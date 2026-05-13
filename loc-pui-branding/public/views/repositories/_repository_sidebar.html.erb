@@ -1,0 +1,40 @@
+<div id="sidebar" class="col-12 col-lg-3 sidebar sidebar-container resizable-sidebar resizable-sidebar-left" data-sidebar-position="left">
+  <div class="search p-0">
+    <div class="search-content">
+      <h4 class="mt-0 px-3 pt-3"><%= t('actions.search') %></h4>
+
+      <%= form_tag(app_prefix("#{@result['uri']}/search"), method: 'get', class: "form-horizontal container mx-0 mb-5 px-3") do %>
+        <%= hidden_field_tag 'limit', '', id: 'limit' %>
+        <%= hidden_field_tag 'op[]', '' %>
+        <%= hidden_field_tag 'field[]', '' %>
+
+        <div class="form-group row">
+          <label class="sr-only" for="q"><%= t('actions.search_within') %></label>
+          <%= text_field_tag('q[]', nil, id: 'q', placeholder: t('custom_search_placeholders.main_query'), class: "form-control") %>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-6 year_from p-0 pr-1">
+            <label class="sr-only" for="from_year"><%= t('search_results.filter.from_year') %></label>
+            <%= text_field_tag('from_year[]', nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.from_year'), id: 'from_year') %>
+          </div>
+          <div class="col-6 year_to p-0 pl-1">
+            <label class="sr-only" for="to_year"><%= t('search_results.filter.to_year') %></label>
+            <%= text_field_tag('to_year[]', nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.to_year'), id: 'to_year') %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= submit_tag(t('search-button.label'), class: 'btn btn-primary btn-block') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="need-help-container">
+    <span class="need-help-label">Need Help?</span>
+    <a href="https://ask.loc.gov" class="ask-librarian-link">Ask a Librarian</a>
+    <i class="fa fa-comment" aria-hidden="true"></i>
+  </div>
+
+</div>

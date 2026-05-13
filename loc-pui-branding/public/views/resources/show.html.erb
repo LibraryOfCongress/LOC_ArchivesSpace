@@ -1,0 +1,127 @@
+<a name="main" title="<%= t('internal_links.main') %>"></a>
+<div id="main-content" class="row">
+  <div id="info_row" class="col-12">
+    <% unless defined?(@no_statement) || !defined?(@search) %>
+      <div class="searchstatement"><%= @search[:search_statement].html_safe %></div>
+    <% end %>
+    <div class="d-flex flex-column flex-md-row">
+      <div class="information flex-grow-1">
+        <%= render partial: 'shared/idbadge', locals: {:result => @result, :props => { :full => true} } %>
+      </div>
+      <div class="page_actions">
+        <%= render partial: 'shared/page_actions', locals: {:record => @result, :title =>  @result.display_string, :url => request.fullpath, :cite => @result.cite } %>
+      </div>
+    </div>
+    
+    <% 
+      has_restrictions = @result.json['restrictions']
+      has_spatial = @result.json['spatial_restrictions']
+    %>
+
+    <% if has_restrictions || has_spatial %>
+      <div class="restriction-banner" role="alert">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        <span class="restriction-banner-text">
+          <% if has_restrictions %>Access Restrictions Apply<% end %><% if has_restrictions && has_spatial %>; <% end %><% if has_spatial %><a href="https://guides.loc.gov/finding-aids/request" target="_blank" rel="noopener noreferrer">Some or all content stored offsite</a><% end %>
+        </span>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+<div class="row">
+</div>
+
+<%= render partial: 'resources/resource_alltabs' %>
+
+<% sidebar_position = AppConfig[:pui_collection_org_sidebar_position] %>
+
+<div class="row mt-5 flex-column flex-lg-row" id="loc_record_container">
+
+  <div
+    id="sidebar"
+    class="h-max col-12 col-lg-3 sidebar sidebar-container resizable-sidebar <%= sidebar_position == 'left' ? 'resizable-sidebar-left' : 'order-1' %> infinite-tree-sidebar"
+    data-sidebar-position="<%= sidebar_position %>"
+    <% unless @has_children %>style="display: none"<% end %>
+  >
+    <% if defined?(@filters) && defined?(@search) %>
+    <%= render partial: 'shared/facets' %>
+   <% end %>
+   <%= render partial: 'shared/search_collection_form', :locals => {:resource_uri => @result['uri'], :action_text => t('actions.search_within')} %>
+   <%= render partial: 'shared/children_tree', :locals => {:heading_text => t('cont_arr'), :root_node_uri => @result.uri, :current_node_uri => @result.uri} %>
+ </div>
+  <div class="col-12 col-lg-9 px-3 resizable-content-pane">
+      <%= render partial: 'shared/digital', locals: {
+        :dig_objs => @dig,
+        record: @result,
+        n_digital_objects: @n_digital_objects
+      } %>
+ 
+    <%= render partial: 'shared/record_innards', locals: { calling_partial: 'show' } %>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll("[data-js='readmore']").forEach((el) => {
+    new ReadMoreNotes(el);
+  });
+</script>
+
+<%= render partial: 'shared/modal_actions' %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const fromYearInput = document.getElementById('filter_from_year');
+    const toYearInput = document.getElementById('filter_to_year');
+
+    if (fromYearInput && toYearInput) {
+      const dateContainer = fromYearInput.closest('.form-group');
+
+      if (dateContainer) {
+        const toggleButtonHTML = `
+          <div class="custom-date-toggle">
+            <button type="button" id="toggle-date-range" class="date-range-button">
+              <i id="date-range-icon" class="fas fa-plus"></i>
+            </button>
+            <span id="date-range-text" class="date-range-label"><%= t('search_results.filter.date_range') %></span>
+          </div>
+        `;
+
+        const wrapper = document.createElement('div');
+        wrapper.id = 'date-range-fields';
+        wrapper.className = 'custom-date-fields d-none';
+
+        dateContainer.insertAdjacentHTML('beforebegin', toggleButtonHTML);
+        dateContainer.parentNode.insertBefore(wrapper, dateContainer);
+        wrapper.appendChild(dateContainer);
+
+        const toggleBtn = document.getElementById("toggle-date-range");
+        const toggleIcon = document.getElementById("date-range-icon");
+
+        toggleBtn.addEventListener("click", function() {
+          const isHidden = wrapper.classList.toggle("d-none");
+          toggleBtn.setAttribute("aria-expanded", !isHidden);
+          if (isHidden) {
+            toggleIcon.classList.remove("fa-minus");
+            toggleIcon.classList.add("fa-plus");
+          } else {
+            toggleIcon.classList.remove("fa-plus");
+            toggleIcon.classList.add("fa-minus");
+          }
+        });
+      }
+    }
+
+    const accordion = document.getElementById('res_accordion');
+
+    if (accordion) {
+      $(accordion).on('show.bs.collapse', function (e) {
+        $(e.target).prev('.card-header').find('.accordion-icon').removeClass('fa-plus').addClass('fa-minus');
+      });
+
+      $(accordion).on('hide.bs.collapse', function (e) {
+        $(e.target).prev('.card-header').find('.accordion-icon').removeClass('fa-minus').addClass('fa-plus');
+      });
+    }
+  });
+</script>

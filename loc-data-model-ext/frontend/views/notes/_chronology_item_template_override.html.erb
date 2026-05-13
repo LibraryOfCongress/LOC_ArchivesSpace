@@ -1,0 +1,21 @@
+<% define_template "chronology_item_override" do |form, item| %>
+  <div class="subrecord-form-fields" data-type="chronology_item">
+    <%= form.label_and_textfield("date_from") %>
+    <%= form.label_and_textfield("date_to") %>
+    <%= form.label_and_textfield("date_singular") %>
+    <%= form.label_and_textfield("place") %>
+    <section class="subrecord-form chronology_item_list">
+      <h5 class="subrecord-form-heading">
+        <%= t("chronology_item.events") %>
+        <% if not form.readonly? %>
+          <button class="btn btn-sm btn-default ml-auto add-event-btn"><%= t("note._frontend.action.add_event") %></button>
+        <% end %>
+      </h5>
+      <div class="controls chronology_item_list">
+        <%= form.list_for(form["events"], "events[]") do |event| %>
+          <% form.emit_template("chronology_item_event", event) %>
+        <% end %>
+      </div>
+    </section>
+  </div>
+<% end %>

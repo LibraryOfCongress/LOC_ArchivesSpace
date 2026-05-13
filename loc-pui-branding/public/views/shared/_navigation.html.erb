@@ -1,0 +1,105 @@
+<section id="navigation">
+  <nav class="navbar navbar-expand-lg navbar-light navbar-default bg-light p-0" aria-label="<%= I18n.t("navigation.top_level") %>">
+    <button type="button" class="navbar-toggler m-2 ml-auto" data-toggle="collapse" data-target="#collapsemenu" aria-expanded="false">
+      <div class="container">
+        <span class="sr-only"><%= t('navigation.mobile_menu') %></span>
+        <span class="navbar-toggler-icon"></span>
+      </div>
+    </button>
+    <div class="collapse navbar-collapse top-bar pl-4" id="collapsemenu">
+      <ul class="navbar-nav mr-auto">
+
+        <% current_request_path = request.path %>
+        <% home_path_val = app_prefix('/') %>
+        <% active_main_item_path = nil %>
+
+        <% $MAIN_MENU.each do |link_config| %>
+          <%
+            link_uri_config = link_config[0]
+            if link_uri_config.is_a?(String)
+              current_item_path = app_prefix(link_uri_config)
+              if current_item_path.is_a?(String)
+                is_item_active = false
+                if link_uri_config == '/objects?limit=digital_object'
+                  if request.fullpath.start_with?(current_item_path)
+                    is_item_active = true
+                  end
+                elsif link_uri_config == '/repositories/resources'
+                  if current_request_path.start_with?(current_item_path)
+                    is_item_active = true
+                  end
+                elsif link_uri_config == '/repositories'
+                  collections_path_for_check = app_prefix('/repositories/resources')
+                  if collections_path_for_check.is_a?(String) && current_request_path.start_with?(current_item_path) && !current_request_path.start_with?(collections_path_for_check)
+                    is_item_active = true
+                  elsif !collections_path_for_check.is_a?(String) && current_request_path.start_with?(current_item_path)
+                    is_item_active = true
+                  end
+                elsif ['/subjects', '/agents'].include?(link_uri_config)
+                  if current_request_path.start_with?(current_item_path)
+                    is_item_active = true
+                  end
+                else
+                  if current_request_path == current_item_path
+                    is_item_active = true
+                  end
+                end
+                if is_item_active
+                  active_main_item_path = current_item_path
+                  break
+                end
+              end
+            end
+          %>
+        <% end %>
+
+        <% home_active_class = (current_request_path == home_path_val && active_main_item_path.nil?) || (active_main_item_path == home_path_val) ? 'active' : '' %>
+        <li class="nav-item p-2 <%= home_active_class %>">
+          <a class="nav-link" href="<%= home_path_val %>">
+            <%= t('brand.frontend_name_short', default: 'Home') %> <span class="fa fa-search" aria-hidden="true"></span>
+            <span class="sr-only">Home Page</span>
+          </a>
+        </li>
+
+        <% $MAIN_MENU.each do |link_config| %>
+          <%
+            link_uri_config = link_config[0]
+            item_active_class = ''
+            if link_uri_config.is_a?(String)
+              current_item_path = app_prefix(link_uri_config)
+              if current_item_path.is_a?(String)
+                if current_item_path == active_main_item_path && (home_active_class == '' || current_item_path == home_path_val)
+                   item_active_class = 'active'
+                end
+              end
+            end
+            
+            # This variable will only contain the class name for the "Reading Rooms" link
+            reading_room_class = (link_uri_config == '/repositories') ? 'reading-rooms-link' : ''
+          %>
+          <% if defined?(current_item_path) && current_item_path.is_a?(String) %>
+            <li class="nav-item p-2 <%= item_active_class %>">
+              <a class="nav-link <%= reading_room_class %>" href="<%= current_item_path %>">
+                <% if link_uri_config == '/repositories' %>
+                  <%= t('navbar.reading_rooms') %>
+                <% else %>
+                  <%= t(link_config[1]) %>
+                <% end %>
+              </a>
+            </li>
+          <% end %>
+        <% end %>
+
+        <li class="nav-item p-2">
+          <a class="nav-link" href="https://guides.loc.gov/finding-aids" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center;">
+            Help Resources 
+            <span style="background-color: #242424; color: white; border-radius: 50%; width: 1.15rem; height: 1.15rem; display: inline-flex; justify-content: center; align-items: center; margin-left: 0.4rem; position: relative; top: -2px;">
+               <i class="fa-solid fa-question" style="font-size: 0.7rem;"></i>
+            </span>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</section>

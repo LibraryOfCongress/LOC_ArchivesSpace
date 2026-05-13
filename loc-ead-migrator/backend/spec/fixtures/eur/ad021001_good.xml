@@ -1,0 +1,1633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Encoded Archival Description (EAD), Version 3 : Release: 1.1.1 : Release Date: 2019-12-16 --><?xml-model href="https://www.loc.gov/ead/EAD3/schematron/ead3.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?><?xml-model href="http://eadproc.loc.gov/common/validate/LC_EAD3_Schematron.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?><ead xmlns="http://ead3.archivists.org/schema/"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://ead3.archivists.org/schema/ https://www.loc.gov/ead/ead3.xsd">
+   <control repositoryencoding="iso15511" relatedencoding="MARC21"
+            countryencoding="iso3166-1"
+            scriptencoding="iso15924"
+            dateencoding="iso8601"
+            langencoding="iso639-2b">
+        <recordid encodinganalog="856$u"
+                instanceurl="https://hdl.loc.gov/loc.asian/eadasian.ad021001">loc.asian/eadasian.ad021001</recordid>
+        <filedesc>
+         <titlestmt>
+            <titleproper encodinganalog="245$a">Chosŏn Sangsa Chusik Hoesa
+                    조선상사주식회사 [Archive of a
+                    North Korean corporation]</titleproper>
+            <subtitle>A Finding Aid to the Collection in the Library of Congress</subtitle>
+            <author encodinganalog="245$c">Prepared by Sonya Lee</author>
+         </titlestmt>
+         <publicationstmt>
+            <publisher encodinganalog="260$b">
+                    <ptr show="embed" actuate="onload"
+                    href="https://hdl.loc.gov/loc.standards/ead.lclogo"/>Asian Division,
+                    Library of Congress, Library of Congress</publisher>
+            <address>
+               <addressline>Washington, D.C.</addressline>
+            </address>
+            <date normal="2020" encodinganalog="260$c">2020</date>
+         </publicationstmt>
+         <notestmt>
+            <controlnote id="versionNote">
+                    <p>Encoded in EAD3 : Encoded Archival Description (EAD), Version 3 : Release:
+                        1.1.1 : Release Date: 2019-12-16. Validating against latest version of
+                        schema.</p>
+                </controlnote>
+            <controlnote id="contactNote">
+                    <p>Contact information: <ref show="new" actuate="onrequest"
+                       href="https://hdl.loc.gov/loc.asian/asian.contact">https://hdl.loc.gov/loc.asian/asian.contact</ref>
+                    </p>
+                </controlnote>
+            <controlnote id="lccnNote">
+                    <p>Catalog Record: <ref show="new" actuate="onrequest" href="https://lccn.loc.gov/2020657372">https://lccn.loc.gov/2020657372</ref>
+                    </p>
+                </controlnote>
+         </notestmt>
+      </filedesc>
+        <maintenancestatus value="new">created</maintenancestatus>
+        <maintenanceagency countrycode="US">
+            <agencycode>us-dlc</agencycode>
+            <agencyname>Library of Congress</agencyname>
+        </maintenanceagency>
+        <languagedeclaration>
+            <language langcode="eng" encodinganalog="040$b">English</language>
+            <script scriptcode="Latn">Latin</script>
+        </languagedeclaration>
+        <conventiondeclaration>
+            <abbr>DACS</abbr>
+            <citation href="https://www2.archivists.org/standards/DACS"
+                   linktitle="DACS in HTML on SAA website"
+                   actuate="onload"
+                   show="new">Describing Archives: a Content Standard</citation>
+            <descriptivenote>
+                <p>DACS was used as the primary description standard.</p>
+            </descriptivenote>
+        </conventiondeclaration>
+        <maintenancehistory>
+            <maintenanceevent>
+                <eventtype value="created"/>
+                <eventdatetime standarddatetime="2020">2020</eventdatetime>
+                <agenttype value="human"/>
+                <agent>Library of Congress, Washington, D.C.</agent>
+                <eventdescription>Finding aid encoded by Library of Congress Asian Division.</eventdescription>
+            </maintenanceevent>
+        </maintenancehistory>
+    </control>
+   <archdesc level="collection" relatedencoding="MARC21" localtype="register">
+      <did>
+         <head>Collection Summary</head>
+         <unittitle label="Title" encodinganalog="245$a">Chosŏn Sangsa Chusik Hoesa [Archive of a North Korean corporation] 
+				<date altrender="Span Dates" localtype="inclusive" normal="1947/1950">1947-1950</date>
+           </unittitle>
+         <unitdate label="Span Dates" unitdatetype="inclusive" normal="1947/1950"
+                   encodinganalog="245$f"
+                   datechar="creation">1947-1950</unitdate>
+         <unitid label="Call No." encodinganalog="090" countrycode="US" repositorycode="US-DLC">Koreanmss01</unitid>
+         <origination label="Creator">
+                <corpname encodinganalog="110" source="lcnaf">
+                    <part>Chosŏn Sangsa Chusik Hoesa</part>
+                </corpname>
+            </origination>
+         <physdesc label="Extent" encodinganalog="300">3,400 items</physdesc>
+         <physdesc label="Extent" encodinganalog="300">20 containers</physdesc>
+         <langmaterial label="Language" encodinganalog="546">
+                <languageset>
+                    <language encodinganalog="041" langcode="kor">Korean</language>
+                    <script scriptcode="Kore"/>
+                </languageset>
+                <languageset>
+                    <language encodinganalog="041" langcode="jpn">Japanese</language>
+                    <script scriptcode="Jpan"/>
+                </languageset>
+                <languageset>
+                    <language encodinganalog="041" langcode="chi">Chinese</language>
+                    <script scriptcode="Hani"/>
+                </languageset>
+                <languageset>
+                    <language encodinganalog="041" langcode="eng">English</language>
+                    <script scriptcode="Latn"/>
+                </languageset>
+                <descriptivenote>
+                    <p>Collection material in Korean, Korean (Chinese scripts), Chinese, Japanese,
+                        and English.</p>
+                </descriptivenote>
+            </langmaterial>
+         <repository label="Location" encodinganalog="852">
+                <corpname>
+                    <part>Asian Division, Library of Congress</part>
+                </corpname>
+                <address>
+               <addressline>Washington, D.C.</addressline>
+            </address>
+            </repository>
+         <abstract label="Summary" encodinganalog="520$a">First international trading company by
+                the North Korean government. Correspondence, reports, invoices, statistics, meeting
+                and planning notes, agendas, memoranda, personnel records, and other organizational
+                records documenting the activities of Chosŏn Sangsa Chusik Hoesa (Archive of a
+                North Korean corporation). Also includes material relating to Pukchosŏn Hwagyo
+                Yonhaphoe (North Korea Overseas Chinese Federation) which document the experiences
+                of overseas Chinese in North Korea.</abstract>
+      </did>
+      <acqinfo encodinganalog="541">
+         <head>Provenance</head>
+         <p>The provenance for the records of the Chosŏn Sangsa Chusik Hoesa, the first
+                international trading company by the North Korean government, is unknown. Upon
+                discovering these records in the Asian Division stacks, it could not be determined
+                when the collection was received by the Library of Congress.</p>
+      </acqinfo>
+      <processinfo encodinganalog="583">
+         <head>Processing History</head>
+         <p>Due to the fragile quality of the records, the Chosŏn Sangsa Chusik Hoesa
+                collection was sent to the Conservation Division for treatment and re-housing from
+                2017 to 2019. Originally, the materials were bound into 45 items. Each bound item
+                was disbound, treated and re-housed in custom made boxes. The collection was
+                arranged and described by Asian Division’s Korean reference specialist from 2019 to
+                2020.</p>
+      </processinfo>
+      <userestrict encodinganalog="540">
+         <head>Copyright Status</head>
+         <p>The status of copyright in the unpublished documents is governed by the Copyright
+                Law of the Democratic People’s Republic of Korea or North Korea. Consult the Asian
+                Division for more information.</p>
+      </userestrict>
+      <accessrestrict encodinganalog="506 0">
+         <head>Access and Restrictions</head>
+         <p>The Chosŏn Sangsa Chusik Hoesa collection is open to research. Researchers are
+                advised to contact the Asian Division prior to visiting. Advance notice is needed
+                because collections must be retrieved for researchers.</p>
+         <p>Readers using this collection must sign and date a register for use of this specific
+                collection.</p>
+         <p>READING ROOM RULES AND REGULATIONS CONCERNING MANUSCRIPT COLLECTIONS</p>
+         <list>
+            <item>Notes may be taken only on the paper or note cards provided in the reading
+                    room. Pens may not be used, and pencils are provided.</item>
+            <item>ALL CONTAINERS MUST STAY ON TRUCKS. Only one folder at a time may be
+                    withdrawn from a box. Cardboard dummies are provided to mark the place where
+                    folders should be refiled. IT IS VERY IMPORTANT TO PRESERVE THE EXISTING
+                    ARRANGEMENT OF MATERIALS IN EACH FOLDER. Report any serious disarrangement to
+                    the reference staff.</item>
+            <item>PHOTOCOPYING and SCANNING. Researchers must bring all manuscripts to the desk
+                    for examination by reference staff before photocopying. Items that are too
+                    fragile may not be photocopied. Only one folder at a time may be withdrawn for
+                    photocopying or scanning. In general, materials can be reproduced by the
+                    Library's Duplication Service.</item>
+            <item>HELP SAVE OUR COLLECTIONS. Do not make marks on manuscripts, do not write
+                    notes on top of manuscripts, do not rest books or other objects on top of
+                    manuscripts. Handle loose sheets or bound pages by their edges; avoid touching
+                    the surface as much as possible. Exercise the greatest possible care in handling
+                    fragile manuscripts.</item>
+            <item>Researchers must follow all directions of the reference staff regarding the
+                    handling of manuscript material.</item>
+         </list>
+      </accessrestrict>
+      <prefercite encodinganalog="524">
+         <head>Preferred Citation</head>
+         <p>Researchers wishing to cite this collection should include the following
+                information: The Chosŏn Sangsa Chusik Hoesa Collection, Container number, Folder
+                title, Korean Collection, Asian Division, Library of Congress, Washington D.C.</p>
+      </prefercite>
+      <bioghist encodinganalog="545">
+         <head>Organizational History</head>
+         <p>Chosŏn Sangsa Chusik Hoesa was the first international trading company established
+                by the North Korean government, and it was based in Pyongyang, North Korea.
+                Heretofore, there was little known about Chosŏn Sangsa Chusik Hoesa. All the
+                information contained in this section of this finding aid was compiled while
+                processing the collection. The exact year of the company’s establishment is not
+                confirmed. However, established materials state that the company had been in
+                operation since 1947, when the North Korean People's Committee, a provisional
+                government in North Korea, was established.</p>
+         <p>While the company was privately owned, it was a semi-state organization operating
+                under the supervision and control of the North Korean Ministry of Commerce. In its
+                capacity as a private company, it was more suited to trade with countries and
+                regions where there were no formal economic agreements. Additionally, experts in the
+                field of trade were needed to deal with complex and professional trade affairs in
+                overseas markets and to make a profit.</p>
+         <p>Although the company was in an area that was heavily influenced by the Soviet Union,
+                the company did not trade with the Soviet Union. Instead, it traded with Hong Kong,
+                China, Japan, and South Korea. Inter-Korean trade was not stable. At that time, the
+                United States military and the South Korean government repeatedly approved and
+                rejected trade requests between the two Koreas. Inter-Korean trade stopped after the
+                end of the Korean War.</p>
+         <p>Although not much is known about this company, in 1949, the leadership, departments,
+                overseas branches, and major trade destinations were as follows:</p>
+         <list>
+            <item>President: Won Hyun Lee</item>
+            <item>Vice President: Kim Jung-soo</item>
+            <item>Departments: Planning Department, Trade Department, Accounting Department,
+                    General Affairs Department, Executive Department, and Inspection Department</item>
+            <item>Branches: Sinŭiju Branch, Namp'o Branch, Wŏnsan Branch, Hamhŭng Branch,
+                    Ch'ŏngjin Branch, Sŏngjin Branch, and Namyang Branch</item>
+            <item>Major trading destinations: Hong Kong, Tianjin, Dalian, and Dandong</item>
+         </list>
+         <p>Some branches were located in cities close to the Chinese border. Other branches on
+                the east coast such as Wŏnsan, Hamhŭng, Ch'ŏngjin, and Sŏngjin benefited from
+                the industrial production concentrated in those areas. Additionally, there was an
+                abundance of seafood harvest which could be exported.</p>
+         <p>The company’s main exports included chemicals, seafood, medicine, grains, and
+                soybeans. Imports consisted of daily necessities and construction materials. Ships
+                and railroads were used for trade.</p>
+         <p>Hong Kong was the most important trade destination, and its trading centers were
+                located in the cities of Dalian, Tianjin, Dandong, Shimyang, and Qingdao. Overseas
+                representatives were dispatched to each branch. Through these bases, there was a
+                partial trade with Japan.</p>
+         <p>Although it cannot be definitively determined when the company closed, the company
+                was at risk in many ways in 1950. Communist governments in China controlled foreign
+                trade, and it became difficult to trade with Hong Kong. The company's operations,
+                which depended mainly on Hong Kong, were in trouble. Additionally, the Korean War
+                broke out in June 1950, and the company began to supply war supplies.</p>
+      </bioghist>
+      <scopecontent encodinganalog="520">
+         <head>Scope and Content Note</head>
+         <p>The Chosŏn Sangsa Chusik Hoesa spans the years from 1947 to 1950. It was the first
+                international trading company established by the North Korean government and was
+                based in Pyongyang from 1947 to 1950 with branches in Dalian, Dandong, Qingdao,
+                Sinŭiju, Namp'o, Wŏnsan, Hamhŭng, Ch'ŏngjin, Sŏngjin, and Namyang. The
+                collection consists of correspondence, business reports, trade invoices, statistics,
+                personnel records, meeting and planning notes, memoranda, and other miscellaneous
+                records pertaining to export and import activities of Chosŏn Sangsa Chusik Hoesa.
+                Also featured are papers documenting the experiences of overseas Chinese in North
+                Korea. These records are in Korean and include some Chinese, Japanese, and English.
+                This collection is one of the most significant and rare collections of the Korean
+                collection in the Asian Division.</p>
+         <p>The collection contains 21 boxes and is generally arranged alphabetically by topic.
+                The material housed inside each box was initially bound together and pertained to a
+                general topic. After being treated by the Conservation Division, each previously
+                bound item is now placed in folders and housed in a box. The original order of the
+                documents has been retained to provide researchers with context. The exception is
+                that boxes one and two contain topical material relating solely to the Pukchosŏn
+                HwagyoYonhaphoe, the North Korea Overseas Chinese Federation. This material was
+                originally dispersed throughout the collection and has been organized into boxes one
+                and two.</p>
+         <p>After the Korean Peninsula was liberated from Japan in 1945, the number of Chinese
+                who lived in North Korea was estimated to be around 60,000. The Pukchosŏn Hwagyo
+                Yonhaphoe was established in December 1946 in Pyongyang, North Korea. The goals of
+                Pukchosŏn Hwagyo Yonhaphoe were to promote friendly relations between Chinese and
+                North Koreans; to protect the interests of Chinese residents; and to voice the
+                concerns of the Chinese government to the North Korean government. Chinese residents
+                were able to engage in social, economic, and simple political activities due in
+                large part to the efforts of the Pukchosŏn Hwagyo Yonhaphoe and its relationship to
+                the Democratic People’s Republic of Korea. To date, documentation of the lives of
+                overseas Chinese in North Korea are rare to find. The material in boxes one and two
+                shed light into how the Pukchosŏn Hwagyo Yonhaphoe advocated for the rights of
+                overseas Chinese in North Korea.</p>
+         <p>Material from box one primarily relates to activities from 1947 and include records
+                from the trading company’s branches in Pyongyang and Sinuiju. Included in this box
+                is a copy of a letter sent by the Pukchosŏn Hwagyo Yonhaphoe, on behalf of all
+                North Korean Chinese, to Kim Il-sŏng, chairman of the North Korean People's
+                Committee, and the Commander of the Soviet Army. The letter was written in
+                commemoration of the second anniversary of the National Liberation Day of Korea on
+                August 15, 1947 and expressed that overseas Chinese residents appreciated how their
+                lives improved in many ways.</p>
+         <p>Previously, only Korean citizens could own land, but land was distributed to Chinese
+                residents living in North Korea. Records in box one reveal how overseas Chinese were
+                able to own land because of land reforms. In addition, education had been under the
+                control of the North Korean government since 1949. Yet, overseas Chinese students
+                were treated the same as North Korean students. Documents from the box show that the
+                North Korean government provided educational facilities and materials needed to
+                repair old classrooms to some Chinese schools in North Korea. Material from this box
+                also disclose that overseas Chinese purchased necessary goods from Dalian, China and
+                other countries and claimed tax exemptions.</p>
+         <p>Box two primarily pertains to activities in 1948 and contains official documents
+                relating to diseases, publicity of Pukchosŏn HwagyoYonhaphoe, dealings with foreign
+                countries, and the general affairs of the Pukchosŏn Hwagyo Yonhaphoe. There is also
+                a 1949 book list of publications by Pukchosŏn Hwagyo Yonhaphoe. On August 9, 1946,
+                the North Korean Provisional People's Committee published the “Decision on Public
+                Citizenship.” As a result of this decree, citizenship would be issued regardless of
+                the social composition, economic stature, and if you are 18 years of age or older.
+                Included in box two are applications by overseas Chinese for identification.</p>
+         <p>After liberation in 1945, the North Korea Overseas Chinese Federation played a
+                crucial role in connecting the North Korean government and Chinese government. The
+                inclusion of these documents in the collection perhaps point to how the trading
+                company used the connections already established between Pukchosŏn Hwagyo Yonhaphoe
+                and the Democratic People’s Republic of Korea to open trade routes into northern
+                China.</p>
+         <p>The rest of the collection, boxes three through twenty-one, provide insight into the
+                inner workings, organizational history, and administration of a semi-state run,
+                private company during a turbulent time in Korean history. The collection contains a
+                lot of documents that show communication between Chosŏn Sangsa Chusik Hoesa and the
+                North Korean government. Correspondence, reports, invoices, meeting and planning
+                notes, personnel records, resumes, invoices, guidelines for trade practices,
+                statistical tables, and other organizational records chronicle the activities of the
+                Chosŏn Sangsa Chusik Hoesa. Topics include commerce, planning, trading
+                relationships, updates from various branches, economic conditions, other trading
+                companies. More importantly though these documents bring to light the economic
+                conditions and policies, history of commerce, foreign economic relationships, and
+                politics of the North Korean government.</p>
+         <p>Records reveal that in 1948 the company’s main exports were chemicals, seafood,
+                medicine, and soybeans. In 1949, the export rankings changed to seafood, soybeans,
+                grains, and chemicals. In 1948, the main imports were daily necessities and
+                construction materials, while in 1949, the most important import was construction
+                materials followed by daily necessities. Documents identified as “top secret papers”
+                include proposals for importing sulfur, but at the time, there was an economic
+                blockade on this item to communist countries. Also included are import and export
+                transactional documents with other trading companies, specifically the Metropolitan
+                Commercial Company. Ships and railroads were used as methods of transportation, and
+                ship times sheets show that ships belonging to the Cho-Sso Shipping Company were
+                frequently used for transporting goods.</p>
+         <p>There are many documents in the collection that point to a major economic disruption
+                in the trading company in 1950. According to data from the collection, on June 7,
+                1950, the new community government in China controlled foreign currency. This
+                impacted the relationship between the Chosŏn Sangsa Chusik Hoesa and Hong Kong, the
+                company’s most important trade destination, and trade fell sharply. This economic
+                disruption impacted various aspects of the Chosŏn Sangsa Chusik Hoesa, and there
+                are no records beyond 1950.</p>
+      </scopecontent>
+      <arrangement encodinganalog="351$a">
+         <head>Arrangement of the Papers</head>
+         <p>The collection is generally arranged alphabetically by topic.</p>
+      </arrangement>
+      <controlaccess altrender=":::F005=^20221019132954.0^">
+         <head>Selected Search Terms</head>
+         <p>The following terms have been used to index the description of this collection in the LC Catalog. They are grouped by name of person or organization, by subject or location, and by occupation and listed alphabetically.</p>
+         <controlaccess>
+            <head>Organizations</head>
+            <corpname encodinganalog="110" relator="creator" source="lcnaf">
+               <part>Chosŏn Sangsa Chusik Hoesa.</part>
+            </corpname>
+            <corpname encodinganalog="610" relator="subject" source="lcnaf">
+               <part>Pukchosŏn Hwagyo Yonhaphoe.</part>
+            </corpname>
+         </controlaccess>
+         <controlaccess>
+            <head>Subjects</head>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Basic needs--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Building materials--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Chemical industry--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Chinese--Commerce--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Chinese--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Chinese--Korea (North)--Societies, etc.</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Chinese--Social networks--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Exports--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Grain trade--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Immigrants--Political activity--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Immigrants--Social networks--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Imports--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>International trade.</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Pharmaceutical industry--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Railroads--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Seafood industry--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Shipment of goods--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Shipping--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Soybean industry--Korea (North)</part>
+            </subject>
+            <subject encodinganalog="650" source="lcsh">
+               <part>Trading companies--Korea (North)</part>
+            </subject>
+         </controlaccess>
+         <controlaccess>
+            <head>Places</head>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>China--Foreign economic relations--Korea (North)</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>Korea (North)--Commerce.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>Korea (North)--Economic conditions.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>Korea (North)--Economic policy.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>Korea (North)--Ethnic relations.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>Korea (North)--Foreign economic relations--China.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>Korea (North)--Foreign economic relations.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>Korea (North)--History--20th century.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>Korea (North)--Politics and government--20th century.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>P'yŏngyang (Korea)--Commerce.</part>
+            </geogname>
+            <geogname encodinganalog="651" relator="subject" source="lcsh">
+               <part>P'yŏngyang (Korea)--History--20th century.</part>
+            </geogname>
+         </controlaccess>
+         <controlaccess>
+            <head>Titles</head>
+            <title encodinganalog="246" source="lcnaf">
+               <part>Archive of a North Korean corporation</part>
+            </title>
+         </controlaccess>
+      </controlaccess>
+      <dsc dsctype="combined">
+         <head>Container List</head>
+         <c01 level="series">
+            <did>
+               <container localtype="box">1</container>
+               <unittitle encodinganalog="245$a">북조선 화교
+                        연합 총회, 
+						<date normal="1947">1947</date>
+                    </unittitle>
+               <unitdate normal="1947">1947</unitdate>
+               <physdesc encodinganalog="300$a">(13 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">북조선 화교
+                            연합 총회 문서</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">신의주 지점
+                            자료</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">월간 서류</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">6월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">7월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">8월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">9월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">10월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">11월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">12월</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">해방 2주년
+                            기념일 (8.15), 김일성
+                            장군에게</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">화교 학교
+                            건설</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">2</container>
+               <unittitle encodinganalog="245$a">북조선 화교
+                        연합 총회, 공문
+                        서류철, 
+						<date normal="1948/1949">1948-1949</date>
+                    </unittitle>
+               <unitdate normal="1948/1949">1948-1949</unitdate>
+               <physdesc encodinganalog="300$a">(11 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">공문
+                            서류철, 
+							<date normal="1948">1948</date>
+                       </unittitle>
+                  <unitdate normal="1948">1948</unitdate>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">방역 사업, <date normal="1948">1948</date>
+                       </unittitle>
+                  <unitdate normal="1948">1948</unitdate>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">선전 관계, <date normal="1948">1948</date>
+                       </unittitle>
+                  <unitdate normal="1948">1948</unitdate>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">외래 공문, <date normal="1948">1948</date>
+                       </unittitle>
+                  <unitdate normal="1948">1948</unitdate>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">총무 관계</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">도서 목록, <date normal="1949">1949</date>
+                       </unittitle>
+                  <unitdate normal="1949">1949</unitdate>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">화교 신분
+                            증명 신청 서류철, <date normal="1949">1949</date>
+                       </unittitle>
+                  <unitdate normal="1949">1949</unitdate>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">왕문록,
+                            개인 자서전</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">3</container>
+               <unittitle encodinganalog="245$a" id="xx01">중국 대련
+                        교역 관계, 
+						<date normal="1947/1948">1947-1948</date>
+                   </unittitle>
+               <unitdate normal="1947/1948">1947-1948</unitdate>
+               <physdesc encodinganalog="300$a">(8 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">함경도
+                            수산물, 
+							<date normal="1947">1947</date>
+						            </unittitle>
+                  <unitdate normal="1947">1947</unitdate>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">사업 계획서
+                                <date normal="1948">1948</date>
+                       </unittitle>
+                  <unitdate normal="1948">1948</unitdate>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">1-2월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">3월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">4월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">5월</unittitle>
+                     <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">6월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">7월</unittitle>
+                  </did>
+               </c03>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">4</container>
+               <unittitle encodinganalog="245$a">중국 대련
+                        교역 관계, 무역부, <date normal="1948">1948</date>
+                   </unittitle>
+               <unitdate normal="1948">1948</unitdate>
+               <physdesc encodinganalog="300$a">(10 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">대련 교역</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">7월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">8월</unittitle>
+                     <physdesc encodinganalog="300$a">(3 folders)</physdesc>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">9월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">10월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">11월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">12월</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수출입
+                            명세표</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">5</container>
+               <unittitle encodinganalog="245$a">무역부, <date normal="1949"> 1949</date>
+                   </unittitle>
+               <unitdate normal="1949"> 1949</unitdate>
+               <physdesc encodinganalog="300$a">(16 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">공무 여행
+                            증명서</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">물자 결손과
+                            처분</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">물자 인수</unittitle>
+                  <physdesc encodinganalog="300$a">(5 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">물자 할당
+                            보고서</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수입품</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">신임장</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">자료 구입,
+                            분양</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">차입서</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">출고 의뢰서
+                       </unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">6</container>
+               <unittitle encodinganalog="245$a">경제 조사
+                        서류철, 기획부 경제과,
+                            <date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(20 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">목차</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">공작원
+                            회의록</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">대소환 (배)
+                            출항 조회</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">대외 무역</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">대외 무역
+                                관리법</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">무역
+                                참고자료</unittitle>
+                     <physdesc encodinganalog="300$a">(3 folders)</physdesc>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">북평시</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">전보</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">중국
+                                수출입 허가제</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">속보, 동북
+                            행정 위원회 공채
+                            발행</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수출입품
+                       </unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">중국 무역</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">대련</unittitle>
+                     <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">동북</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">천진</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">화북</unittitle>
+                     <physdesc encodinganalog="300$a">(3 folders)</physdesc>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">7</container>
+               <unittitle encodinganalog="245$a">수입품 처분
+                        신청 서류철, 계획부, <date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(13 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">목차</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수입 물자
+                            처분, 할당, 배정</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">3월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">5월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">6월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">7월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">8월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">9월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">10월</unittitle>
+                     <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">11월</unittitle>
+                     <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">12월</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">8</container>
+               <unittitle encodinganalog="245$a">사업 총결
+                        보고서, 검사부, 
+						<date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(7 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">사업 총결
+                            보고서</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">인사 이동</unittitle>
+                  <physdesc encodinganalog="300$a">(5 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">9</container>
+               <unittitle encodinganalog="245$a">경제 조사
+                        자료, 기획부 경제과, <date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(18 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">목차</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">각종 물품
+                            조사</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">동북</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">동북 화학
+                                공업 관리국 상품
+                                목록</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">수출입
+                                허가 절차, 수출입
+                                세율</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">무역 양식</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">무역부 사무
+                            편람</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">무역부 외국
+                            Vessel Time Sheets</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수출 수입</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">운송 화물</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">일본</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">홍콩, 동북
+                            지역 수출입</unittitle>
+                  <physdesc encodinganalog="300$a">(5 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">홍콩 향항
+                       </unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">10</container>
+               <unittitle encodinganalog="245$a">무역 실무
+                        관련 서류, 
+						<date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(5 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">각부에 대한
+                            지침서</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">사무 처리
+                            절차</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수입품</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">홍콩 주재
+                            공문 서류</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">회람</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">11</container>
+               <unittitle encodinganalog="245$a">무역
+                        통계서철, 경제과, <date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(6 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">대련시 물가</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">대상국별
+                            무역, 물가 통계표</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">홍콩</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">천진</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">청도시,
+                                화북</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">조선 수산물
+                            무역 통계표, 
+							<date normal="1926/1939">1926-1939</date>
+                       </unittitle>
+                  <unitdate normal="1926/1939">1926-1939</unitdate>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">12</container>
+               <unittitle encodinganalog="245$a">
+                        메트로폴리탄 커머셜
+                        회사 취급 상품 사고
+                        종합 통계표, 
+						<date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(8 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">
+                            경화유한공사</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">극비 서류철
+                            - 경제 봉쇄물품 (sulfur)
+                            수입</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">총결산 보고</unittitle>
+                  <physdesc encodinganalog="300$a">(3 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">13</container>
+               <unittitle encodinganalog="245$a">사업 총결
+                        보고, <date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(8 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">사업보고</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">검사부</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">계획부</unittitle>
+                     <physdesc encodinganalog="300$a">(3 folders)</physdesc>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">무역부</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">서무과</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">문제점들</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">홍콩, 천진
+                            수출품</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">14</container>
+               <unittitle encodinganalog="245$a">사업 총결
+                        보고서, 계획부, <date normal="1949">
+                            1949</date>
+                   </unittitle>
+               <unitdate normal="1949">
+                            1949</unitdate>
+               <physdesc encodinganalog="300$a">(9 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">각 지점별
+                            지시서</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">각항에
+                            들어온 수입품들</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">개인 교역</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">지역별</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">수입품</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">수출물자
+                                통계표 (개인 상인,
+                                회사, 정부 기관)</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">보고서</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">선별과
+                            종별에 따른 홍콩
+                            수입품</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">종합표</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">15</container>
+               <unittitle encodinganalog="245$a">신의주 지점
+                        검열 보고서, 경리부, <date normal="1949">1949</date>
+                   </unittitle>
+               <unitdate normal="1949">1949</unitdate>
+               <physdesc encodinganalog="300$a">(7 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">업무 실태
+                            보고서</unittitle>
+                  <physdesc encodinganalog="300$a">(6 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">16</container>
+               <unittitle encodinganalog="245$a">사업 총결
+                        보고서, 검사부, <date normal="1950">
+                            1950</date>
+                   </unittitle>
+               <unitdate normal="1950">
+                            1950</unitdate>
+               <physdesc encodinganalog="300$a">(10 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">1.4 분기 사업
+                            총결 보고서</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">1950년 초반
+                            수입</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">물자 수입
+                            의뢰 관계, 계획부</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수출 물자
+                       </unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">원산 지점
+                            문제점 보고서</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">조선 인민군
+                            부대장 앞</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">천진시</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">17</container>
+               <unittitle encodinganalog="245$a">한국 전쟁
+                        직전의 수출입 사업,
+                        계획부, <date normal="1950">1950</date>
+                   </unittitle>
+               <unitdate normal="1950">1950</unitdate>
+               <physdesc encodinganalog="300$a">(13 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">기획부,
+                            보험</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">무역 관계</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">1월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">2월, 신의주
+                                지점</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">3월, 중국
+                                주재 대사관</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">4월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">5월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">6월</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">7월, 38이남
+                                해방 지구와의 교역
+                           </unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">사업 일지,
+                            6-7월</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수출입 관세
+                            납부</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수입품 처분
+                            신청 소요 일수
+                            통계표</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">철도 운임표</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">18</container>
+               <unittitle encodinganalog="245$a">
+                        메트로폴리탄 커머셜
+                        회사, 광석 수출 관계, <date normal="1950">1950</date>
+                   </unittitle>
+               <unitdate normal="1950">1950</unitdate>
+               <physdesc encodinganalog="300$a">(10 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">광석 수출
+                            (Metropolitan Commercial Co., Ltd.)</unittitle>
+               </did>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">
+                                경화유한공사 (Hong Kong)</unittitle>
+                     <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">China Trade Industrial Service, Inc.
+                                (New York)</unittitle>
+                  </did>
+               </c03>
+               <c03 level="file">
+                  <did>
+                     <unittitle encodinganalog="245$a">IIDA &amp; CO., Ltd. (Tokyo)</unittitle>
+                  </did>
+               </c03>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">린광석</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">자철석</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">철광</unittitle>
+                  <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">19</container>
+               <unittitle encodinganalog="245$a">수출품
+                        조사서철, 경제과, <date normal="1950">1950</date>
+                   </unittitle>
+               <unitdate normal="1950">1950</unitdate>
+               <physdesc encodinganalog="300$a">(6 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">새 중국
+                            정부 외화 통제와
+                            무역</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수출물자
+                            외화 시가 조사 보고</unittitle>
+                  <physdesc encodinganalog="300$a">(3 folders)</physdesc>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">홍콩 경화
+                            유한 공사와의
+                            수출품 조사</unittitle>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">표지</unittitle>
+               </did>
+            </c02>
+         </c01>
+         <c01 level="series">
+            <did>
+               <container localtype="box">20</container>
+               <unittitle encodinganalog="245$a">수출입 물자
+                        취급 명세표, 
+						<date normal="1948/1949">1948-1949</date>
+                   </unittitle>
+               <unitdate normal="1948/1949">1948-1949</unitdate>
+               <physdesc encodinganalog="300$a">(2 folders)</physdesc>
+            </did>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">수출입 현황
+                            보고서, 대련시, 
+							<date normal="1948">1948</date>
+                       </unittitle>
+                  <unitdate normal="1948">1948</unitdate>
+               </did>
+            </c02>
+            <c02 level="file">
+               <did>
+                  <unittitle encodinganalog="245$a">중국 신문의
+                            경제 기사 스크랩, <date normal="1949">1949</date>
+                       </unittitle>
+                  <unitdate normal="1949">1949</unitdate>
+               </did>
+            </c02>
+         </c01>
+      </dsc>
+   </archdesc>
+</ead>

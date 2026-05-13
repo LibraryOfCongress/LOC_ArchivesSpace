@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://www.loc.gov/ead/EAD3/schematron/ead3.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?><?xml-model href="http://eadproc.loc.gov/common/validate/LC_EAD3_Schematron.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?><ead xmlns="http://ead3.archivists.org/schema/"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://ead3.archivists.org/schema/ https://www.loc.gov/ead/ead3.xsd">
+   <control repositoryencoding="iso15511" relatedencoding="MARC21"
+            countryencoding="iso3166-1"
+            scriptencoding="iso15924"
+            dateencoding="iso8601"
+            langencoding="iso639-2b">
+        <recordid encodinganalog="856$u"
+                instanceurl="https://hdl.loc.gov/loc.asian/eadasian.ad021001">%{recordid}</recordid>
+        <filedesc>
+         <titlestmt>
+            <titleproper encodinganalog="245$a">TITLE</titleproper>
+            <subtitle>A Finding Aid to the Collection in the Library of Congress</subtitle>
+            <author encodinganalog="245$c">Prepared by Sonya Lee</author>
+         </titlestmt>
+         <publicationstmt>
+            <publisher encodinganalog="260$b">
+                    <ptr show="embed" actuate="onload"
+                    href="https://hdl.loc.gov/loc.standards/ead.lclogo"/>Asian Division,
+                    Library of Congress, Library of Congress</publisher>
+            <address>
+               <addressline>Washington, D.C.</addressline>
+            </address>
+            <date normal="2020" encodinganalog="260$c">2020</date>
+         </publicationstmt>
+         <notestmt>
+            <controlnote id="versionNote">
+                    <p>Encoded in EAD3 : Encoded Archival Description (EAD), Version 3 : Release:
+                        1.1.1 : Release Date: 2019-12-16. Validating against latest version of
+                        schema.</p>
+                </controlnote>
+            <controlnote id="contactNote">
+                    <p>Contact information: <ref show="new" actuate="onrequest"
+                       href="https://hdl.loc.gov/loc.asian/asian.contact">https://hdl.loc.gov/loc.asian/asian.contact</ref>
+                    </p>
+                </controlnote>
+            <controlnote id="lccnNote">
+                    <p>Catalog Record: <ref show="new" actuate="onrequest" href="https://lccn.loc.gov/2020657372">https://lccn.loc.gov/2020657372</ref>
+                    </p>
+                </controlnote>
+         </notestmt>
+      </filedesc>
+        <maintenancestatus value="new">created</maintenancestatus>
+        <maintenanceagency countrycode="US">
+            <agencycode>us-dlc</agencycode>
+            <agencyname>Library of Congress</agencyname>
+        </maintenanceagency>
+        <languagedeclaration>
+            <language langcode="eng" encodinganalog="040$b">English</language>
+            <script scriptcode="Latn">Latin</script>
+        </languagedeclaration>
+        <conventiondeclaration>
+            <abbr>DACS</abbr>
+            <citation href="https://www2.archivists.org/standards/DACS"
+                   linktitle="DACS in HTML on SAA website"
+                   actuate="onload"
+                   show="new">Describing Archives: a Content Standard</citation>
+            <descriptivenote>
+                <p>DACS was used as the primary description standard.</p>
+            </descriptivenote>
+        </conventiondeclaration>
+        <maintenancehistory>
+            <maintenanceevent>
+                <eventtype value="created"/>
+                <eventdatetime standarddatetime="2020">2020</eventdatetime>
+                <agenttype value="human"/>
+                <agent>Library of Congress, Washington, D.C.</agent>
+                <eventdescription>Finding aid encoded by Library of Congress Asian Division.</eventdescription>
+            </maintenanceevent>
+        </maintenancehistory>
+    </control>
+    </ead>

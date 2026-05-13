@@ -1,0 +1,4 @@
+en:
+  loc_delete_linked_daos:
+    delete_resource: "Delete Resource and Linked Digital Objects"
+    confirm_message: "This will delete the Resource records and ALL Digital Objects that uniquely relate to it."

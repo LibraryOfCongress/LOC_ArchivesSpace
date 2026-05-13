@@ -1,0 +1,46 @@
+en:
+  brand:
+    title: "Library of Congress"
+    welcome_page_title: "Finding Aids to Archival Collections"
+    welcome_head: "Welcome to the Library's Finding Aids"
+    welcome_message: |
+      <p>Search across our finding aids to archival collections</p>
+    frontend_name_short: "Home"
+    about_this_site: "Finding Aids to Archival Collections at the Library of Congress contains finding aids for the special collections held by Library Divisions and Research Centers. Use this site to search and browse the finding aids describing our collections and materials.<br><br>To find Help Resources, <a href='https://guides.loc.gov/finding-aids' style='text-decoration: underline;'>visit the research guide</a> for finding aids and documentation."
+    about_finding_aids: "A finding aid, also called a collection guide, is a description of an archival collection. Archival collections contain primary sources and other unique, original, or rare materials. The finding aid provides a hierarchical inventory of collection materials, as well as information about the origin of the collection."
+    about_ask_a_librarian_html: "<b>Have a question? Need assistance?</b> Our librarians and program specialists are here to help you search, access, use, and understand our collections. To submit a question, visit <a href='http://ask.loc.gov' style='text-decoration: underline;'>ask.loc.gov</a> and select the relevant subject or service, or chat with our online experts."
+  actions:
+    numeric: "Container List"
+    hierarch: "Finding Aid View"
+    search_header: "Search the finding aids"
+  navbar:
+    search_placeholder: "Enter your search terms"
+    reading_rooms: "Reading Rooms"
+  custom_search_placeholders:
+    main_query: "Type Text"
+  search_results:
+    search_results: "Search"
+    digital_object_results_head: "Showing Digital Materials Results: %{start}-%{end} of %{total}"
+    filter:
+      from_year: "From"
+      to_year: "To"
+      from: "Year"
+      to: "Year"
+      date_range: "Date Range"
+    collection_results_head: "Collection Results: %{start}-%{end} of %{total}"
+    subject_results_head: "Subject Results: %{start}-%{end} of %{total}"
+
+  found: "Found in %{count} %{type}"
+  coll_obj:
+    _singular: Collection or record
+    _plural: Collections and/or records
+
+  cont_arr: "Collection Organization" 
+
+  repository:
+    what: In this Repository
+  inherit:
+    inherited: Auto-generated from the collection record
+  enumerations:
+    note_multipart_type:
+      scopecontent: "Scope and Content Note"

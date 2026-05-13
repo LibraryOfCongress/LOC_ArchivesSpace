@@ -1,0 +1,133 @@
+<%
+if result.level
+    if result.primary_type =~ /digital_object/
+      level = I18n.t("enumerations.digital_object_level.#{result.level}", :default => result.level)
+      badge_label = I18n.t("digital_object._public.badge_label", :level => level)
+    else
+      level = result.level == 'otherlevel' ? result.other_level : result.level
+      badge_label = I18n.t("enumerations.archival_record_level.#{level}", :default => level)
+    end
+else
+    badge_label = t("#{result.primary_type}._singular")
+end
+
+case result.primary_type
+  when "resource"
+    url = resource_base_url(result)
+  when "archival_object"
+    url = archival_object_base_url(result)
+  when "digital_object"
+    url = digital_object_base_url(result)
+  when "accession"
+    url = accession_base_url(result)
+  when "subject"
+    url = subject_base_url(result)
+  when "classification"
+    url = classification_base_url(result)
+  when "agent_person"
+    url = agent_base_url(result)
+  when "agent_family"
+    url = agent_base_url(result)
+  when "agent_corporate_entity"
+    url = agent_base_url(result)
+  when "agent_software"
+    url = agent_base_url(result)
+  else
+    url = result.uri
+end
+%>
+
+<% if ['resource', 'archival_object'].include?(result.primary_type) %>
+
+  <% if result.primary_type == 'resource' && props.fetch(:full, false) %>
+
+    <div class="collection-header">
+      <% if result.resolved_repository %>
+  <span class="repo-context">
+    <i class="fa fa-home" aria-hidden="true"></i>&nbsp;
+    <a href="<%= app_prefix(repository_base_url(result.resolved_repository)) %>">
+      <%# Takes the "double name" and strips off the part in parentheses %>
+      <%= (result.resolved_repository['display_string'] || '').split('(').first.strip %>
+    </a>
+  </span>
+  <span class="separator" aria-hidden="true">&nbsp;»&nbsp;</span>
+      <% end %>
+      <span class="collection-context">
+  <i class="<%= icon_for_type(result.primary_type) %>" aria-hidden="true"></i>&nbsp;<%== result.display_string %>
+      </span>
+    </div>
+
+    <h1>
+      <a class="record-title" href="<%= app_prefix(url) %>">
+        <%== result.display_string %>
+      </a>
+    </h1>
+
+    <div class="badge-and-identifier">
+      <div class="record-type-badge <%= result.primary_type %>">
+        <i class="<%= icon_for_type(result.primary_type) %>"></i>&nbsp;<%= badge_label %>
+      </div>
+      <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
+      <% unless comp_id.blank? %>
+        <div class="identifier">
+          <span class="id-label"><%= t('search_sorting.identifier') %>:</span>&nbsp;<span class="component"><%= comp_id %></span>
+        </div>
+      <% end %>
+    </div>
+
+  <% else %>
+
+    <div class="collection-header">
+      <div class="record-type-badge <%= (result.primary_type.start_with?('agent') ? 'agent' : result.primary_type) %>">
+  <i class="<%= icon_for_type(result.primary_type) %>"></i>&nbsp;<%= badge_label %> <% if result.container_summary_for_badge %> &mdash; <%= result.container_summary_for_badge %><% end %>
+      </div>
+      <% if result.resolved_repository %>
+  <%= render partial: 'shared/result_breadcrumbs', locals: {
+    :result => result,
+    :props => props
+  } %>
+      <% end %>
+    </div>
+
+    <h3>
+      <% if props.fetch(:full, false) %>
+	<span class="record-title">
+	  <%== props.fetch(:infinite_item, false) ? result.parse_full_title(true) : result.parsed_display_string %>
+	</span>
+      <% else %>
+	<a class="record-title" href="<%= app_prefix(url) %>">
+	  <%== props.fetch(:infinite_item, false) ? result.parse_full_title(true) : result.parsed_display_string %>
+	</a>
+      <% end %>
+    </h3>
+
+    <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
+    <% unless comp_id.blank? %>
+      <div class="identifier">
+	<span class="id-label"><%= t('search_sorting.identifier') %>:</span>&nbsp;<span class="component"><%= comp_id %></span>
+      </div>
+    <% end %>
+
+  <% end %>
+
+<% else %>
+
+  <%= (props.fetch(:full,false)? '<h1>' : '<h3>').html_safe %>
+    <a class="record-title" href="<%= app_prefix(url) %>">
+      <%== props.fetch(:infinite_item, false) ? result.parse_full_title(true) : result.display_string %>
+    </a><% if result.primary_type == 'top_container' && props.fetch(:full, false) %>: Stored onsite<% end %>
+  <%= (props.fetch(:full,false)? '</h1>' : '</h3>').html_safe %>
+
+  <div class="badge-and-identifier">
+    <div class="record-type-badge <%= (result.primary_type.start_with?('agent') ? 'agent' : result.primary_type) %>">
+      <i class="<%= icon_for_type(result.primary_type) %>"></i>&nbsp;<% if result.primary_type == 'top_container' %>Collection<% else %><%= badge_label %><% end %> <% if result.container_summary_for_badge %> &mdash; <%= result.container_summary_for_badge %><% end %>
+    </div>
+    <% comp_id = display_component_id(result, props.fetch(:infinite_item, false)) %>
+    <% unless comp_id.blank? %>
+      <div class="identifier">
+  <span class="id-label"><%= t('search_sorting.identifier') %>:</span>&nbsp;<span class="component"><%= comp_id %></span>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>

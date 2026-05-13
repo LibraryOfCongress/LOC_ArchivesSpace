@@ -1,0 +1,3 @@
+<% if !user_can?('publish_resource_record') %>
+<%= form.hidden_input "publish", @resource.publish ? 1 : 0 %>
+<% end %>

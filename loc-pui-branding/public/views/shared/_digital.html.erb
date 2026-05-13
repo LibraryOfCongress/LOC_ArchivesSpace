@@ -1,0 +1,69 @@
+<% if record['json']['representative_file_version'].present? %>
+  <div class="available-digital-objects">
+    <div class="objectimage">
+      <div class="card">
+        <%
+          rfv = record['json']['representative_file_version']
+          img_uri = rfv['file_uri']
+          a_uri = rfv['derived_from'] || rfv['link_uri']
+          dig_materials_link = nil
+
+          if representative_link_to_digital_materials?(record)
+            digitized_link_text = t(
+              'digital_object._public.browse_number_digital_objects_in_collection',
+              num: n_digital_objects,
+              count: n_digital_objects
+            )
+            dig_materials_link = link_to digitized_link_text,
+              app_prefix("/repositories/#{params[:rid]}/resources/#{params[:id]}/digitized"),
+              data: { 'view-all-digital-objects' => true }
+          end
+        %>
+        <%= render partial: 'shared/representative_file_version_record', locals: {
+          :a_uri => a_uri,
+          :img_uri => img_uri,
+          :caption => rfv['caption'],
+          :dig_materials_link => dig_materials_link
+        } %>
+      </div>
+    </div>
+  </div>
+
+<% elsif local_assigns[:dig_objs] && dig_objs.present? %>
+  <div class="full-width-banner-wrapper">
+    <% dig_objs.each do |d_file| %>
+      <% if d_file['out'].present? %>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-9 offset-sm-3 banner-content-container">
+              <a class="banner-link" href="<%= d_file['out'] %>" target="_blank" rel="noopener noreferrer" title="Go to Digital Object on loc.gov">
+                <i class="fa-solid fa-file-lines banner-icon" aria-hidden="true"></i>
+                <div class="banner-text-content">
+                  <span class="banner-main-text">
+                    Go to digital file on loc.gov
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                  <span class="banner-sub-text">
+                    <%= d_file['caption'].blank? ? 'View Digital Material' : d_file['caption'].html_safe %>
+                  </span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    const titleElement = document.querySelector('h1 .record-title');
+    const subTextElement = document.querySelector('.banner-sub-text');
+
+    if (titleElement && subTextElement) {
+      const titleText = titleElement.textContent.trim();
+      subTextElement.textContent = titleText;
+    }
+  });
+</script>

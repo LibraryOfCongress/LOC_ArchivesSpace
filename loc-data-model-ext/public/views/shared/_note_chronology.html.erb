@@ -1,0 +1,30 @@
+<dl>
+  <% Array(note['items']).each do |item| %>
+    <%# Date Display Logic %>
+    <%
+      date_output = nil
+      if item['date_from'].present? && item['date_to'].present?
+        date_output = "#{item['date_from']} - #{item['date_to']}"
+      elsif item['date_singular'].present?
+        date_output = item['date_singular']
+      elsif item['date_from'].present? # Fallback if only 'date_from' is available
+        date_output = item['date_from']
+      elsif item['date_to'].present? # Fallback if only 'date_to' is available
+        date_output = item['date_to']
+      end
+    %>
+    <% if date_output.present? %>
+      <dt><%= date_output %></dt>
+    <% end %>
+
+    <%# Place Display %>
+    <% if item['place'].present? %>
+      <dt><%= item['place'] %></dt>
+    <% end %>
+
+    <%# Events Display %>
+    <% Array(item['events']).each do |event| %>
+      <dd><%= process_mixed_content(event).html_safe %></dd>
+    <% end %>
+  <% end %>
+</dl>

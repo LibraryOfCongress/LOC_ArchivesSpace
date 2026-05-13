@@ -1,0 +1,101 @@
+<%
+  show_header = true if show_header.nil?
+  header_size = '3' if header_size.nil?
+%>
+<div class="search pt-3" role="search" id="welcomePageSearch">
+  <a name="search" id="search"></a>
+  <% if show_header %>
+    <h<%= header_size %>><%=  t('actions.search_header') %></h<%= header_size %>>
+  <% end %>
+  <% @search = Search.new unless defined?(@search) %>
+  <%= form_tag(app_prefix("#{search_url}"), method: 'get', :id => 'advanced_search') do %>
+    <% (0...[1, @search.q.length].max).each do |i| %>
+      <div class="row search_row align-items-baseline pt-1" id="search_row_<%= i %>">
+
+        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12 form-group search-operator-field <%= 'operator-column-hidden' if i == 0 %>">
+          <%= label_tag("op#{i}", t('advanced_search.operator_label'), :class => 'font-weight-bold') %>
+          <%
+            operator_classes = 'form-control options-for-select'
+            operator_classes += ' form-control-small-operator' if i > 0
+          %>
+          <%= select_tag('op[]', options_for_select(Search.get_boolean_opts, @search[:op][i]),
+                           disabled: (i == 0),
+                           :id => "op#{i}",
+                           :class => operator_classes) %>
+          <%= hidden_field_tag('op[]','', :id => "op_") if i == 0 %>
+        </div>
+
+        <div class="col-xl-5 col-lg-<%= i == 0 ? '5' : '5' %> col-md-<%= i == 0 ? '6' : '10' %> col-sm-12 form-group">
+          <%= label_tag(:"q#{i}", t('navbar.search_placeholder'), class: 'repeats font-weight-bold') %>
+          <%= text_field_tag('q[]', @search[:q][i], :placeholder =>  t('custom_search_placeholders.main_query'), :id => "q#{i}",
+                                     :class=> 'form-control repeats fill-column js-search-box') %>
+        </div>
+
+        <% if i == 0 %>
+          <div class="col-xl-3 col-lg-4 col-md-5 col-sm-12 form-group norepeat">
+            <%= label_tag(:limit, t('advanced_search.limit_label'), class: 'font-weight-bold') %>
+            <%= select_tag(:limit, options_for_select(limit_options, @search[:limit]), :id => 'limit', :class=> 'form-control fill-column') %>
+          </div>
+        <% end %>
+
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 form-group">
+          <%= label_tag(:"field#{i}", t('search-field'), class: 'repeats font-weight-bold') %>
+          <%= select_tag('field[]', options_for_select(field_options, @search[:field][i]), :id=> "field#{i}", :class=> 'form-control repeats') %>
+        </div>
+
+        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 form-group px-0">
+          <div class="row mx-0">
+            <div class="col-6">
+              <%= label_tag(:"from_year#{i}", "#{t('search_results.filter.from_year')}", class: 'repeats font-weight-bold') %>
+              <%= text_field_tag('from_year[]', @search[:from_year][i], :size => 4,:maxlength => 4, :id=>"from_year#{i}",
+                                         :placeholder => t('search_results.filter.from'),:class=>'form-control repeats form-control-small-year') %>
+            </div>
+            <div class="col-6">
+              <%= label_tag(:"to_year#{i}", "#{t('search_results.filter.to_year')}", class: 'repeats font-weight-bold') %>
+              <%= text_field_tag('to_year[]', @search[:to_year][i], :size => 4, :maxlength => 4, :id => "to_year#{i}",
+                                         :class=> 'form-control repeats form-control-small-year', :placeholder => t('search_results.filter.to')) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="<%= i == 0 ? 'col-xl-1' : 'col-xl-2' %> col-lg-2 col-md-12 col-sm-12 form-group text-left plusminus-column">
+          <span class="mb-2 d-inline-block repeats plusminus_label font-weight-bold"><%= t('advanced_search.add_row') %></span><br />
+          <button type="button"
+                  class="btn btn-light border plusminus-btn"
+                  id="plusminus<%= i %>"
+                  data-action="add"
+                  title="<%= t('advanced_search.add_row') %>"
+                  aria-label="<%= t('advanced_search.add_row') %>">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row" id="submit_div">
+      <div class="col-sm-3">
+        <%= submit_tag(t('search-button.label'), :class=>'btn btn-primary', :id => 'submit_search') %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<script type="text/javascript" >
+  initialize_search();
+</script>
+
+<% if controller.controller_name == 'welcome' %>
+  <div class="row mt-4 custom-about-sections">
+    <div class="col-md-4">
+      <h3>About this site</h3>
+      <p><%= t('brand.about_this_site').html_safe %></p>
+    </div>
+    <div class="col-md-4">
+      <h3>What is a finding aid?</h3>
+      <p><%= t('brand.about_finding_aids') %></p>
+    </div>
+    <div class="col-md-4">
+      <h3>Ask a Librarian</h3>
+      <p><%= t('brand.about_ask_a_librarian_html') %></p>
+    </div>
+  </div>
+<% end %>

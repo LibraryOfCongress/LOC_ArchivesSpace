@@ -1,0 +1,17 @@
+<section id="job_filenames_">
+  <div class="form-group required">
+    <label class="btn btn-success btn-sm fileinput-button" for="job_file_input">
+      <span class="glyphicon glyphicon-plus icon-white"></span>
+      <span><%= t("job._frontend.actions.add_file") %></span>
+      <input
+	id="job_file_input"
+	type="file"
+	name="files[]"
+	accept=".csv"
+	autocomplete="off"
+	required
+      />
+    </label>
+    <span id="job_filename"></span>
+  </div>
+</section>

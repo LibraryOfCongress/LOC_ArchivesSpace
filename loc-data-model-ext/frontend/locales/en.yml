@@ -1,0 +1,70 @@
+en:
+  resource:
+    lccn: LCCN
+    spatial_restrictions: Some or all material stored offsite?
+  archival_object:
+    additional_identifiers: Additional Identifiers
+    loc_magmar_id: Magmar ID
+    _frontend:
+      action:
+        add_additional_identifier: Add Additional Identifier
+  accession:
+    lccn: LCCN
+    date_received_by_library: "Date Received by Library"
+    division_acquisition_date: "Date Received by Division"
+  revision_statement:
+    agent: Agent
+    agent_type: Agent Type
+    agent_type_machine: Machine
+    agent_type_human: Human
+    type: Type
+    type_created: Created
+    type_updated: Updated
+    type_revised: Revised
+  chronology_item:
+    date_from: Date From
+    date_to: Date To
+    date_singular: Singular Date
+  extent:
+    physical_description: Physical Description
+  digital_object:
+    ead_dao_type: EAD DAO Type
+    other_ead_dao_type: Other DAO Type
+  enumerations:
+    note_multipart_type:
+      odd: "Other Descriptive Data"
+# this is actually defined in the 'common' directory,
+# but since the backend picks up the frontend I18n
+# load_paths for some reason, this will work.
+    _note_types:
+      odd: Other Descriptive Data
+    ead_dao_type:
+      derived: Derived
+      borndigital: Born Digital
+      unknown: Unknown
+      otherdaotype: Other DAO Type
+    note_singlepart_type:
+      didnote: Descriptive Identification Note
+    digital_object_note_type:
+      descriptivenote: "Descriptive Note"
+  note:
+    note_unorderedlist: Unordered List
+    _frontend:
+      action:
+        add_note_unorderedlist: Add Item
+  note_unorderedlist:
+    title: Title
+    title_tooltip: |
+      <p>An element for recording a specific label, or title, for the subnote.</p>
+    publish: Publish?
+    publish_tooltip: |
+        <p>Determines whether this Note to public (patron) interfaces.</p>
+    option: Unordered List
+  agent_contact:
+    contact_form: Contact Form
+  group:
+    permission_types:
+      delete_resource_record: "delete resources (in this repository)"
+      delete_accession_record: "delete accessions (in this repository)"
+      delete_archival_record: "delete archival objects and digital objects (in this repository)"
+        

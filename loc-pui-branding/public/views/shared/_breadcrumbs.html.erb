@@ -1,0 +1,46 @@
+<% if defined?(@context) && !@context.blank? %>
+  <% if defined?(@result) && @result.is_a?(DigitalObject) && @context.length > 1 %>
+    <%
+      # For Digital Objects, render the custom header
+      repo_crumb = @context.first
+      digital_object_crumb = @context.last
+    %>
+    <div class="objects-header">
+      <span class="repo-context">
+        <i class="fa fa-home" aria-hidden="true"></i>&nbsp;
+        <a href="<%= app_prefix(repo_crumb[:uri]) %>">
+          <%= repo_crumb[:crumb] %>
+        </a>
+      </span>
+
+      <span class="separator" aria-hidden="true">&nbsp;»&nbsp;</span>
+
+      <span class="collection-context">
+        <i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;<%== process_mixed_content(digital_object_crumb[:crumb]) %>
+      </span>
+    </div>
+
+  <% else %>
+    <%# Default breadcrumb rendering for all other pages %>
+    <div class="container-fluid p-0 clear">
+      <nav aria-label="<%= I18n.t('navigation.hierarchical') %>">
+        <ul class="breadcrumb">
+          <% @context.each do |bread| %>
+            <% if bread[:crumb]; crumb = bread[:crumb]; crumb += " (#{bread[:identifier]})" if bread[:identifier] %>
+              <li>
+                <%= badge_for_type(bread[:type]) %>
+                <% if bread[:uri].blank? %>
+                  <%= process_mixed_content(crumb).html_safe %>
+                <% else %>
+                  <a href='<%=app_prefix(bread[:uri]) %>'>
+                    <%= process_mixed_content(crumb).html_safe %>
+                  </a>
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  <% end %>
+<% end %>

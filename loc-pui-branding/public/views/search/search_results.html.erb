@@ -1,0 +1,155 @@
+<% results_type = (defined?(@results_type) ? @results_type : t('search_results.results')) %>
+<div class="row">
+  <div class="col-sm-12">
+    <%= render partial: 'shared/breadcrumbs' %>
+    <% if defined?(@search_title) %>
+      <h2><%= @search_title %></h2>
+    <% end %>
+
+    <% if defined?(@reset) && @reset %>
+      <%= render partial: 'shared/search', locals: {
+            search_url: @base_search,
+            title: t('archive._plural'),
+            limit_options: [
+              ["#{t('actions.search')} #{t('search-limits.all')}", ''],
+              [t('search-limit', limit: t('search-limits.resources')), 'resource'],
+              [t('search-limit', limit: t('search-limits.digital')), 'digital_object']
+            ],
+            field_options: [
+              ["#{t('search_results.filter.fullrecord')}", ''],
+              ["#{t('search_results.filter.title')}", 'title'],
+              ["#{t('search_results.filter.creators')}", 'creators_text'],
+              ["#{t('search_results.filter.subjects')}", 'subjects_text'],
+              ["#{t('search_results.filter.notes')}", 'notes'],
+              ["#{t('search_results.filter.identifier')}", 'identifier']
+            ],
+            header_size: '2',
+            show_header: true
+          } %>
+    <% else %>
+      <% unless defined?(@no_statement) %>
+        <div class="searchstatement">
+          <div class="btn btn-group pull-right">
+            <%= link_to I18n.t('actions.new_search'), (defined?(@new_search) ? @new_search : root_path), class: "btn btn-sm btn--default" %>
+            <button class="btn btn-sm btn--default" id="toggleRefineSearch" aria-expanded="false" aria-controls="refineSearchPanel"><%= I18n.t('actions.refine_search') %></button>
+          </div>
+          <% if defined?(@search) %>
+            <%= @search[:search_statement].html_safe %>
+          <% end %>
+          <div id="refineSearchPanel" class="container refinesearch" aria-hidden="true" style="display:none;">
+            <%= render partial: 'shared/search', locals: {
+                  search_url: @base_search,
+                  title: t('archive._plural'),
+                  limit_options: [
+                    ["#{t('actions.search')} #{t('search-limits.all')}", ''],
+                    [t('search-limit', limit: t('search-limits.resources')), 'resource'],
+                    [t('search-limit', limit: t('search-limits.digital')), 'digital_object']
+                  ],
+                  field_options: [
+                    ["#{t('search_results.filter.fullrecord')}", ''],
+                    ["#{t('search_results.filter.title')}", 'title'],
+                    ["#{t('search_results.filter.creators')}", 'creators_text'],
+                    ["#{t('search_results.filter.subjects')}", 'subjects_text'],
+                    ["#{t('search_results.filter.notes')}", 'notes'],
+                    ["#{t('search_results.filter.identifier')}", 'identifier']
+                  ],
+                  show_header: false
+                } %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<% if defined?(@results) %>
+  <div class="row">
+    <div id="sidebar" class="col-12 col-lg-3 sidebar sidebar-container resizable-sidebar resizable-sidebar-left" data-sidebar-position="left">
+      <a name="filter" title="<%= t('internal_links.filter') %>"></a>
+      <%= render partial: 'shared/facets' %>
+    </div>
+
+    <div class="col-12 col-lg-9 resizable-content-pane">
+      <a name="main" title="<%= t('internal_links.main') %>"></a>
+
+      <div class="row my-3 align-items-center">
+        <div class="col-auto">
+          <% if params[:limit] == 'subject' %>
+            <div class="results-text">
+              <%= t('search_results.subject_results_head', start: @results['offset_first'], end: @results['offset_last'], total: @results['total_hits']) %>
+            </div>
+          <% elsif params[:limit] == 'resource' %>
+            <div class="collection-results-text">
+              <%= t('search_results.collection_results_head', start: @results['offset_first'], end: @results['offset_last'], total: @results['total_hits']) %>
+            </div>
+          <% elsif params[:limit] == 'digital_object' %>
+            <div class="results-text">
+               <%= t('search_results.digital_object_results_head', start: @results['offset_first'], end: @results['offset_last'], total: @results['total_hits']) %>
+            </div>
+          <% else %>
+            <div class="results-text">
+              <%= t('search_results.results_head', type: results_type, start: @results['offset_first'], end: @results['offset_last'], total: @results['total_hits']) %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col"></div>
+        <div class="col-auto d-flex align-items-center gap-3">
+          <% unless @pager.last_page == 1 %>
+            <div>
+              <%= render partial: 'shared/pagination', locals: { pager: @pager } %>
+            </div>
+          <% end %>
+          <div>
+            <%= render partial: 'shared/sorter' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row search-results">
+        <div class="col-sm-12">
+          <a name="searchresults" id="searchresults"></a>
+          <% @results.records.each do |result| %>
+            <%= render partial: 'shared/result', locals: { result: result, props: (@result_props || {}).merge(full: false) } %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row my-3">
+        <div class="col-12 d-flex justify-content-end">
+          <% unless @pager.last_page == 1 %>
+            <%= render partial: 'shared/pagination', locals: { pager: @pager, pager_id: 'paging_bottom' } %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var toggleBtn = document.getElementById("toggle-date-range");
+  var collapseBtn = document.getElementById("collapse-date-range");
+  var dateFields = document.getElementById("date-range-fields");
+  var dateRangeText = document.getElementById("date-range-text");
+  var filterSidebar = document.getElementById("sidebar");
+
+  if (toggleBtn && collapseBtn && filterSidebar) {
+    toggleBtn.addEventListener("click", function() {
+      dateFields.classList.remove("d-none");
+      collapseBtn.classList.remove("d-none");
+      toggleBtn.classList.add("d-none");
+      if (dateRangeText) dateRangeText.classList.add("d-none");
+      filterSidebar.classList.add("expanded");
+    });
+
+    collapseBtn.addEventListener("click", function() {
+      dateFields.classList.add("d-none");
+      collapseBtn.classList.add("d-none");
+      toggleBtn.classList.remove("d-none");
+      if (dateRangeText) dateRangeText.classList.remove("d-none");
+      filterSidebar.classList.remove("expanded");
+    });
+  }
+});
+</script>

@@ -1,0 +1,11 @@
+
+<script>
+  const USER_CAN_PUBLISH = <%== user_can?('publish_resource_record') %>;
+</script>
+<%= javascript_include_tag "#{AppConfig[:frontend_proxy_prefix]}assets/loc_resource_publish_permission.js" %>
+
+<%- if @resource %>
+<script>
+  const DISABLE_PUBLISH = true
+</script>
+<% end %>

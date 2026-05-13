@@ -1,0 +1,16 @@
+<% Array(note['content']).each do |content| %>
+  <%== process_mixed_content(content).html_safe %>
+  <br/>
+<% end %>
+
+<dl>
+  <% Array(note['items']).each do |index_item| %>
+    <dt><%= process_mixed_content( index_item['value'] ).html_safe %></dt>
+    <% if index_item['reference_ref'].is_a?(Hash) %>
+      <dd><a href="<%= index_item['reference_ref']['ref'] %>"><%= index_item['reference_text'] %></a></dd>
+    <% else %>
+      <dd><%= index_item['reference'] %></dd>
+      <dd><%= index_item['reference_text'] %></dd>
+    <% end %>
+  <% end %>
+</dl>

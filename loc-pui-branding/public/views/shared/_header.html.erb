@@ -1,0 +1,52 @@
+<section id="header">
+  <div class="d-flex row align-items-center px-4">
+
+    <div class="col-sm-2 d-flex align-items-center">
+      <a href="https://www.loc.gov">
+        <img class="logo-loc img-fluid"
+             src="/assets/images/LOC-Logo.png"
+             alt="Library of Congress" />
+      </a>
+      <img class="loc-separator-svg"
+           src="/assets/images/separator.svg"
+           alt="Separator" />
+    </div>
+
+    <div class="col">
+      <h1>
+        <% unless request.original_fullpath == '/' %>
+          <a title="<%= t('brand.title_link_text') %>" href="<%= AppConfig[:public_proxy_url] %>">
+        <% end %>
+        <%= t('brand.welcome_page_title') %>
+        <% unless request.original_fullpath == '/' %>
+          </a>
+        <% end %>
+      </h1>
+    </div>
+
+    <%# 
+        AS-504: staff access link removed
+        wrapped in 'if false' to ensure the HTML is stripped before
+        reaching the browser, preventing bots from scraping the staff URL from the source code.
+        code is preserved here for potential future use. 
+    %>
+    <% if false %>
+      <div class="col-auto ml-auto staff-access-container">
+        <%
+          # The @staff_url variable is prepared by ArchivesSpace controllers
+          # when AppConfig[:pui_enable_staff_link] is true.
+          # It correctly points to the resolver for the current record.
+          # If we are not on a record page, it will be nil, and the link
+          # will fall back to the staff interface homepage.
+          target_staff_url = @staff_url || AppConfig[:frontend_proxy_url]
+        %>
+
+        <%# Only show the link if a target URL is available %>
+        <% if target_staff_url %>
+          <a id="loc-staff-link" href="<%= target_staff_url %>" class="staff-access-link" target="_blank" rel="noopener noreferrer">Staff Access</a>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+</section>

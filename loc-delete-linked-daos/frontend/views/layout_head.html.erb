@@ -1,0 +1,6 @@
+<%- if @resource && user_can?('delete_archival_record') %>
+<script>
+  const USER_CAN_DELETE_RESOURCE = true
+</script>
+<%= javascript_include_tag "#{AppConfig[:frontend_proxy_prefix]}assets/loc_delete_linked_daos.js" %>
+<% end %>

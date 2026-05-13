@@ -1,0 +1,14 @@
+<!-- it would be better if the public app allowed us to manipulate this list of note types -->
+<% types.insert((types.find_index('odd') || types.size), 'didnote') %>
+<% types << 'descriptivenote' %>
+<% types[types.index('scopecontent')] = 'abstract' %>
+<% types.each do |type|
+	(@result.notes[type] || []).each do |note_struct|
+	   if !note_struct['note_text'].blank? %>
+	    <div class="note">
+	      <%= render  partial: 'shared/single_note',
+		  locals: {:type => type, :note_struct => note_struct, :heading_size => 'h3', :sub_heading_size => 'h4', :calling_partial => 'multi_notes'}  %>
+	    </div>
+	   <% end %>
+	<% end %>
+<% end %>

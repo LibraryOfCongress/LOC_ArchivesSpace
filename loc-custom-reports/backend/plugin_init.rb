@@ -1,0 +1,5 @@
+require_relative 'reports/loc_folio_report'
+require_relative 'reports/loc_magmar_report'
+require_relative 'reports/loc_handle_redirect_report'
+require_relative 'reports/loc_cdms_redirect_report'
+require_relative 'reports/loc_resource_note_report'

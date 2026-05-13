@@ -1,0 +1,7 @@
+en:
+  job:
+    types:
+      loc_delete_repository_job: Delete Repository
+  loc_delete_repository_job:
+    repository: Repository
+    secret: Secret Passphrase

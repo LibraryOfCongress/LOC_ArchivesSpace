@@ -1,0 +1,22 @@
+<% define_template "additional_identifiers_item" do |form, value=""| %>
+  <div class="input-group">
+    <%= form.textfield("additional_identifiers[]", value, :escape => false, :clean => true) %>
+    <% if not form.readonly? %>
+      <div class="input-group-append">
+	<button class="btn btn-sm btn-default remove-identifier-btn"><span class="glyphicon glyphicon-minus"></span></button>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+
+<div class="form-group w-100 row loc-additional-identifiers">
+  <%= form.label "additional_identifiers", {}, %w(col-sm-2 control-label text-right) %>
+  <div class="col-sm-9" id="additional_identifiers_input">
+    <% record.additional_identifiers.each { |ai| form.emit_template("additional_identifiers_item", ai) } %>
+  <% if not form.readonly? %>
+    <button class="btn btn-sm btn-default add-identifier-btn ml-auto"><%= t("archival_object._frontend.action.add_additional_identifier") %></button>
+  <% end %>
+  </div>
+</div>
+<%= form.label_and_readonly "loc_magmar_id" %>
