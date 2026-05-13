@@ -1,0 +1,15 @@
+<% define_template "chronology_item_override" do |form, item| %>
+  <div class="subrecord-form-fields" data-type="chronology_item">
+    <%= form.label_and_readonly("date_from") %>
+    <%= form.label_and_readonly("date_to") %>
+    <%= form.label_and_readonly("date_singular") %>
+    <div class="form-group">
+      <label class="control-label"><%= t("chronology_item.events") %></label>
+      <div class="controls">
+        <%= form.list_for(form["events"], "events[]") do |event| %>
+          <% form.emit_template("chronology_item_event", event) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

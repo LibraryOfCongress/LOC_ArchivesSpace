@@ -1,0 +1,6 @@
+en:
+  group:
+    permission_types:
+      publish_resource_record: publish <b>resource</b> records
+  validation_errors:
+    publish_resource_permission: User does not have permission to publish / unpublish resource records

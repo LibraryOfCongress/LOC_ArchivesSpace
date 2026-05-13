@@ -1,0 +1,39 @@
+<% pager_id ||= 'paging' %>
+<% if pager && (pager.last_page > 1 || (local_assigns.has_key?(:force_show) && force_show)) %>
+<nav id="<%= pager_id %>" class="d-flex custom-pagination">
+  <ul class="pagination flex-wrap mb-0">
+
+    <% if pager.page > 1 %>
+      <li class="previous page-item">
+        <a class="page-link" href="<%= app_prefix(pager.link) %>&page=<%= pager.prev %>" aria-label="<%= t('actions.previous') %>"><span aria-hidden="true">&lsaquo;</span></a>
+      </li>
+    <% end %>
+
+    <% (1..pager.last_page).each do |page| %>
+      <%
+        is_first_page = (page == 1)
+        is_last_page = (page == pager.last_page)
+        is_in_window = ((page - pager.page).abs < 2)
+        should_render = is_first_page || is_last_page || is_in_window
+        should_render_ellipsis = ((page - pager.page).abs == 2)
+      %>
+      <% if should_render %>
+        <% if page == pager.page %>
+          <li class="active page-item"><a class="page-link" href="#"><%= page %></a></li>
+        <% else %>
+          <li class="page-item"><a class="page-link" href="<%= app_prefix(pager.link) %>&page=<%= page %>"><%= page %></a></li>
+        <% end %>
+      <% elsif should_render_ellipsis %>
+        <li class="page-item disabled"><a class="page-link" href="#" style="pointer-events: none;">...</a></li>
+      <% end %>
+    <% end %>
+
+    <% if pager.page < pager.last_page %>
+      <li class="next page-item">
+        <a class="page-link" href="<%= app_prefix(pager.link) %>&page=<%= pager.next %>" aria-label="<%= t('actions.next') %>"><span aria-hidden="true">&rsaquo;</span></a>
+      </li>
+    <% end %>
+
+  </ul>
+</nav>
+<% end %>

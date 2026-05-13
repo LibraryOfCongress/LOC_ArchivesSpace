@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <eadheader countryencoding="iso366-1" dateencoding="iso8601" findaidstatus="completed" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid>as328_edge_cases</eadid>
+    <filedesc><titlestmt><titleproper>Test for AS-328 Edge Cases</titleproper></titlestmt></filedesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <unittitle>Test Collection for Edge Cases</unittitle>
+      <unitid label="ID No.">AS328-EDGE</unitid>
+      <unitdate label="Span Dates" type="inclusive" normal="2025/2025">2025</unitdate>
+      <physdesc label="Extent"><extent>1 item</extent></physdesc>
+      <langmaterial label="Language"><language langcode="eng">English</language></langmaterial>
+    </did>
+    <dsc>
+
+      <c01 id="scen1" level="series">
+        <did>
+          <unittitle>Series with Ignored Range</unittitle>
+          <container localtype="box">1-10</container>
+        </did>
+        <c02 level="file">
+          <did>
+            <unittitle>Child File with Simple Reel</unittitle>
+            <container localtype="reel">5</container>
+          </did>
+        </c02>
+      </c01>
+      
+      <c01 id="scen2" level="series">
+        <did>
+          <unittitle>Series with Child Compound Reel</unittitle>
+          <container localtype="box">22-30</container> </did>
+        <c02 level="file">
+          <did>
+            <unittitle>Child File with Compound Box-Reel</unittitle>
+            <container localtype="box-reel">31/8</container> </did>
+        </c02>
+      </c01>
+
+      <c01 id="scen3" level="file">
+        <did>
+          <unittitle>File with Mixed Container Types</unittitle>
+          <container localtype="box">32-33</container> <container localtype="reel">9</container>    </did>
+      </c01>
+
+    </dsc>
+  </archdesc>
+</ead>

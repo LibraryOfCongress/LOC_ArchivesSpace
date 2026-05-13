@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" findaidstatus="completed" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid>as328_compound</eadid>
+    <filedesc><titlestmt><titleproper>Test for AS-328 Compound</titleproper></titlestmt></filedesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <unittitle label="Title">Test Collection for AS-328 Compound</unittitle>
+      <unitdate label="Span Dates" type="inclusive" normal="2025/2025">2025</unitdate>
+      <unitid label="ID No.">AS328-C</unitid>
+      <physdesc label="Extent">1 item</physdesc>
+      <langmaterial label="Language"><language langcode="eng">English</language></langmaterial>
+    </did>
+    <dsc>
+      <c01 level="file">
+        <did>
+          <unittitle>File with box-reel</unittitle>
+          <container localtype="box-reel">50/1</container>
+          <unitdate normal="2025" type="inclusive">2025</unitdate>
+          <physdesc><extent>1 item</extent></physdesc>
+        </did>
+      </c01>
+    </dsc>
+  </archdesc>
+</ead>

@@ -1,0 +1,28 @@
+en:
+  reports:
+    loc_folio_report:
+      title: Resource Report For Folio
+      description: List EAD IDs, LCCNs, and restriction information for all resource records.
+    loc_magmar_report:
+      title: Magmar ID Report
+      description: List all archival objects and file versions associated with loc magmar ids
+    loc_handle_redirect_report:
+      title: Finding Aid Handle Redirect Report
+      description: Generates a batch redirect file mapping EAD Handles to ArchivesSpace PUI URLs.
+    loc_cdms_redirect_report:
+      title: CDMS Redirect Report
+      description: Uses 3 CSV files to generate a report mapping file uris to PUI URLs.
+    loc_resource_note_report:
+      title: Missing Note Type Report
+      description: Lists all resource records (by title and EAD ID) in a given repository that lack a specified note type. Defaults to "Other Finding Aids" (otherfindaid).
+    parameters:
+      note_type: Note Type  
+    translation_defaults:
+      loc_magmar_id: Magmar ID
+      file_uri: File URI
+      public_url: ArchivesSpace Public Interface URL
+      ead_location: EAD Location (Handle)
+      pui_url: PUI URL
+      title: Title
+      ead_id: EAD ID
+    

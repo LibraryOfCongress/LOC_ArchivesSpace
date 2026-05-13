@@ -1,0 +1,13 @@
+<%- if @resource && @resource.id && user_can?('delete_archival_record') %>
+<div id="loc_delete_linked_daos_template"><!--
+  <li>
+    <%= button_confirm_action(I18n.t('loc_delete_linked_daos.delete_resource'),
+	url_for(controller: :loc_resources_ext, action: :delete_with_digital_objects, method: :post, id: @resource.id),
+    {
+      class: "btn dropdown-item",
+      "data-message": I18n.t("loc_delete_linked_daos.confirm_message")
+    })
+    %>
+  </li>
+--></div>
+<% end %>

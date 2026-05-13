@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:isbn:1-931666-22-9 http://www.loc.gov/ead/ead.xsd">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" findaidstatus="completed" langencoding="iso639-2b" repositoryencoding="iso15511" scriptencoding="iso15924">
+    <eadid countrycode="US" mainagencycode="US-DLC" url="https://hdl.loc.gov/loc.mss/eadmss.ms011041">ms011041</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Edward S. Corwin Papers</titleproper>
+        <subtitle>A Finding Aid to the Collection in the Library of Congress</subtitle>
+        <author>Prepared by Joseph D. Sullivan</author>
+      </titlestmt>
+      <publicationstmt>
+        <publisher>Manuscript Division, Library of Congress</publisher>
+        <address>
+          <addressline>Washington, D.C. </addressline>
+        </address>
+        <date>2011</date>
+      </publicationstmt>
+      <notestmt>
+        <note>
+          <p>Contact information: <extptr xlink:role="CONTACTINFO" xlink:href="https://hdl.loc.gov/loc.mss/mss.contact" xlink:show="new" xlink:title="https://hdl.loc.gov/loc.mss/mss.contact" xlink:type="simple"/></p>
+        </note>
+        <note>
+          <p>Catalog Record: <extptr xlink:role="LCCN" xlink:href="https://lccn.loc.gov/mm78016912" xlink:show="new" xlink:title="https://lccn.loc.gov/mm78016912" xlink:type="simple"/></p>
+        </note>
+      </notestmt>
+    </filedesc>
+    <profiledesc>
+      <creation>Finding aid encoded by Library of Congress Manuscript Division, <date>2011</date></creation>
+      <langusage>The finding aid is in <language langcode="eng">English</language></langusage>
+    </profiledesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <head>Collection Summary</head>
+      <unittitle label="Title">Edward S. Corwin Papers</unittitle>
+      <unitdate label="Span Dates" type="inclusive" normal="1904/1963">1904-1963</unitdate>
+      <unitdate label="Bulk Dates" type="bulk" normal="1935/1950">1935-1950</unitdate>
+      <unitid label="ID No." countrycode="US" repositorycode="US-DLC">MSS16912</unitid>
+      <physdesc label="Extent">1,000 items</physdesc>
+      <physdesc label="Extent">3 containers</physdesc>
+      <physdesc label="Extent">1.2 linear feet</physdesc>
+      <repository label="Repository">
+        <corpname>Library of Congress Manuscript Division</corpname>
+        <address>
+          <addressline>Washington, D.C.</addressline>
+        </address>
+      </repository>
+      <abstract label="Abstract">Constitutional historian and educator. Correspondence, memoranda, drafts of writings, reports, notes, printed matter, and other papers relating chiefly to Corwin's career as a professor of jurisprudence at Princeton University and to his service as chairman of the Commission on the Organization of the Executive Branch of Government (Hoover Commission).</abstract>
+      <langmaterial label="Language" encodinganalog="546">
+        <languageset>
+          <language encodinganalog="041" langcode="eng">English</language>
+          <script scriptcode="Latn"/>
+        </languageset>
+        <descriptivenote>
+          <p>Collection material in English</p>
+        </descriptivenote>
+      </langmaterial>
+    </did>
+    <acqinfo>
+      <head>Provenance</head>
+      <p>The papers of Edward S. Corwin, constitutional historian and educator, were given to the Library of Congress by Corwin in 1952.</p>
+    </acqinfo>
+    <userestrict>
+      <head>Copyright Status</head>
+      <p>The status of copyright in the unpublished writings of Edward S. Corwin is governed by the Copyright Law of the United States (Title 17, U.S.C.).</p>
+    </userestrict>
+    <accessrestrict>
+      <head>Access and Restrictions</head>
+      <p>The papers of Edward S. Corwin are open to research in the Library of Congress Manuscript Reading Room under the regulations governing the use of manuscript collections.</p>
+    </accessrestrict>
+    <prefercite>
+      <head>Preferred Citation</head>
+      <p>Researchers wishing to cite this collection should include the following information: Container number, Edward S. Corwin Papers, Manuscript Division, Library of Congress, Washington, D.C. </p>
+    </prefercite>
+    <bioghist>
+      <head>Biographical Note</head>
+      <p>Edward Samuel Corwin was born in 1878. He received an A.B. from the University of Michigan, Ann Arbor, Mich., in 1900 and a Ph.D. from the University of Pennsylvania, Philadelphia, Pa., in 1905. He was a professor of jurisprudence at Princeton University from 1905 until his retirement in 1946. Corwin served as chairman of the Commission on the Organization of the Executive Branch of Government (Hoover Commission). He died in 1963.</p>
+    </bioghist>
+    <scopecontent>
+      <head>Scope and Content Note</head>
+      <p>The papers of Edward Samuel Corwin (1878-1963) span the years 1904-1963, with the bulk of the material concentrated in the period 1935-1950. The collection consists of correspondence, memoranda, drafts of writings, reports, notes, printed matter, and miscellaneous items relating chiefly to Corwin's career as professor of jurisprudence at Princeton University and as chairman of the Commission on the Organization of the Executive Branch of Government (Hoover Commission). General correspondence comprises the largest part of the collection and pertains to Corwin's academic career and his writings and includes letters from Felix Frankfurter, Learned Hand, and Charles Evans Hughes. Material relating to the Hoover Commission includes correspondence, reports, memoranda, notes, and printed matter relating to the organization of the executive branch of government. Other groups of papers in the collection pertain to Corwin's writings and include drafts of his books, <title xlink:type="simple">The Constitution and What It Means Today</title>, <title xlink:type="simple">The President, Office and Powers, 1787-1957</title>, and <title xlink:type="simple">Total War and the Constitution</title>, as well as material relating to a study of the presidential nominating process in the United States.</p>
+    </scopecontent>
+    <arrangement>
+      <head>Arrangement of the Papers</head>
+      <p>This collection is arranged in four series:</p>
+      <list>
+        <item>General Correspondence, 1904-1963</item>
+        <item>Commission on the Organization of the Executive Branch of Government, 1948</item>
+        <item>Writings, 1942-1951</item>
+        <item>Miscellany, 1936-1952</item>
+      </list>
+    </arrangement>
+    <relatedmaterial>
+      <head id="related">Related Material</head>
+      <p>Sound recordings of lectures by Corwin have been transferred to the Motion Picture, Broadcasting, and Recorded Sound Division of the Library of Congress where they are identified as part of these papers.</p>
+    </relatedmaterial>
+    <odd>
+      <head>Additional Information</head>
+      <p>This is a test paragraph to demonstrate the bug. <ref target="related">Also see related material.</ref> This text follows the reference.</p>
+    </odd>
+    <controlaccess>
+      <head>Selected Search Terms</head>
+      <p>The following terms have been used to index the description of this collection in the Library's online catalog. They are grouped by name of person or organization, by subject or location, and by occupation and listed alphabetically.</p>
+      <controlaccess>
+        <head>People</head>
+        <persname>Corwin, Edward S. (Edward Samuel), 1878-1963.</persname>
+        <persname>Frankfurter, Felix, 1882-1965--Correspondence.</persname>
+        <persname>Hand, Learned, 1872-1961--Correspondence.</persname>
+        <persname>Hughes, Charles Evans, 1862-1948--Correspondence.</persname>
+      </controlaccess>
+      <controlaccess>
+        <head>Organizations</head>
+        <corpname>Princeton University.</corpname>
+        <corpname>United States. Commission on Organization of the Executive Branch of the Government (1947-1949)</corpname>
+      </controlaccess>
+      <controlaccess>
+        <head>Subjects</head>
+        <subject>Constitutional history--United States.</subject>
+        <subject>Constitutional law--United States.</subject>
+        <subject>Executive power--United States.</subject>
+        <subject>Presidents--Nomination--United States.</subject>
+        <subject>Presidents--United States.</subject>
+      </controlaccess>
+      <controlaccess>
+        <head>Occupations</head>
+        <occupation>Educators.</occupation>
+        <occupation>Historians.</occupation>
+      </controlaccess>
+    </controlaccess>
+    <dsc>
+      <head>Container List</head>
+      <c01 level="series">
+        <did>
+          <unittitle>General Correspondence, 1904-1963</unittitle>
+        </did>
+        <c02 level="file">
+          <did>
+            <container type="box">1</container>
+            <unittitle>A-Z</unittitle>
+          </did>
+        </c02>
+      </c01>
+      <c01 level="series">
+        <did>
+          <unittitle>Commission on the Organization of the Executive Branch of Government, 1948</unittitle>
+        </did>
+        <c02 level="file">
+          <did>
+            <container type="box">2</container>
+            <unittitle>Correspondence, reports, memoranda, notes, and printed matter</unittitle>
+          </did>
+        </c02>
+      </c01>
+      <c01 level="series">
+        <did>
+          <unittitle>Writings, 1942-1951</unittitle>
+        </did>
+        <c02 level="file">
+          <did>
+            <container type="box">3</container>
+            <unittitle>
+              <title xlink:type="simple">The Constitution and What It Means Today</title>, drafts</unittitle>
+          </did>
+        </c02>
+        <c02 level="file">
+          <did>
+            <container type="box">3</container>
+            <unittitle>
+              <title xlink:type="simple">The President, Office and Powers</title>, notes and drafts</unittitle>
+            <unitdate>1942-1951</unitdate>
+          </did>
+        </c02>
+        <c02 level="file">
+          <did>
+            <container type="box">3</container>
+            <unittitle>
+              <title xlink:type="simple">Total War and the Constitution</title>, notes and drafts</unittitle>
+          </did>
+        </c02>
+        <c02 level="file">
+          <did>
+            <container type="box">3</container>
+            <unittitle>Nominating the president, notes and drafts</unittitle>
+          </did>
+        </c02>
+      </c01>
+      <c01 level="series">
+        <did>
+          <unittitle>Miscellany, 1936-1952</unittitle>
+        </did>
+        <c02 level="file">
+          <did>
+            <container type="box">3</container>
+            <unittitle>Lecture notes, printed matter, and other miscellaneous items</unittitle>
+            <unitdate>1936-1952</unitdate>
+          </did>
+        </c02>
+      </c01>
+    </dsc>
+  </archdesc>
+</ead>

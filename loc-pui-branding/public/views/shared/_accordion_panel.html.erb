@@ -1,0 +1,21 @@
+<% 
+   is_expanded = (p_id == 'add_desc') 
+%>
+
+<% if !p_body.strip.blank? %>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title mb-0">
+        <a class="accordion-toggle" data-toggle="collapse" data-target="#<%= p_id %>" aria-controls="<%= p_id %>" aria-expanded="<%= is_expanded %>">
+          <i class="fas fa-<%= is_expanded ? 'minus' : 'plus' %> accordion-icon"></i>
+          <span><%= p_title %></span>
+        </a>
+      </h2>
+    </div>
+    <div id="<%= p_id %>" class="collapse <%= 'show' if is_expanded %> note_panel">
+      <div class="card-body">
+        <%= p_body %>
+      </div>
+    </div>
+  </div>
+<% end %>

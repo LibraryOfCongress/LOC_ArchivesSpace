@@ -1,0 +1,53 @@
+<div id="main-content">
+  <div class="row" id="info_row">
+    <div class="information col-sm-7">
+      <%= render partial: 'shared/idbadge', locals: { result: @result, props: { full: true } } %>
+    </div>
+    <div class="page_actions col-sm-5 right">
+      <%= render partial: 'shared/page_actions', locals: { record: @result, title: @result.display_string, url: request.fullpath } %>
+    </div>
+  </div>
+  <div class="row align-items-start">
+    <div class="information col-sm-12">
+      <div class="clear">
+        <span class="inline-label clear"><%= t('enumeration_names.subject_source') %>: </span><%= t("enumerations.subject_source.#{@result['json']['source']}") %>
+      </div>
+      <% if @result['json']['scope_note'].present? %>
+        <span class="inline-label"><%= t('scope_note') %>:</span> <%= process_mixed_content(@result['json']['scope_note']).html_safe %>
+      <% end %>
+
+      <% if @pager && @pager.count > 0 %>
+        <div class="row my-3 align-items-center">
+          <div class="col">
+            <h2 class="collection-results-header mb-0">Found in <%= @results['total_hits'] %> Collections and/or Records:</h2>
+          </div>
+          <div class="col"></div>
+          <div class="col-auto d-flex align-items-center gap-3">
+            <div class="subjects-page-pagination">
+              <%# We now pass force_show: true to make the pagination appear %>
+              <%= render partial: 'shared/pagination', locals: { pager: @pager, force_show: true } %>
+            </div>
+            <div>
+              <%= render partial: 'shared/sorter' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row search-results">
+          <div class="col-sm-12">
+            <% @results.records.each do |result| %>
+              <%= render partial: 'shared/result', locals: { result: result, props: (@result_props || {}).merge(full: false) } %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="col-12 d-flex justify-content-end">
+            <%# Pass force_show: true here as well for the bottom pagination %>
+            <%= render partial: 'shared/pagination', locals: { pager: @pager, pager_id: 'paging_bottom', force_show: true } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,156 @@
+<a name="main" title="<%= t('internal_links.main') %>"></a>
+
+<section class="row">
+  <div class="information w-100">
+    <%= render partial: 'shared/breadcrumbs' %>
+  </div>
+</section>
+
+<div id="main-content" class="objects">
+  <div class="d-flex" id="info_row">
+    <div class="information flex-grow-1">
+      <%= render partial: 'shared/idbadge', locals: {:result => @result, :props => { :full => true} } %>
+    </div>
+    <div class="page_actions">
+      <%= render partial: 'shared/page_actions', locals: {:record => @result, :title => @result.display_string, :url => request.fullpath, :cite => @result.cite } %>
+    </div>
+  </div>
+
+  <div id="inherited-banner-placeholder">
+    <% 
+      has_restrictions = @result.json['restrictions']
+      has_spatial = @result.json['spatial_restrictions']
+    %>
+    <% if has_restrictions || has_spatial %>
+      <div class="row">
+        <div class="col-12">
+           <div class="restriction-banner" role="alert" style="margin-top: 1rem; margin-bottom: 1rem;">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <span class="restriction-banner-text">
+                <% if has_restrictions %>Access Restrictions Apply<% end %><% if has_restrictions && has_spatial %>; <% end %><% if has_spatial %><a href="https://guides.loc.gov/finding-aids/request" target="_blank" rel="noopener noreferrer">Some or all content stored offsite</a><% end %>
+              </span>
+           </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% sidebar_position = AppConfig[:pui_collection_org_sidebar_position] %>
+  <div class="row align-items-start" id="notes_row">
+    <% if !@result.instance_of?(DigitalObject) || @has_children %>
+      <div 
+        id="sidebar" 
+        class="sidebar sidebar-container col-sm-3 resizable-sidebar <%= sidebar_position == 'left' ? 'resizable-sidebar-left' : 'order-1' %> infinite-tree-sidebar" 
+        data-sidebar-position="<%= sidebar_position %>"
+      >
+        <%
+          if @result.kind_of?(DigitalObject)
+            heading_text = t('dig_cont_arr')
+          else
+            heading_text = t('cont_arr')
+          end
+        %>
+
+        <% if AppConfig[:pui_search_collection_from_archival_objects] && @result.instance_of?(ArchivalObject) %>
+          <%= render partial: 'shared/search_collection_form', :locals => {:resource_uri => @result.resource_uri, :action_text => "#{t('actions.search_in', :type => t('resource._singular'))}"} %>
+        <% end %>
+        <%= render partial: 'shared/children_tree', :locals => {:heading_text => heading_text, :root_node_uri => @result.root_node_uri, :current_node_uri => @result.uri} %>
+      </div>
+    <% end %>
+
+    <div class="col-sm-9 resizable-content-pane">
+      <%= render partial: 'shared/digital', locals: {:dig_objs => @dig, record: @result} %>
+
+      <% if defined?(comp_id) && !comp_id && !@result['json']['ref_id'].blank? %>
+        <span class='ref_id'>[<%= t('archival_object._public.header.ref_id') %>: <%= @result['json']['ref_id'] %>]</span>
+      <% end %>
+
+      <%# AS-536 / AS-511: Explicitly render Access restrict notes for Digital Objects only %>
+      <% if @result.kind_of?(DigitalObject) && @result.respond_to?(:notes) && @result.notes.has_key?('accessrestrict') %>
+        <div class="accessrestrict-note" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">
+          <% @result.notes['accessrestrict'].each do |note| %>
+            <%# Use the note's explicit label if present, otherwise fallback to the default translation %>
+            <h3><%= note['label'].present? ? note['label'] : t('enumerations._note_types.accessrestrict', default: 'Conditions Governing Access') %></h3>
+            <div class="note-content">
+              <%= raw note['note_text'] %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= render partial: 'shared/record_innards' %>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll("[data-js='readmore']").forEach((el) => {
+      new ReadMoreNotes(el);
+    });
+  </script>
+
+  <%= render partial: 'shared/modal_actions' %>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Accordion Icon Logic
+      const accordion = document.getElementById('res_accordion');
+      if (accordion) {
+        $(accordion).on('show.bs.collapse', function (e) {
+          $(e.target).prev('.card-header').find('.accordion-icon').removeClass('fa-plus').addClass('fa-minus');
+        });
+        $(accordion).on('hide.bs.collapse', function (e) {
+          $(e.target).prev('.card-header').find('.accordion-icon').removeClass('fa-minus').addClass('fa-plus');
+        });
+      }
+
+      const placeholder = document.getElementById('inherited-banner-placeholder');
+      const existingBanner = placeholder.querySelector('.restriction-banner');
+
+      if (!existingBanner) {
+        const parentResourceUri = "<%= @result.resource_uri if @result.respond_to?(:resource_uri)%>";
+
+        if (parentResourceUri && parentResourceUri.length > 0) {
+          const storageKey = "restriction_banner_html_" + parentResourceUri;
+          const cachedHtml = sessionStorage.getItem(storageKey);
+
+          const injectBanner = (htmlContent) => {
+            if (!htmlContent) return;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'row';
+            wrapper.innerHTML = `
+              <div class="col-12">
+                 <div class="restriction-banner" role="alert" style="margin-top: 1rem; margin-bottom: 1rem;">
+                    ${htmlContent}
+                 </div>
+              </div>
+            `;
+            placeholder.appendChild(wrapper);
+          };
+
+          if (cachedHtml) {
+            if (cachedHtml !== "none") injectBanner(cachedHtml);
+          } else {
+            fetch(parentResourceUri)
+              .then(response => response.text())
+              .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const parentBanner = doc.querySelector('.restriction-banner');
+
+                if (parentBanner) {
+                  const bannerContent = parentBanner.innerHTML;
+                  sessionStorage.setItem(storageKey, bannerContent);
+                  injectBanner(bannerContent);
+                } else {
+                  sessionStorage.setItem(storageKey, "none");
+                }
+              })
+              .catch(err => {
+                console.error("Could not check parent restrictions:", err);
+              });
+          }
+        }
+      }
+    });
+  </script>
+</div>

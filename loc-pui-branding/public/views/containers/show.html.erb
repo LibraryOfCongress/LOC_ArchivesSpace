@@ -1,0 +1,105 @@
+<div id="main-content" class="containers">
+  <div class="d-flex">
+    <div class="information flex-grow-1">
+      <% if @result['json']['repository'] && @result['json']['repository']['_resolved'] && @result['json']['collection'] %>
+        <% repository = @result['json']['repository']['_resolved'] %>
+        <% collection = @result['json']['collection'][0] %>
+        <div class="collection-header">
+          <span class="repo-context">
+            <i class="fa fa-home" aria-hidden="true"></i>&nbsp;
+            <a href="<%= app_prefix(repository['uri']) %>">
+              <%= (repository['display_string'] || '').split('(').first.strip %>
+            </a>
+          </span>
+          <span class="separator" aria-hidden="true">&nbsp;&raquo;&nbsp;</span>
+          <span class="collection-context">
+            <i class="<%= icon_for_type('resource') %>" aria-hidden="true"></i>&nbsp;<%== strip_tags(collection['display_string']) %>
+          </span>
+        </div>
+      <% end %>
+
+      <h1>
+        <a class="record-title" href="<%= app_prefix(@result.uri) %>"><%== @result.display_string.strip %></a>: Stored onsite
+      </h1>
+
+      <div class="badge-and-identifier">
+        <div class="record-type-badge top_container">
+          <i class="<%= icon_for_type('top_container') %>"></i>&nbsp;Collection
+        </div>
+      </div>
+
+    </div>
+    <div class="page_actions">
+      <%= render partial: 'shared/page_actions', locals: {:record => @result, :title => @result.display_string, :url => request.fullpath } %>
+    </div>
+  </div>
+  <div class="row">
+    <% unless @results.blank? || (@results.is_a?(Hash) && @results['total_hits'] == 0) || @facets.blank? %>
+      <div
+	id="sidebar"
+	class="h-max col-12 col-lg-3 sidebar sidebar-container resizable-sidebar resizable-sidebar-left"
+	data-sidebar-position="left">
+        <%= render partial: 'shared/facets' %>
+      </div>
+    <% end %>
+
+    <div class="col-12 col-lg-9 px-3 resizable-content-pane">
+      <div class="staff-hidden d-none">
+        <% if @result['json']['restricted'] %>
+          <p><h4 class='restricted'><%= I18n.t('top_container.restricted') %></h4></p>
+        <% end %>
+      </div>
+
+      <% unless @results.blank? || (@results.is_a?(Hash) && @results['total_hits'] == 0) %>
+        <h2><%= t('contains', :count => @results['total_hits'], :type => @results['total_hits'] == 1? t('search_results.result') : t('search_results.results')) %>:</h2>
+
+        <%
+          container_display = @result.display_string.split(':').first.strip
+        %>
+
+        <% @results.records.each do |result| %>
+        <%
+          full_title = result['json']['title'] || result['json']['display_string']
+          display_title = full_title
+          display_date = result.dates
+
+          if full_title&.include?(', <date>')
+            display_title = full_title.split(', <date>').first
+            match_data = full_title.match(/<date>(.*?)<\/date>/)
+            display_date = match_data[1] if match_data
+          end
+        %>
+          <div class="recordrow" style="clear:both" data-uri="<%= result.uri %>">
+
+            <h3>
+              <a class="record-title" href="<%= app_prefix(result.uri) %>">
+                <%== process_mixed_content(display_title) %>
+              </a>
+            </h3>
+
+            <div class="record-metadata-line">
+              <span class="record-type-badge archival_object">
+                <i class="fa fa-folder" aria-hidden="true"></i>&nbsp;
+                <%= I18n.t("enumerations.archival_record_level.#{result.level}") %>
+              </span>
+              <span class="metadata-separator" aria-hidden="true">&nbsp;|&nbsp;</span>
+              <span class="container-location">
+                <%= container_display %>
+              </span>
+            </div>
+
+            <% unless display_date.blank? %>
+              <div class="dates">
+                <strong>Dates:</strong> Creation:
+                <%= display_date %>
+              </div>
+            <% end %>
+
+          </div>
+        <% end %>
+
+        <%= render partial: 'shared/pagination', locals: {:pager  => @pager}  %>
+      <% end %>
+    </div>
+  </div>
+</div>

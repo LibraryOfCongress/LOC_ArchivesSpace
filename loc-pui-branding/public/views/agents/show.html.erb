@@ -1,0 +1,77 @@
+<% json = @result.json %>
+
+<div id="main-content" class="agents">
+  <div class="row has-resizable-content">
+
+    <%# Left Sidebar: Facets and additional agent information %>
+    <div id="sidebar" class="col-12 col-lg-3 sidebar sidebar-container resizable-sidebar resizable-sidebar-left" data-sidebar-position="left">
+      <a name="filter" title="<%= t('internal_links.filter') %>"></a>
+
+      <%= render partial: 'shared/facets' %>
+
+      <% if show_agents_sidebar?(@result) %>
+      <h3 class="mt-4"><%= t('more_about') %> '<%== process_mixed_content(@result.display_string) %>'</h3>
+      <div class="acc_holder clear" >
+        <div class="panel-group" id="agent_accordion">
+          <% n = render partial: 'name', locals: {:result => @result} %>
+          <%= render partial: 'shared/accordion_panel', locals:
+          {:p_title => I18n.t('agent._public.section.other_names'),
+          :p_id => "names_panel",
+          :p_body => n } %>
+
+          <% if @result.respond_to?(:related_agents) && !ASUtils.wrap(@result.related_agents).empty? %>
+            <% x = render partial: 'agents/related_agents', locals: {:related_agents => @result.json['related_agents'], :list_clss => 'related_agents'} %>
+            <%= render partial: 'shared/accordion_panel', locals: {:p_title => t('agent._public.section.related_agents'), :p_id => 'related_agents_list', :p_body => x} %>
+          <% end %>
+
+          <% unless json['agent_resources'].blank? %>
+            <% x = render partial: 'shared/present_list_agent_resources', locals: {:list => json['agent_resources'], :list_clss => 'external_docs'} %>
+            <%= render partial: 'shared/accordion_panel', locals: {:p_title => t('agent_resource._plural'), :p_id => 'agent_resource_list', :p_body => x} %>
+          <% end %>
+
+          <% unless @result.external_documents.blank? %>
+            <% x = render partial: 'shared/present_list_external_docs', locals: {:list => @result.external_documents, :list_clss => 'external_docs'} %>
+            <%= render partial: 'shared/accordion_panel', locals: {:p_title => t('external_docs'), :p_id => 'ext_doc_list', :p_body => x} %>
+          <% end %>
+        </div>
+      </div>
+      <script type="text/javascript" >
+        initialize_accordion("#agent_accordion .note_panel", "<%= t('accordion.expand') %>" , "<%= t('accordion.collapse') %>", <%= AppConfig[:pui_expand_all] %>);
+      </script>
+      <% end %>
+    </div>
+
+
+    <%# Right Main Content: Agent details and associated records %>
+    <div class="col-12 col-lg-9 resizable-content-pane">
+      <div class="d-flex" id="info_row">
+        <div class="information flex-grow-1">
+          <%= render partial: 'shared/idbadge', locals: {:result => @result, :props => { :full => true} } %>
+        </div>
+        <div class="page_actions">
+          <%= render partial: 'shared/page_actions', locals: {:record => @result, :title => @result.display_string, :url => request.fullpath } %>
+        </div>
+      </div>
+
+      <%# --- Agent Details Section --- %>
+      <%= render partial: 'dates', locals: {:result => @result} %>
+      <%= render partial: 'parallel_names', locals: {:result => @result} %>
+      <%= render partial: 'shared/notes', locals: {:result => @result, note_label: I18n.t('agent_notes.note_bioghist'), note_type: 'note_bioghist'} %>
+      <%= render partial: 'shared/notes', locals: {:result => @result, note_label: I18n.t('agent_notes.note_general_context'), note_type: 'note_general_context'} %>
+      <%= render partial: 'shared/notes', locals: {:result => @result, note_label: I18n.t('agent_notes.note_legal_status'), note_type: 'note_legal_status'} %>
+      <%= render partial: 'shared/notes', locals: {:result => @result, note_label: I18n.t('agent_notes.note_mandate'), note_type: 'note_mandate'} %>
+      <%= render partial: 'shared/notes', locals: {:result => @result, note_label: I18n.t('agent_notes.note_structure_or_genealogy'), note_type: 'note_structure_or_genealogy'} %>
+      <%= render partial: 'gender', locals: {:result => @result} %>
+      <%= render partial: 'subjects', locals: {:result => @result, subject_label: I18n.t('agent_function._plural'), subject_type: 'agent_functions'} %>
+      <%= render partial: 'subjects', locals: {:result => @result, subject_label: I18n.t('agent_occupation._plural'), subject_type: 'agent_occupations'} %>
+      <%= render partial: 'subjects', locals: {:result => @result, subject_label: I18n.t('agent_place._plural'), subject_type: 'agent_places'} %>
+      <%= render partial: 'subjects', locals: {:result => @result, subject_label: I18n.t('agent_topic._plural'), subject_type: 'agent_topics'} %>
+      <%= render partial: 'shared/languages', locals: {:result => @result} %>
+      <%= render partial: 'shared/metadata_rights_declarations', locals: {:result => @result} %>
+      <%= render partial: 'snac', locals: {:result => @result} %>
+      
+      <%# --- Associated Records Section --- %>
+      <%= render partial: 'shared/results', locals: {:results => @results, :pager => @pager} %>
+    </div>
+  </div>
+</div>

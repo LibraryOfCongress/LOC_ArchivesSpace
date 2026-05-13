@@ -1,0 +1,25 @@
+<dd class="<%= local_assigns[:container_class] %>">
+  <%
+    # must preserve existing filters (in @page_search) and append the new one.
+    # agents facet values are strings (names), but the 'agents' solr field expects URIs.
+    # override this to target 'published_agents' for string matching.
+    filter_field = type
+    if type == 'agents'
+      filter_field = 'published_agents'
+    end
+
+    # AS-466 update applied strip_mixed_content to all facets.
+    # that broke agents matching if the key contains specific formatting.
+    # we have to only strip subjects, use raw keys for others.
+    raw_val = (type == 'subjects' ? strip_mixed_content(facet.key) : facet.key)
+  %>
+
+  <a href="<%= app_prefix("#{@page_search}&filter_fields[]=#{filter_field}&filter_values[]=#{CGI.escape(raw_val)}") %>"
+     rel="nofollow"
+     title="<%= t('search_results.filter_by')%> '<%= strip_mixed_content(facet.label) %>'"
+     aria-label="<%= strip_mixed_content(facet.label) %>, <%= facet.count %> <%= t('search_results.results', default: 'results') %>">
+    <%= facet.label.html_safe %>
+  </a>
+
+  <span class="badge badge-pill badge-dark" aria-hidden="true"><%= facet.count %></span>
+</dd>

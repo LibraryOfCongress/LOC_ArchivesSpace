@@ -1,0 +1,174 @@
+<a name="main" title="<%= t('internal_links.main') %>"></a>
+
+<div id="main-content" class="row">
+  <div class="information col-12 col-lg-6">
+    <%= render partial: 'shared/idbadge', locals: {:result => @result, :props => { :full => true} } %>
+  </div>
+
+  <div class="page_actions col-12 col-lg-6">
+    <%= render partial: 'shared/page_actions', locals: {:record => @result, :title =>  @result.display_string, :url => request.fullpath, :cite => @result.cite } %>
+  </div>
+
+  <div class="col-12">
+    <% 
+      has_restrictions = @result.json['restrictions']
+      has_spatial = @result.json['spatial_restrictions']
+    %>
+
+    <% if has_restrictions || has_spatial %>
+      <div class="restriction-banner" role="alert">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        <span class="restriction-banner-text">
+          <% if has_restrictions %>Access Restrictions Apply<% end %><% if has_restrictions && has_spatial %>; <% end %><% if has_spatial %><a href="https://guides.loc.gov/finding-aids/request" target="_blank" rel="noopener noreferrer">Some or all content stored offsite</a><% end %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <%= render partial: 'shared/breadcrumbs' %>
+</div>
+
+<%= render partial: 'resources/resource_alltabs' %>
+
+<%
+  sidebar_position = AppConfig[:pui_collection_org_sidebar_position]
+  tree_waypoint_size = Rails.configuration.infinite_tree_batch_size
+  records_waypoint_size = Rails.configuration.infinite_records_waypoint_size
+  num_records = @ordered_records.count
+%>
+
+<div class="row overflow-hidden" id="loc_record_container">
+  <div
+    id="sidebar"
+    class="sidebar sidebar-container col-12 col-lg-3 resizable-sidebar <%= sidebar_position == 'left' ? 'resizable-sidebar-left' : 'order-1' %> infinite-tree-sidebar"
+    data-sidebar-position="<%= sidebar_position %>"
+  >
+    <% if AppConfig[:pui_search_collection_from_collection_organization] %>
+      <%= render partial: 'shared/search_collection_form', :locals => {:resource_uri => @result['uri'], :action_text => t('actions.search_in', :type => t('resource._singular'))} %>
+    <% end %>
+
+    <h2>Collection Organization</h2>
+    <hr />
+    <%= render partial: 'shared/infinite_tree' %>
+  </div>
+  <%= render partial: 'resources/infinite_records', locals: {
+      num_records: num_records,
+      records_waypoint_size: records_waypoint_size
+      } %>
+</div>
+
+<%= render partial: 'resources/infinite_load_all', locals: {num_records: num_records} %>
+
+<script>
+const uriFragment = window.location.hash;
+const resourceUri = '<%= @result["uri"] %>';
+const treeWaypointSize = '<%= tree_waypoint_size %>';
+const identifier_separator = '<%= I18n.t("resource.identifier_separator") %>';
+const date_type_bulk = '<%= I18n.t("date_type_bulk.bulk") %>';
+const appUrlPrefix = '<%= AppConfig[:public_proxy_url] %>';
+const workerPath = '<%= asset_path('infiniteRecordsWorker.js') %>';
+const mainMaxFetches = <%= Rails.configuration.infinite_records_main_max_concurrent_waypoint_fetches %>;
+const workerMaxFetches = <%= Rails.configuration.infinite_records_worker_max_concurrent_waypoint_fetches %>;
+
+const coordinator = new InfiniteCoordinator();
+
+const infiniteRecords = new InfiniteRecords(
+  resourceUri,
+  appUrlPrefix,
+  workerPath,
+  mainMaxFetches,
+  workerMaxFetches,
+  uriFragment,
+  coordinator
+);
+const infiniteTree = new InfiniteTree(
+  treeWaypointSize,
+  appUrlPrefix,
+  resourceUri,
+  identifier_separator,
+  date_type_bulk,
+  uriFragment,
+  coordinator
+);
+
+infiniteTree.container.addEventListener('click', (e) => {
+  treeClickDelegator(e, infiniteTree, infiniteRecords);
+});
+
+/**
+ * treeClickDelegator
+ * @description - Delegate click events on the InfiniteTree container
+ * @param {Event} event - Click event
+ * @param {InfiniteTree} tree - InfiniteTree instance
+ * @param {InfiniteRecords} records - InfiniteRecords instance
+ */
+function treeClickDelegator(event, tree, records) {
+  if (event.target.closest('.node-expand')) {
+    tree.expandHandler(event);
+  } else if (event.target.closest('.node-title')) {
+    records.treeLinkHandler(event);
+  }
+}
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const sidebar = document.querySelector("#sidebar");
+    if (!sidebar) return;
+
+    const searchForm = sidebar.querySelector('form');
+    if (searchForm) {
+      const filterMoreWrapper = document.createElement('div');
+      filterMoreWrapper.className = 'filter_more';
+      searchForm.parentNode.insertBefore(filterMoreWrapper, searchForm);
+      filterMoreWrapper.appendChild(searchForm);
+      
+      const askLibrarianHTML = `
+        <div class="need-help-container">
+          <span class="need-help-label">Need Help?</span>
+          <a href="https://ask.loc.gov" target="_blank" class="ask-librarian-link">Ask a Librarian</a>
+          <i class="fa fa-comment" aria-hidden="true"></i>
+        </div>
+      `;
+      filterMoreWrapper.insertAdjacentHTML('beforeend', askLibrarianHTML);
+
+      const headingHTML = `<h3 class="custom-search-heading"><%= t('actions.search') %></h3>`;
+      filterMoreWrapper.insertAdjacentHTML('beforebegin', headingHTML);
+    }
+
+    const fromYearInput = sidebar.querySelector('#filter_from_year');
+    const dateContainer = fromYearInput ? fromYearInput.closest('.form-group.row') : null;
+
+    if (dateContainer) {
+      const toggleButtonHTML = `
+        <div class="custom-date-toggle">
+          <button type="button" class="date-range-button" aria-expanded="false">
+            <i class="fas fa-plus"></i>
+          </button>
+          <span class="date-range-label"><%= t('search_results.filter.date_range') %></span>
+        </div>
+      `;
+      
+      const wrapper = document.createElement('div');
+      wrapper.id = 'date-range-fields';
+      wrapper.className = 'custom-date-fields d-none';
+      
+      dateContainer.insertAdjacentHTML('beforebegin', toggleButtonHTML);
+      dateContainer.parentNode.insertBefore(wrapper, dateContainer);
+      wrapper.appendChild(dateContainer);
+
+      const toggleBtn = sidebar.querySelector(".date-range-button");
+      toggleBtn.addEventListener("click", function() {
+        const isHidden = wrapper.classList.toggle("d-none");
+        this.setAttribute("aria-expanded", !isHidden);
+        this.querySelector('i').className = isHidden ? "fas fa-plus" : "fas fa-minus";
+        sidebar.classList.toggle('expanded', !isHidden);
+      });
+    }
+  });
+</script>
+
+
+<%= render partial: 'shared/modal_actions' %>

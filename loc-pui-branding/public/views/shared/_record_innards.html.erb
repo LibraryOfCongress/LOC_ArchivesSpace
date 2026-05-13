@@ -1,0 +1,96 @@
+<% non_folder = %w(summary langmaterial accessrestrict userestrict bioghist) %>
+<% folder = %w(scopecontent arrangement phystech physloc otherfindaid custodhist acqinfo appraisal accruals originalsloc altformavail extent relatedmaterial separatedmaterial note_bibliography materialspec physdesc inscription physfacet dimensions edition fileplan legalstatus odd note processinfo note_index) %>
+<% calling_partial ||= 'unknown' %>
+
+<% unless @result.kind_of?(DigitalObject) %>
+  <div class="upper-record-details">
+
+    <% scopecontent = @result.note('scopecontent') %>
+    <% unless scopecontent.blank? %>
+      <div class="scopecontent single_note">
+        <h2><%= scopecontent['label'] %></h2>
+        <div class="d-flex flex-column align-items-start wrap-anywhere note-content">
+          <%= scopecontent['note_text'].html_safe %>
+        </div>
+      </div>
+    <% end %>
+
+    <% unless @result.dates.blank? %>
+      <h2><%= t('resource._public.dates') %></h2>
+      <%= render partial: 'shared/dates', locals: {:dates => @result.dates} %>
+    <% end %>
+
+    <% if @result.agents && Array(@result.agents['creator']).length > 0 %>
+      <%= render partial: 'shared/agents_list', locals: {:list => {'creator' => @result.agents['creator']}, :heading_size => 'h2'} %>
+    <% end %>
+
+    <% non_folder.each do |type| %>
+      <% (@result.notes[type] || []).each do |note_struct| %>
+       <% unless note_struct['note_text'].blank? %>
+        <%= render partial: 'shared/single_note', locals: {:type => type, :note_struct => note_struct, :calling_partial => 'record_innards'} %>
+       <% end %>
+      <% end %>
+    <% end %>
+
+    <% unless @result.extents.blank? %>
+      <h2>
+        <%= t('resource._public.extent') %>
+      </h2>
+      <p class="extent">
+        <% @result.extents.each do |ext| %>
+          <%= inheritance(ext['_inherited']).html_safe %>
+          <%= ext['display'] %><br />
+        <% end %>
+      </p>
+    <% end %>
+
+    <% unless @result.notes.include?('langmaterial') || @result.lang_materials.blank? %>
+      <h2><%= t('resource._public.lang') %></h2>
+       <% @result.lang_materials.each do |lang_material| %>
+        <p class="language"><%= inheritance(lang_material['_inherited']).html_safe %>
+          <%= t('enumerations.language_iso639_2.' + lang_material['language'])%>
+        </p>
+      <% end %>
+    <% end %>
+
+    <%= render partial: 'shared/metadata_rights_declarations', locals: {:result => @result} %>
+
+    <% if @result.is_a?(Accession) && @result.inventory %>
+      <h2><%= t('accession._public.section.inventory') %></h2>
+      <p><%= @result.inventory %></p>
+    <% end %>
+
+    <% ASUtils.find_local_directories('public/views/_upper_record_innards.html.erb').each do |template| %>
+      <%= render :inline => File.read(template) if File.exists?(template) %>
+    <% end %>
+  </div>
+<% end %>
+
+<% unless calling_partial == "infinite_item" %>
+  <%= render partial: 'shared/record_innards_accordions', locals: { folder: folder, non_folder: non_folder } %>
+<% end %>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if the expandAllByDefault function exists
+    if (typeof expandAllByDefault === 'function') {
+
+      const expandBtn = document.getElementById('expand-all-link');
+      const collapseBtn = document.getElementById('collapse-all-link');
+
+      if (expandBtn) {
+        expandBtn.addEventListener('click', function(event) {
+          event.preventDefault(); // Prevents the link from navigating
+          expandAllByDefault('.note_panel', true); // 'true' expands all
+        });
+      }
+
+      if (collapseBtn) {
+        collapseBtn.addEventListener('click', function(event) {
+          event.preventDefault(); // Prevents the link from navigating
+          expandAllByDefault('.note_panel', false); // 'false' collapses all
+        });
+      }
+    }
+  });
+</script>

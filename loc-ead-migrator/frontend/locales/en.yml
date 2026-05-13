@@ -1,0 +1,9 @@
+en:
+  job:
+    types:
+      loc_ead_migrator_job: LOC Batch EAD Migrator
+      loc_duplicate_file_report_job: LOC Duplicate EAD Report
+      loc_import_folio_restrictions_job: LOC Import Folio Restrictions
+      loc_delete_digital_objects_job: LOC Delete Unlinked Digital Objects
+  loc_ead_migrator_job:
+    repository: Repository

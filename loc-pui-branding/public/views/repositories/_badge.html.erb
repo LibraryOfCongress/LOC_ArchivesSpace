@@ -1,0 +1,32 @@
+<%
+  icon_class = case type
+               when 'resource'
+                 'fa-archive'
+               when 'digital_object'
+                 'fa-images'
+               when 'subject'
+                 'fa-tags'
+               when 'agent'
+                 'fa-users'
+               else
+                 'fa-question-circle' 
+               end
+
+  # Instead of the default path which shows all items, force a search for objects
+  # with a specific filter for 'primary_type' = 'digital_object'.
+  if type == 'digital_object'
+    url = "/repositories/#{params[:slug_or_id]}/objects?q[]=*&op[]=OR&field[]=keyword&limit=digital_object,archival_object&filter_fields[]=primary_type&filter_values[]=digital_object"
+  else
+    url = "/repositories/#{params[:slug_or_id]}/#{type.pluralize}"
+  end
+
+  count = @counts[type] || 0
+  label = (count != 1 ? t("#{type}._plural") : t("#{type}._singular"))
+%>
+
+<div class="whats-in-item">
+  <a href="<%= url %>">
+    <i class="fa <%= icon_class %>" aria-hidden="true"></i>
+    <span class="whats-in-label"><%= "#{count} #{label}" %></span>
+  </a>
+</div>

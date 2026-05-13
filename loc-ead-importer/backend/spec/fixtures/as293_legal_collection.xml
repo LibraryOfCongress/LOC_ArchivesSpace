@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" findaidstatus="completed" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid>ms003030</eadid>
+    <filedesc>
+      <titlestmt>
+        <titleproper>Test Fixture for Legal Collection Case Numbers (AS-293)</titleproper>
+      </titlestmt>
+    </filedesc>
+    <profiledesc>
+      <creation>
+        This is a fake EAD for testing purposes.
+        <control>
+          <recordid>ms003030</recordid>
+        </control>
+      </creation>
+    </profiledesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <unittitle>Legal Collection Test</unittitle>
+      <unitid>ms003030</unitid>
+      <unitdate normal="2000/2010" type="inclusive">2000-2010</unitdate>
+      <physdesc><extent>1 linear foot</extent></physdesc>
+      <langmaterial><language langcode="eng">English</language></langmaterial>
+    </did>
+    <dsc>
+      <c01 level="file">
+        <did>
+          <unitid>80-1124</unitid>
+          <unittitle>Wright v. Regan</unittitle>
+        </did>
+      </c01>
+
+      <c01 level="file">
+        <did>
+          <unitid>81-534</unitid>
+          <unitid>81-599</unitid>
+          <unittitle>Sample Case with two numbers</unittitle>
+        </did>
+      </c01>
+
+      <c01 level="file">
+        <did>
+          <container localtype="box">1</container>
+          <unitid>82-123</unitid>
+          <unittitle>Case with other unitid</unittitle>
+        </did>
+      </c01>
+
+      <c01 level="file">
+        <did>
+          <unitid label="Some Label">ignore-me</unitid>
+          <unittitle>Should not be changed</unittitle>
+        </did>
+      </c01>
+
+      <c01 level="file">
+        <did>
+          <unitid>83-456</unitid>
+          <unittitle></unittitle>
+        </did>
+      </c01>
+
+      <c01 level="file">
+        <did>
+          <unitid>84-789</unitid>
+        </did>
+      </c01>
+    </dsc>
+  </archdesc>
+</ead>

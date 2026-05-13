@@ -1,0 +1,10 @@
+<% unless !@result.respond_to?(:additional_identifiers) || @result.additional_identifiers.blank? %>
+  <div class="additional-identifiers">
+    <h2>Additional Identifiers</h2>
+    <% @result.additional_identifiers.each do |add_id| %>
+      <p class="extent">
+	<%= add_id %>
+      </p>
+    <% end %>
+  </div>
+<% end %>

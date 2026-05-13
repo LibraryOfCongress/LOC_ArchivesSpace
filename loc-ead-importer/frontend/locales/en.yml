@@ -1,0 +1,6 @@
+en:
+  import_job:
+    import_type_loc_ead_xml: LOC EAD3
+  enumerations:
+    resource_finding_aid_description_rules:
+      dcrmg: "Descriptive Cataloging of Rare Materials (Graphic)"

@@ -1,0 +1,54 @@
+<%= render_aspace_partial :partial => "telephones/template" %>
+
+
+<% define_template "agent_contact", jsonmodel_definition(:agent_contact) do |form| %>
+  <%# We need non-representative contacts in the form at all times (or will be lost on update) but not displayed in a repository context %>
+  <div class="subrecord-form-fields" <%= 'style="display: none;"'.html_safe if @repository && !form['is_representative'] && !@delivering_js_templates %>>
+    <% unless @repository %>
+    <h3 class="subrecord-form-heading">
+      <button type="button" class="badge badge-pill badge-primary fs-14px is-representative-label"><%= t("agent_contact.is_representative") %></button>
+      <button type="button" class="btn btn-sm btn-default is-representative-toggle"><%= t("agent_contact._frontend.action.make_representative") %></button>
+    </h3>
+    <% end %>
+
+    <%= form.hidden_input "is_representative", form["is_representative"] ? 1 : 0 %>
+
+    <%= form.label_and_textfield "name", :required => @repository ? :conditionally : true %>
+
+    <%= form.label_and_select "salutation",
+	 form.possible_options_for('salutation', true) %>
+
+    <%= form.label_and_textfield "address_1" %>
+
+    <%= form.label_and_textfield "address_2" %>
+
+    <%= form.label_and_textfield "address_3" %>
+
+    <%= form.label_and_textfield "city" %>
+
+    <%= form.label_and_textfield "region" %>
+
+    <%= form.label_and_textfield "country" %>
+
+    <%= form.label_and_textfield "post_code" %>
+
+    <%= form.label_and_textfield "email" %>
+
+    <% if @repository %>
+      <%= form.label_and_textfield "email_signature" %>
+    <% else %>
+      <%= form.hidden_input "email_signature" %>
+    <% end %>
+
+    <% if @repository %>
+      <%= form.label_and_textfield "contact_form" %>
+    <% else %>
+      <%= form.hidden_input "contact_form" %>
+    <% end %>
+
+    <%= render_aspace_partial :partial => "shared/subrecord_form", :locals => { :form => form,  :name => "telephones", :heading_size => "h4" } %>
+
+    <%= render_aspace_partial :partial => "notes/form", :locals => {:form => form, :all_note_types => note_types_for("agent_contact"), :section_id => "agent_contact_notes", :nested_note_jsonmodel => "agent_contact_notes", :header_size => "h4", :add_button_text => "note._frontend.action.add_for_contact_note", :show_apply_note_order_action => false} %>
+
+  </div>
+<% end %>

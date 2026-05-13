@@ -1,0 +1,23 @@
+<div class="row flex-column flex-lg-row has-resizable-content" id="repository_page_row">
+
+  <%= render partial: 'repositories/repository_sidebar' %>
+
+
+  <div class="col-12 col-lg-9 px-3 resizable-content-pane">
+    <div id="main-content" class="repositories">
+      <div class="abstract">
+        <%= render partial: 'repositories/repository', locals: {:result => @result, :full => true} %>
+      </div>
+
+      <div id="whats-in-container">
+        <h2 class="repository-header">In this Repository</h2>
+        <div class="repository-content py-3">
+          <div class="list-inline d-flex flex-wrap">
+            <%= render partial: 'repositories/badge', collection: @badges, as: :type %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,174 @@
+<%# Section for displaying any currently applied search filters. %>
+<div class="filters my-3">
+  <% unless @filters.blank? && @search.filters_blank? %>
+    <h3 class="applied-filters-heading"><%= t('search_results.filtered_by')%> </h3>
+    <ul class='p-0 mt-4 mb-5'>
+      <% @search.get_filter_q_arr(@page_search).each do |f_q| %>
+        <% unless f_q['v'].blank? %>
+          <li class="list-group-item">
+            <span class="filter">
+              <%= t('search_results.search_term') %>: <%= f_q['v'] %>
+
+              <%# Generate the correct "remove filter" link for both index and show pages. %>
+              <% if defined?(@result) && @result %>
+                <%# On a SHOW page, link back to the specific record's URI. %>
+                <a href="<%= app_prefix(@result.uri) %>" title="<%= t('search_results.remove_filter')%>" class="delete_filter">X</a>
+              <% else %>
+                <%# On an INDEX page, use the default remove-filter URI. %>
+                <a href="<%= app_prefix(f_q['uri']) %>" title="<%= t('search_results.remove_filter')%>" class="delete_filter">X</a>
+              <% end %>
+
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+      <% unless @search[:filter_from_year].blank? && @search[:filter_to_year].blank? %>
+        <%
+          from_year = (@search[:filter_from_year].blank? ? '' : @search[:filter_from_year] )
+          to_year = (@search[:filter_to_year].blank? ? t('search_results.filter.year_now') : @search[:filter_to_year])
+        %>
+        <li class="list-group-item">
+          <span class="filter">
+            <%= t('search_results.filter.from_to', begin: from_year, end: to_year) %>
+            <a href="<%= app_prefix(@page_search.sub("&filter_from_year=#{(from_year=='' ? '*' : from_year)}&filter_to_year=#{(to_year==t('search_results.filter.year_now') ? '*' : to_year)}","")) %>"
+               title="<%= t('search_results.remove_filter') %> " class="delete_filter">X</a>
+          </span>
+        </li>
+      <% end %>
+      <% @filters.each do |k, a| %>
+        <% a.each do |h| %>
+          <li class="list-group-item">
+            <span class="filter">
+              <%= h['pt'] %>: <%= h['pv'] %>
+              <a href="<%= app_prefix(h['uri']) %>"
+                 title="<%= t('search_results.remove_filter') %> " class="delete_filter">X</a>
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<%# "Search within results" form and associated date filters. %>
+<% if @search[:dates_within] || @search[:text_within] %>
+  <h3 class="search-results-heading"><%= t('search_results.search_results') %></h3>
+  <div class="filter_more">
+
+    <%# Render the correct search form based on whether this is a show or index page. %>
+    <% if controller.action_name == 'show' && defined?(@result) && @result.uri.include?('/agents/') %>
+      <%# On a record SHOW page, the form submits to the current path to apply filters. %>
+      <%= form_tag(request.fullpath, method: 'get', class: "form-horizontal container mx-0 mt-4 mb-3") do %>
+        <% if @search[:text_within] %>
+          <div class="form-group row">
+            <%= hidden_field_tag('sort', "", id: nil) %>
+            <%= label_tag('filter_q', t('actions.search_within'), class: 'sr-only') %>
+            <%= text_field_tag('filter_q[]', nil, id: 'filter_q', placeholder: t('actions.search_within'), class: "form-control") %>
+          </div>
+        <% end %>
+        <% unless params[:limit] == 'subject' || !@search.filters_blank? %>
+          <div class="date-range-toggle d-flex align-items-center my-3">
+            <button type="button" id="toggle-date-range" class="date-range-button" aria-label="<%= t('search_results.filter.toggle_date_range', default: 'Toggle Date Range Filter') %>">
+              <i id="date-range-icon" class="fas fa-plus"></i>
+            </button>
+            <span id="date-range-text" class="date-range-label"><%= t('search_results.filter.date_range') %></span>
+          </div>
+          <div id="date-range-fields" class="d-none mt-4">
+            <div class="form-group row">
+              <div class="col-md-6 year_from p-0 pr-md-1">
+                <%= label_tag('filter_from_year', t('search_results.filter.from_year'), class: 'sr-only') %>
+                <%= text_field_tag(:filter_from_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.from_year'), id: 'filter_from_year') %>
+              </div>
+              <div class="col-md-6 year_to p-0 pl-md-1">
+                <%= label_tag('filter_to_year', t('search_results.filter.to_year'), class: 'sr-only') %>
+                <%= text_field_tag(:filter_to_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.to_year'), id: 'filter_to_year') %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class='row align-items-center'>
+          <%= submit_tag(t('search-button.label'), class: 'btn btn-primary', id: nil) %>
+        </div>
+      <% end %>
+    <% else %>
+      <%# On search INDEX pages, the form submits to the base search path. %>
+      <%= form_tag(app_prefix(@base_search), method: 'get', class: "form-horizontal container mx-0 mt-4 mb-3") do %>
+        <%= render partial: 'shared/hidden_params', locals: { no_ids: true } %>
+        <% if @search[:text_within] %>
+          <div class="form-group row">
+            <%= hidden_field_tag('sort', "", id: nil) %>
+            <%= label_tag('filter_q', t('actions.search_within'), class: 'sr-only') %>
+            <%= text_field_tag('filter_q[]', nil, id: 'filter_q', placeholder: t('actions.search_within'), class: "form-control") %>
+          </div>
+        <% end %>
+        <% unless params[:limit] == 'subject' || !@search.filters_blank? %>
+          <div class="date-range-toggle d-flex align-items-center my-3">
+            <button type="button" id="toggle-date-range" class="date-range-button" aria-label="<%= t('search_results.filter.toggle_date_range', default: 'Toggle Date Range Filter') %>">
+              <i id="date-range-icon" class="fas fa-plus"></i>
+            </button>
+            <span id="date-range-text" class="date-range-label"><%= t('search_results.filter.date_range') %></span>
+          </div>
+          <div id="date-range-fields" class="d-none mt-4">
+            <div class="form-group row">
+              <div class="col-md-6 year_from p-0 pr-md-1">
+                <%= label_tag('filter_from_year', t('search_results.filter.from_year'), class: 'sr-only') %>
+                <%= text_field_tag(:filter_from_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.from_year'), id: 'filter_from_year') %>
+              </div>
+              <div class="col-md-6 year_to p-0 pl-md-1">
+                <%= label_tag('filter_to_year', t('search_results.filter.to_year'), class: 'sr-only') %>
+                <%= text_field_tag(:filter_to_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.to_year'), id: 'filter_to_year') %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class='row align-items-center'>
+          <%= submit_tag(t('search-button.label'), class: 'btn btn-primary', id: nil) %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="need-help-container">
+      <span class="need-help-label">Need Help?</span>
+      <a href="https://ask.loc.gov" class="ask-librarian-link">Ask a Librarian</a>
+      <i class="fa fa-comment" aria-hidden="true"></i>
+    </div>
+  </div>
+<% end %>
+
+<%= render partial: 'shared/only_facets' %>
+
+<style>
+  .date-range-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var toggleBtn = document.getElementById("toggle-date-range");
+    var toggleIcon = document.getElementById("date-range-icon");
+    var dateFields = document.getElementById("date-range-fields");
+    var filterSidebar = document.getElementById("filter-sidebar");
+
+    if (!filterSidebar) {
+      filterSidebar = document.getElementById("sidebar");
+    }
+
+    if (toggleBtn && toggleIcon && dateFields && filterSidebar) {
+      toggleBtn.addEventListener("click", function() {
+        var isHidden = dateFields.classList.toggle("d-none");
+        if (isHidden) {
+          toggleIcon.classList.remove("fa-minus");
+          toggleIcon.classList.add("fa-plus");
+          filterSidebar.classList.remove("expanded");
+        } else {
+          toggleIcon.classList.remove("fa-plus");
+          toggleIcon.classList.add("fa-minus");
+          filterSidebar.classList.add("expanded");
+          document.getElementById("filter_from_year").focus();
+        }
+      });
+    }
+  });
+</script>
