@@ -3,9 +3,11 @@
     <a id="collection-inventory"></a>
     <h3><%= I18n.t('pdf_reports.collection_inventory') %></h3>
     <table class="collection-inventory-header">
-      <td class="title">Title/Description</td>
-      <td class="instance">Instances</td>
+      <tr>
+  <td class="instance">Container</td>
+  <td class="title">Contents</td>
+      </tr>
+      <%= yield %>
     </table>
 <% end %>
-<%= yield %>
 </div>

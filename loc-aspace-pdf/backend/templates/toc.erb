@@ -3,114 +3,148 @@
   <h3><%= I18n.t('pdf_reports.table_of_contents') %></h3>
 
   <ul class="toc">
-    <li class="level-1"><a href="#summary-information"><%= I18n.t('pdf_reports.summary_information') %></a>
+    <li class="level-1"><span class="toc-entry"><a href="#summary-information"><%= I18n.t('pdf_reports.summary_information') %></a></span><span class="toc-page"><a href="#summary-information"></a></span>
     </li>
 
     <% @resource.notes.each do |note_type, note| %>
     <% next unless ['physdesc'].include?(note_type) %>
-    <li class="level-1"><a href="#administrative-information"><%= I18n.t("enumerations._note_types.#{note_type}") %></a></li>
+    <li class="level-1"><span class="toc-entry"><a href="#administrative-information"><%= I18n.t("enumerations._note_types.#{note_type}") %></a></span><span class="toc-page"><a href="#administrative-information"></a></span></li>
     <% end %>
 
     <% unless @resource.notes['bioghist'].nil? %>
     <li class="level-1">
+      <span class="toc-entry">
       <a href="#note-bioghist">
-	<% labels = [] %>
-	<% @resource.notes['bioghist'].each do |n| %>
-	<% if n['label'] %>
-	<% labels << n['label'] %>
-	<% else %>
-	<% labels <<  I18n.t("enumerations._note_types.bioghist") %>
-	<% end %>
-	<% end %>
-	<%= process_mixed_content(labels.uniq.join(", ")) %>
+  <% labels = [] %>
+  <% @resource.notes['bioghist'].each do |n| %>
+  <% if n['label'] %>
+  <% labels << n['label'] %>
+  <% else %>
+  <% labels <<  I18n.t("enumerations._note_types.bioghist") %>
+  <% end %>
+  <% end %>
+  <%= process_mixed_content(labels.uniq.join(", ")) %>
       </a>
+      </span>
+      <span class="toc-page"><a href="#note-bioghist"></a></span>
     </li>
-      <% end %>
+    <% end %>
 
-      <% unless @resource.notes['scopecontent'].nil? %>
+    <% unless @resource.notes['scopecontent'].nil? %>
     <li class="level-1">
+      <span class="toc-entry">
       <a href="#note-scopecontent">
-	<% labels = [] %>
-	<% @resource.notes['scopecontent'].each do |n| %>
-	<% if n['label'] %>
-	<% labels << n['label'] %>
-	<% else %>
-	<% labels <<  I18n.t("enumerations._note_types.scopecontent") %>
-	<% end %>
-	<% end %>
-	<%= process_mixed_content(labels.uniq.join(", ")) %>
+  <% labels = [] %>
+  <% @resource.notes['scopecontent'].each do |n| %>
+  <% if n['label'] %>
+  <% labels << n['label'] %>
+  <% else %>
+  <% labels <<  I18n.t("enumerations._note_types.scopecontent") %>
+  <% end %>
+  <% end %>
+  <%= process_mixed_content(labels.uniq.join(", ")) %>
       </a>
+      </span>
+      <span class="toc-page"><a href="#note-scopecontent"></a></span>
     </li>
     <% end %>
 
     <% unless @resource.notes['arrangement'].nil? %>
     <li class="level-1">
+      <span class="toc-entry">
       <a href="#note-arrangement">
-	<% labels = [] %>
-	<% @resource.notes['arrangement'].each do |n| %>
-		  <% if n['label'] %>
-		      <% labels << n['label'] %>
-		  <% else %>
-		      <% labels <<  I18n.t("enumerations._note_types.arrangement") %>
-		  <% end %>
-		<% end %>
-	      <%= process_mixed_content(labels.uniq.join(", ")) %>
-	    </a>
-	</li>
+  <% labels = [] %>
+  <% @resource.notes['arrangement'].each do |n| %>
+      <% if n['label'] %>
+          <% labels << n['label'] %>
+      <% else %>
+          <% labels <<  I18n.t("enumerations._note_types.arrangement") %>
       <% end %>
+    <% end %>
+        <%= process_mixed_content(labels.uniq.join(", ")) %>
+      </a>
+      </span>
+      <span class="toc-page"><a href="#note-arrangement"></a></span>
+    </li>
+    <% end %>
 
-      <li class="level-1"><a href="#administrative-information"><%= I18n.t('pdf_reports.administrative_information') %></a></li>
+    <li class="level-1">
+      <span class="toc-entry">
+  <a href="#administrative-information"><%= I18n.t('pdf_reports.administrative_information') %></a>
+      </span>
+      <span class="toc-page"><a href="#administrative-information"></a></span>
+    </li>
 
 
-      <% unless @resource.notes['relatedmaterial'].nil? %>
-	<li class="level-1">
-	    <a href="#note-relatedmaterial">
-	      <% labels = [] %>
+    <% unless @resource.notes['relatedmaterial'].nil? %>
+    <li class="level-1">
+      <span class="toc-entry">
+      <a href="#note-relatedmaterial">
+        <% labels = [] %>
 
-		<% @resource.notes['relatedmaterial'].each do |n| %>
-		  <% if n['label'] %>
-		      <% labels << n['label'] %>
-		  <% else %>
-		      <% labels <<  I18n.t("enumerations._note_types.relatedmaterial") %>
-		  <% end %>
-		<% end %>
-	      <%= process_mixed_content(labels.uniq.join(", ")) %>
-	    </a>
-	</li>
+    <% @resource.notes['relatedmaterial'].each do |n| %>
+      <% if n['label'] %>
+          <% labels << n['label'] %>
+      <% else %>
+          <% labels <<  I18n.t("enumerations._note_types.relatedmaterial") %>
       <% end %>
+    <% end %>
+        <%= process_mixed_content(labels.uniq.join(", ")) %>
+      </a>
+      </span>
+      <span class="toc-page"><a href="#note-relatedmaterial"></a></span>
+    </li>
+    <% end %>
 
 
       <% unless @resource.subjects.empty? %>
-	<li class="level-1"><a href="#controlled-access-headings"><%= I18n.t('pdf_reports.controlled_access_headings') %></a></li>
+      <li class="level-1">
+  <span class="toc-entry">
+    <a href="#controlled-access-headings"><%= I18n.t('pdf_reports.controlled_access_headings') %></a>
+  </span>
+  <span class="toc-page"><a href="#controlled-access-headings"></a></span>
+      </li>
       <% end %>
 
       <% unless @resource.notes['note_bibliography'].nil? %>
-	<li class="level-1">
-	  <a href="#note-note_bibliography">
-	    <% labels = [] %>
+      <li class="level-1">
+  <span class="toc-entry">
+    <a href="#note-note_bibliography">
+      <% labels = [] %>
 
-	    <% @resource.notes['note_bibliography'].each do |n| %>
-	      <% if n['label'] %>
-		  <% labels << n['label'] %>
-	      <% else %>
-		  <% labels <<  I18n.t("enumerations._note_types.note_bibliography") %>
-	      <% end %>
-	    <% end %>
-	    <%= process_mixed_content(labels.uniq.join(", ")) %>
-	  </a>
-	</li>
+      <% @resource.notes['note_bibliography'].each do |n| %>
+        <% if n['label'] %>
+      <% labels << n['label'] %>
+        <% else %>
+      <% labels <<  I18n.t("enumerations._note_types.note_bibliography") %>
+        <% end %>
+      <% end %>
+      <%= process_mixed_content(labels.uniq.join(", ")) %>
+    </a>
+  </span>
+  <span class="toc-page"><a href="#note-note_bibliography"></a></span>
+  </li>
       <% end %>
 
       <% if has_children %>
-	  <li class="level-1"><a href="#collection-inventory"><%= I18n.t('pdf_reports.collection_inventory') %></a></li>
+      <li class="level-1">
+  <span class="toc-entry">
+    <a href="#collection-inventory"><%= I18n.t('pdf_reports.collection_inventory') %></a>
+  </span>
+  <span class="toc-page"><a href="#collection-inventory"></a></span>
+      </li>
       <% end %>
 
       <% ordered_aos.each do |entry| %>
-	  <%# ANW-258: remove dates from toc items, to match Staff PDF Stripping them out here instead of omitting them at the source as they might be needed elsewhere %>
-	  <% title_arry = entry.display_string.split(',') %>
-	  <% title_no_date_str = title_arry[0] %>
-
-	  <li class="level-<%= entry.depth + 1 %>"><a href="#<%= entry.uri %>"><%= process_mixed_content(title_no_date_str) %></a></li>
+    <%# ANW-258: remove dates from toc items, to match Staff PDF Stripping them out here instead of omitting them at the source as they might be needed elsewhere %>
+    <% title_arry = entry.display_string.split(',') %>
+    <% title_no_date_str = title_arry[0] %>
+    <li class="level-<%= entry.depth + 1 %>">
+      <span class="toc-entry">
+        <a href="#<%= entry.uri %>"><%= process_mixed_content(title_no_date_str) %></a>
+      </span>
+      <span class="toc-page"><a href="#<%= entry.uri %>"></a></span>
+    </li>
       <% end %>
   </ul>
 </div>

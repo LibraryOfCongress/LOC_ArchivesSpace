@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" findaidstatus="completed" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid>ms003030</eadid>
+    <filedesc>
+      <titlestmt>
+	<titleproper>Test Fixture</titleproper>
+      </titlestmt>
+    </filedesc>
+    <profiledesc>
+      <creation>
+	This is a fake EAD for testing purposes.
+	<control>
+	  <recordid>ms003030</recordid>
+	</control>
+      </creation>
+    </profiledesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <unittitle>Bioghist Test</unittitle>
+      <unitid>ms003030</unitid>
+      <unitdate normal="2000/2010" type="inclusive">2000-2010</unitdate>
+      <physdesc><extent>1 linear foot</extent></physdesc>
+      <langmaterial><language langcode="eng">English</language></langmaterial>
+      <bioghist encodinganalog="545">
+	 <head>Biographical Notes and Chronological List</head>
+	 <bioghist>
+	    <head>Biographical Notes</head>
+	    <p>(A <ref target="chron01" show="replace" actuate="onrequest"> chronological list
+	       </ref> of the names of major family members, their spouses, and children
+	       follows.)</p>
+	    <bioghist encodinganalog="545">
+	       <head>Henry Breckinridge</head>
+	       <chronlist>
+		  <listhead>
+		     <head01>Date</head01>
+		     <head02>Event</head02>
+		  </listhead>
+		  <chronitem>
+		     <datesingle>1886, May 25</datesingle>
+		     <event>Born, <geogname>
+			   <part>Chicago, Ill.</part>
+			</geogname>
+		     </event>
+		  </chronitem>
+	       </chronlist>
+	    </bioghist>
+	    <bioghist encodinganalog="545">
+	       <head>John Breckinridge</head>
+	       <chronlist>
+		  <listhead>
+		     <head01>Date</head01>
+		     <head02>Event</head02>
+		  </listhead>
+		  <chronitem>
+		     <datesingle>1760, Dec. 2</datesingle>
+		     <event>Born near present site of <geogname>
+			   <part>Staunton, Va.</part>
+			</geogname>
+		     </event>
+		  </chronitem>
+	       </chronlist>
+	    </bioghist>
+	    <bioghist>
+	       <head>John C. Breckinridge</head>
+	       <chronlist>
+		  <listhead>
+		     <head01>Date</head01>
+		     <head02>Event</head02>
+		  </listhead>
+		  <chronitem>
+		     <datesingle>1821, Jan. 15</datesingle>
+		     <event>Born near <geogname>
+			   <part>Lexington, Ky.</part>
+			</geogname>
+		     </event>
+		  </chronitem>
+	       </chronlist>
+	    </bioghist>
+	    <bioghist>
+	       <head>Joseph Cabell Breckinridge </head>
+	       <chronlist>
+		  <listhead>
+		     <head01>Date</head01>
+		     <head02>Event</head02>
+		  </listhead>
+		  <chronitem>
+		     <datesingle>1842, Jan. 14</datesingle>
+		     <event>Born, <geogname>
+			   <part>Baltimore, Md.</part>
+			</geogname>
+		     </event>
+		  </chronitem>
+	       </chronlist>
+	    </bioghist>
+	 </bioghist>
+	 <bioghist>
+	    <head id="chron01">Chronological List of the Names of Major Family Members, Their
+	       Spouses, and Children</head>
+	    <p> Papers of the individuals listed here make up the greater part of the Breckinridge
+	       Family Papers. Names of children who are known not to have survived to adulthood are
+	       omitted.</p>
+	    <table frame="none">
+	       <tgroup cols="2" align="left">
+		  <colspec colnum="1" colname="1" align="left" colwidth="40*"/>
+		  <colspec colnum="2" colname="2" align="left" colwidth="60*"/>
+		  <thead valign="bottom">
+		     <row>
+			<entry colname="1" morerows="0">Major Family Members and Spouses</entry>
+			<entry colname="2" morerows="0">Children</entry>
+		     </row>
+		  </thead>
+		  <tbody valign="top">
+		     <row>
+			<entry colname="1" morerows="0">
+			   <name>
+			      <part>John Breckinridge (1760-1806)</part>
+			   </name>
+			</entry>
+			<entry morerows="0"/>
+		     </row>
+		     <row>
+			<entry colname="1" morerows="0">m. Mary Hopkins Cabell (1788-1823)</entry>
+			<entry morerows="0">Grayson Porter Breckinridge (1786-1831)</entry>
+		     </row>
+		  </tbody>
+	       </tgroup>
+	    </table>
+	    <p id="note">Hereinafter cited as Henry Breckinridge ("Skillman" appears to have been
+	       dropped after his early years).</p>
+	 </bioghist>
+      </bioghist>
+    </did>
+    <dsc>
+    </dsc>
+  </archdesc>
+</ead>

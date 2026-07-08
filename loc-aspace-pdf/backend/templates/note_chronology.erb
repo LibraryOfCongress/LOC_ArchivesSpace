@@ -1,15 +1,20 @@
-<dl>
+<table>
   <% Array(note['items']).each do |item| %>
-  <dt>
-    <% if item['date_singular'] %>
-    <%= item['date_singular'] %>
-    <% elsif item['date_from'] || item['date_to'] %>
-    <%= item['date_from'] %> - <%= item['date_to'] %>
-    <% end %>
-  </dt>
-    <dt><%= item['place'] %></dt>
-    <% item['events'].each do | event | %>
-      <dd><%=  process_mixed_content(event) %></dd>
-    <% end %>
+  <tr>
+    <th>
+      <% if item['date_singular'] %>
+      <%= item['date_singular'] %>
+      <% elsif item['date_from'] || item['date_to'] %>
+      <%= item['date_from'] %> - <%= item['date_to'] %>
+      <% end %>
+      <% if item['place'] %><br /><% end %>
+      <%= item['place'] %>
+    </th>
+    <td>
+      <% item['events'].each do | event | %>
+	<%=  process_mixed_content(event) %><br />
+      <% end %>
+    </td>
+  </tr>
   <% end %>
-</dl>
+</table>

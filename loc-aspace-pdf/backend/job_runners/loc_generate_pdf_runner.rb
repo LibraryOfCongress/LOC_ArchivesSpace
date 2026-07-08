@@ -24,6 +24,14 @@ class LocGeneratePdfRunner < JobRunner
       pdf = FindingAidPDF.new(@job.repo_id, resource_id)
       pdf_file = pdf.generate(ticker)
       @job.add_file(pdf_file)
+      begin
+        if AppConfig[:debug_pdf_generation]
+          ticker.log("generating source html for debugging")
+          source_html = pdf.source_file(ticker)
+          @job.add_file(source_html)
+        end
+      rescue
+      end
       @job.write_output("Done generating PDF for #{resource_jsonmodel["title"]}  ")
     end
   end

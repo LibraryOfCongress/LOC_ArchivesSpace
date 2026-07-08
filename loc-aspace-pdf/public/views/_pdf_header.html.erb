@@ -1,0 +1,119 @@
+<style>
+  /* smaller base font throughout */
+  body {
+    font-size: 9pt;
+    line-height: 1.2;
+  }
+
+  /* section headings */
+  h3 {
+    font-size: 11pt;
+    margin-top: 0.6em;
+    margin-left: 0;
+    border-top-width: 2px;
+    padding: 4px 0;
+  }
+
+  /* tighten front-matter and chronlist spacing */
+  dl { margin: 0.25em 0; }
+  dt, dd { margin-top: 0.15em; }
+
+  .bioghist dl { width: auto; }
+  .bioghist dt { width: 110px; font-weight: bold; }
+  .bioghist dd { width: 380px; margin-left: 120px; }
+
+  /* container list | reduce vertical padding between AOs */
+  .avoid-break { margin-top: 2px; }
+
+  .print-record {
+    margin-bottom: 0.15em;
+    padding-top: 3px;
+    padding-bottom: 4px;
+  }
+  .print-record-border.print-record.level-1 {
+    padding-top: 0;
+    margin-top: 0.4em;
+  }
+  .print-record-border.level-1,
+  .print-record-border.level-2,
+  .print-record-border.level-3,
+  .print-record-border.level-4,
+  .print-record-border.level-5 {
+    margin: 2px;
+  }
+
+  .indented dl { margin-top: 2px; width: 60%; }
+  .indented dt,
+  .indented dd { margin-top: 0.1em; }
+
+  /* container layout / disable floats entirely.
+     floats in Flying Saucer cause cross-record bleed in deeply
+     nested structures. The box/folder labels render on their own line below
+     the AO title */
+  .ao-summary {
+    width: 100%;
+    float: none;
+    display: block;
+  }
+  .container-information {
+    width: 100%;
+    float: none;
+    display: block;
+    text-align: left;
+    font-size: 80%;
+    color: #333;
+    margin: 2px 0 4px 0;
+  }
+  .container-information .box-area {
+    display: block;
+    float: none;
+    width: auto;
+  }
+  .container-information .box-string,
+  .container-information .folder-string {
+    display: inline-block;
+    float: none;
+    margin: 0 8px 0 0;
+    overflow: visible;
+    text-align: left;
+  }
+
+  /* series-header gray banner */
+  .first-post {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .first-post .container-information {
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+
+  /* demote h4 inside container-list notes */
+  .print-record h4 {
+    font-size: 100%;
+    font-weight: normal;
+    font-style: italic;
+    margin: 0.2em 0 0.1em 0;
+  }
+
+  /* note text smaller than AO title */
+  .print-record p {
+    font-size: 90%;
+    margin: 0;
+  }
+  .ao-summary a.record-title {
+    font-size: 100%;
+    font-weight: bold;
+  }
+  .indented dl,
+  .indented a {
+    font-size: 85%;
+  }
+
+  /* collection inventory header table | tighten and de-emphasize */
+  table.collection-inventory-header {
+    margin-top: 8px;
+    margin-bottom: 2px;
+    font-size: 75%;
+  }
+</style>

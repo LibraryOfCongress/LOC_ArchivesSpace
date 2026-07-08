@@ -2,19 +2,20 @@
   <meta charset="utf-8" />
   <style>
     body {
-	font-family: <%= AppConfig[:pui_pdf_font_name] %>;
-	line-height: <%= AppConfig[:pui_pdf_paragraph_line_height] %>;
-	line-height: 125%;
+  font-family: <%= AppConfig[:pui_pdf_font_name] %>;
+  line-height: <%= AppConfig[:pui_pdf_paragraph_line_height] %>;
+  font-size: 9pt;
+  line-height: 1.2;
     }
 
    .title-page {
-	page-break-after: always;
-	position: relative;
-	height: 58em;
+  page-break-after: always;
+  position: relative;
+  height: 58em;
     }
 
     .toc-page {
-	page-break-after: always;
+  page-break-after: always;
     }
 
    span.title {
@@ -39,13 +40,13 @@
    }
 
     div.logo {
-	display: block;
-	width: 100%;
-	height: 250px;
-	background-repeat: no-repeat;
-	background-size: 100% auto;
-	background-origin: content-box;
-	background-position: 50% 50%;
+  display: block;
+  width: 100%;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-origin: content-box;
+  background-position: 50% 50%;
     }
 
     .logo img {
@@ -53,13 +54,20 @@
     }
 
     ul.toc {
-	list-style-type: none;
-	margin-left: 0;
-	padding-left: 0;
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
     }
 
+    ul.toc li::before {
+       content: none !important;
+       position: absolute;
+       left: 0;
+       font-size: 1 em;
+   }
+
     a {
-	color: #3333FF;
+  color: #3333FF;
     }
 
     .toc .level-1 { padding-left: 1em; }
@@ -74,51 +82,82 @@
     .toc .level-10 { padding-left: 10em; }
 
     .toc a {
-	color: black;
-	text-decoration: none;
+  color: black;
+  text-decoration: none;
+    }
+
+
+    ul.toc span.toc-entry a::after {
+  content: leader('.');
+    }
+
+    ul.toc span.toc-page a::after {
+  content: target-counter(attr(href), page);
     }
 
     a.record-title {
-	color: black;
-	font-weight: bold;
+  color: black;
+  font-weight: bold;
     }
 
-    div.ao-summary {
-       /* float: left;
-       text-align: left;
-       width: 700px; */
+    /* container layout / disable floats entirely.
+       floats in Flying Saucer cause cross-record bleed in deeply
+       nested structures. The box/folder labels render on their own line below
+       the AO title */
+    .ao-summary {
+      width: 100%;
+      float: none;
+      display: block;
     }
+
     .ao-summary a.record-title {
-	color: black;
-	font-weight: normal;
-	font-size: 100%;
+      font-size: 100%;
+      font-weight: bold;
     }
 
     .container-information {
-	font-size: 75%;
-	text-align: right;
-	color: black;
-	display: block;
-	float: right;
-	width: 60%;
-    }
-
-    .first-post .container-information {
-       margin-top: 30px;
-       margin-bottom: 20px;
-       background-color: #eee;
+      width: 100%;
+      float: none;
+      display: block;
+      text-align: left;
+      font-size: 80%;
+      color: #333;
+      margin: 2px 0 4px 0;
     }
 
     .container-information .box-area {
-       float: right;
+      display: block;
+      float: none;
+      width: auto;
+    }
+    .container-information .box-string,
+    .container-information .folder-string {
+      display: inline-block;
+      float: none;
+      margin: 0 8px 0 0;
+      overflow: visible;
+      text-align: left;
+    }
+
+    /* series-header gray banner */
+    .first-post {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+    .first-post .container-information {
+      margin-top: 4px;
+      margin-bottom: 2px;
     }
 
     h3 {
-	margin-top: 1em;
-	border-top: 5px #000 solid;
-	border-bottom: 1px #000 dotted;
-	padding: 10px;
-	margin-left: -10px;
+  font-size: 11pt;
+  margin-top: 0.6em;
+  margin-left: 0;
+  border-top-width: 2px;
+  padding: 4px 0;
+  border-top: 2px #000 solid;
+  border-bottom: 1px #000 dotted;
+  margin-left: -10px;
     }
 
     h3 + p {
@@ -130,79 +169,65 @@
        padding: 5px;
     }
 
+    /* collection inventory header table | tighten and de-emphasize */
     table.collection-inventory-header {
-       background-color: #fafafa;
-       font-weight: bold;
-       width: 102%;
-       margin-top: 20px;
-       margin-bottom: -10px;
-       margin-left: -10px;
-       margin-right: -10px;
-       border-top: 1px solid #aaa;
-       border-bottom: 1px solid #aaa;
-       font-size: 75%;
-       padding-left: 5px;
-       padding-right: 10px;
+      margin-top: 8px;
+      margin-bottom: 2px;
+      width: 100%;
     }
 
     table.collection-inventory-header td.title {
-       width: 50%;
+       width: 90%;
        text-align: left;
     }
 
     table.collection-inventory-header td.instance {
-       width: 50%;
-       text-align: right;
+       width: 10%;
+       text-align: left;
     }
 
     dl {
-	overflow: hidden;
+       overflow: hidden;
+       margin: 0.23 em 0;
     }
 
-    dt, dd { float: left; margin: 0; margin-top: 0.5em; }
+    dt, dd { float: left; margin: 0; margin-top: 0.15em; }
     dt { clear: both; font-weight: bold; width: 20%; text-align: right; margin-right: 1em; }
     dd { width: 70%; }
 
     .title-block {
-	/* border-bottom: solid 2px black; */
+  /* border-bottom: solid 2px black; */
     }
 
-    div.bioghist dl {
-       width: 800px;
-    }
+    .bioghist dl { width: auto; }
+    .bioghist dt { width: 110px; font-weight: bold; }
+    .bioghist dd { width: 380px; margin-left: 120px; }
 
-    div.bioghist dt {
-       float: left;
-       width: 150px;
-    }
-
-    div.bioghist dd {
-       float: left;
-       width: 500px;
-       margin-left: 150px;
+    .bioghist table th {
+  white-space: nowrap;
     }
 
     div.title-text-block p {
-       margin: 0;
+  margin: 0;
     }
 
     .title-block h2 {
-	border: 0;
+  border: 0;
     }
 
     .title-page .repository-information {
-	position: absolute;
-	bottom: 0;
-	width: 95%;
-	padding: 1em;
+  position: absolute;
+  bottom: 0;
+  width: 95%;
+  padding: 1em;
     }
 
     .repository-information > * {
-	padding-left: 1em;
+  padding-left: 1em;
     }
 
     .repository-information > .repository-name {
-	padding-left: 0;
+  padding-left: 0;
     }
 
     .repository-address {
@@ -210,82 +235,102 @@
     }
 
     h2 {
-	padding-top: 0.25em;
-	padding-bottom: 0.25em;
-	border-top: solid 2px #333;
-	border-bottom: dotted 1px #333;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  border-top: solid 2px #33;
+  border-bottom: dotted 1px #333;
     }
 
-    ul.toc a::after {
-	content: leader('.') target-counter(attr(href), page);
-    }
+
 
     .print-record-border {
-	padding-left: 0.5em;
-	/* border: 1px solid #f00; */
-	/* margin: 0; /*
+  padding-left: 0.5em;
+  /* border: 1px solid #f00; */
+  /* margin: 0; /*
 
-	/* Get rid of annoying vertical whitespace */
-	/* margin-top: -8px; */
-	/* padding-top: 8px; */
-	/* padding-bottom: 10px !important; */
+  /* Get rid of annoying vertical whitespace */
+  /* margin-top: -8px; */
+  /* padding-top: 8px; */
+  /* padding-bottom: 10px !important; */
     }
 
     .avoid-break {
-	margin-top: 10px;
-	break-inside: avoid;
-	page-break-inside: avoid;
+  margin-top: 2px;
+  break-inside: avoid;
+  page-break-inside: avoid;
     }
 
     .print-record {
-	margin-bottom: 1em;
-	display: block;
-	border-top: solid 1px #dedede;
-	padding-top: 10px;
-	padding-bottom: 20px;
+  margin-bottom: 0.15em;
+  display: block;
+  border-top: solid 1px #dedede;
+  padding-top: 3px;
+  padding-bottom: 4px;
     }
 
-    .print-record-border.print-record.level-1 { padding-top: 0; margin-top: 1em; }
+    .print-record-border.print-record.level-1 { padding-top: 0; margin-top: 0.4em; }
 
-    .print-record-border.level-1 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-2 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-3 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-4 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-5 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-6 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-7 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-8 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-9 { margin-left: 1em; display: block; margin: 5px; }
-    .print-record-border.level-10 { margin-left: 1em; display: block; margin: 5px; }
+    .print-record-border.level-1 {
+      margin: 2px;
+    }
+
+    .print-record-border.level-2 {
+      margin-left: 8px;
+    }
+
+    .print-record-border.level-3 {
+      margin-left: 12px;
+    }
+
+    .print-record-border.level-4 {
+      margin-left: 16px;
+    }
+
+    .print-record-border.level-5,
+    .print-record-border.level-6,
+    .print-record-border.level-7,
+    .print-record-border.level-8,
+    .print-record-border.level-9,
+    .print-record-border.level-10,
+    .print-record-border.level-11,
+    .print-record-border.level-12 {
+      margin-left: 20px;
+    }
 
     .print-record h3 {
-	margin: 0;
+  margin: 0;
     }
 
+    /* demote h4 inside container-list notes */
     .print-record h4 {
-	margin: 1em 0 1em 0;
+      font-size: 90%;
+      font-weight: normal;
+      font-style: italic;
+      margin: 0.2em 0 0.1em 0;
     }
 
+    /* note text smaller than AO title */
     .print-record p {
-	margin: 0;
+      font-size: 90%;
+      margin: 0;
     }
 
     .print-record dl {
-	margin: 0 0 0.5em 0;
+  margin: 0 0 0.5em 0;
     }
 
 
     .italic {
-	font-style: italic;
+  font-style: italic;
     }
 
     .inherit {
-	font-style: italic;
+  font-style: italic;
     }
 
     .print-record-border a.record-title {
-	color: black;
-	font-weight: normal;
+  color: black;
+  font-weight: normal;
     }
 
     .box-area {
@@ -316,56 +361,47 @@
        font-weight: bold !important;
     }
 
-    .indented dl {
-       margin-top: 10px;
-       font-weight: normal !important;
-       font-size: 75% !important;
-       width: 40%;
-    }
-
-    .indented dt {
-       font-weight: normal !important;
-       text-decoration: underline;
-    }
-
+    .indented dl,
     .indented a {
-       font-weight: normal !important;
-       font-size: 75% !important;
+      font-size: 85%;
     }
+
+    .indented dt,
+    .indented dd { margin-top: 0.1em; }
 
     }
 
     <%# Hide headers/footers on the titlepage %>
     @page :first {
-	@top-center {
-	    content: '';
-	}
+  @top-center {
+      content: '';
+  }
 
-	@bottom-center {
-	    content: '';
-	}
+  @bottom-center {
+      content: '';
+  }
     }
 
     @page {
        <% if @resource.finding_aid['title'] %>
-	 <% short_title = @resource.finding_aid['title'] %>
+   <% short_title = @resource.finding_aid['title'] %>
        <% else %>
-	 <% short_title = @resource.display_string %>
+   <% short_title = @resource.display_string %>
        <% end %>
 
-	<% if short_title != '' %>
-	@top-center {
-	    font-size: 80%;
-	    color: #666;
-	    content: '<%= short_title %>';
-	}
-	<% end %>
+  <% if short_title != '' %>
+  @top-center {
+      font-size: 80%;
+      color: #666;
+      content: '<%= short_title %>';
+  }
+  <% end %>
 
-	@bottom-center {
-	    font-size: 80%;
-	    color: #666;
-	    content: '- Page ' counter(page) ' -';
-	}
+  @bottom-center {
+      font-size: 80%;
+      color: #666;
+      content: '- Page ' counter(page) ' -';
+  }
     }
 
   </style>

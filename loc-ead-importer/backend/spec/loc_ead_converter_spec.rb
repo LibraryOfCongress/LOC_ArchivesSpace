@@ -11,28 +11,24 @@ describe 'LOC EAD3 Converter' do
     File.expand_path("./fixtures/#{fixture_file}", File.dirname(__FILE__))
   end
 
-  describe "Conversion of LOC EAD3 Test File: af022009" do
+  before(:all) do
+    Thread.current[:request_context] ||= {}
+    FactoryBot.create(:repo)
+  end
+
+  describe "Conversion of EAD file" do
 
     def test_file
-      get_fixture("af022009.xml")
+      get_fixture("basic_ead.xml")
     end
 
     before(:all) do
-      Thread.current[:request_context] ||= {}
-      FactoryBot.create(:repo)
       parsed = convert(test_file)
-      @corps = parsed.select { |rec| rec['jsonmodel_type'] == 'agent_corporate_entity' }
-      @families = parsed.select { |rec| rec['jsonmodel_type'] == 'agent_family' }
-      @people = parsed.select { |rec| rec['jsonmodel_type'] == 'agent_person' }
-      @subjects = parsed.select { |rec| rec['jsonmodel_type'] == 'subject' }
-      @digital_objects = parsed.select { |rec| rec['jsonmodel_type'] == 'digital_object' }
-      @top_containers = parsed.select { |rec| rec['jsonmodel_type'] == 'top_container' }
-      @archival_objects = parsed.select { |rec| rec['jsonmodel_type'] == 'archival_object' }
       @resource = parsed.select { |rec| rec['jsonmodel_type'] == 'resource' }.last
     end
 
     it "maps '<unitid>' correctly" do
-      expect(@resource["id_0"]).to eq("AFC 2017/049")
+      expect(@resource["id_0"]).to eq("abc123")
     end
 
     # AS-320
@@ -41,15 +37,14 @@ describe 'LOC EAD3 Converter' do
     end
   end
 
-  describe "handling nested <bioghist> tags in ms997003" do
+  describe "handling nested <bioghist> tags" do
 
     def test_file
-      get_fixture("ms997003.xml")
+      get_fixture("nested_bioghist.xml")
     end
 
     before(:all) do
       parsed = convert(test_file)
-      @archival_objects = parsed.select { |rec| rec['jsonmodel_type'] == 'archival_object' }
       @resource = parsed.select { |rec| rec['jsonmodel_type'] == 'resource' }.last
     end
 
@@ -57,7 +52,7 @@ describe 'LOC EAD3 Converter' do
       bioghist_notes = @resource['notes'].select { |n| n['type'] == 'bioghist' }
       expect(bioghist_notes.length).to eq 1
       chron_notes = bioghist_notes.first['subnotes'].select {|h| h['jsonmodel_type'] == 'note_chronology' }
-      expect(chron_notes.length).to eq 9
+      expect(chron_notes.length).to eq 4
       expect(chron_notes.first['title']).to eq "Henry Breckinridge"
 
       text_notes = bioghist_notes.first['subnotes'].select {|n| n['jsonmodel_type'] == 'note_text' }
@@ -74,7 +69,7 @@ describe 'LOC EAD3 Converter' do
   describe "AS-337: Handling <head> tags with IDs" do
 
     def test_file
-      get_fixture("ms011041.xml")
+      get_fixture("as337_head_tags_with_ids.xml")
     end
 
     before(:all) do
@@ -107,8 +102,6 @@ describe 'LOC EAD3 Converter' do
       end
 
       before(:all) do
-        Thread.current[:request_context] ||= {}
-        FactoryBot.create(:repo)
         @parsed = convert(test_file)
         @top_containers = @parsed.select { |rec| rec['jsonmodel_type'] == 'top_container' }
 
@@ -141,8 +134,6 @@ describe 'LOC EAD3 Converter' do
       end
 
       before(:all) do
-        Thread.current[:request_context] ||= {}
-        FactoryBot.create(:repo)
         @parsed = convert(test_file)
         @top_containers = @parsed.select { |rec| rec['jsonmodel_type'] == 'top_container' }
 
@@ -175,8 +166,6 @@ describe 'LOC EAD3 Converter' do
     end
 
     before(:all) do
-      Thread.current[:request_context] ||= {}
-      FactoryBot.create(:repo)
       @parsed = convert(test_file)
       @archival_objects = @parsed.select { |rec| rec['jsonmodel_type'] == 'archival_object' }
     end
@@ -225,8 +214,6 @@ describe 'LOC EAD3 Converter' do
     end
 
     before(:all) do
-      Thread.current[:request_context] ||= {}
-      FactoryBot.create(:repo)
       @parsed = convert(test_file)
       @top_containers = @parsed.select { |rec| rec['jsonmodel_type'] == 'top_container' }
       @archival_objects = @parsed.select { |rec| rec['jsonmodel_type'] == 'archival_object' }

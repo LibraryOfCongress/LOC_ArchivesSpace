@@ -45,4 +45,35 @@ ArchivesSpace::Application.config.after_initialize do
     end
   end
 
+  # AS-131: RDE Cleanup & Validation Fixes
+  # Reopen ArchivalRecordChildren to clean RDE rows before JSONModel validation
+  class ArchivalRecordChildren
+    class << self
+      alias_method :clean_loc_orig, :clean unless method_defined?(:clean_loc_orig)
+      alias_method :clean_instances_loc_orig, :clean_instances unless method_defined?(:clean_instances_loc_orig)
+
+      def clean(data)
+        # Strip blank additional identifiers from the array before validation
+        if data['additional_identifiers'].is_a?(Array)
+          data['additional_identifiers'].reject! { |id| id.nil? || id.strip.empty? }
+        end
+        clean_loc_orig(data)
+      end
+
+      def clean_instances(data)
+        # Prevent validation error on empty instance type
+        # The schema allows instance_type to be missing (ifmissing: nil),
+        # but minLength: 1 causes an error if the UI sends an empty string "".
+        if data['instances'].is_a?(Array)
+          data['instances'].each do |instance|
+            if instance.has_key?('instance_type') && instance['instance_type'].to_s.strip.empty?
+              instance.delete('instance_type')
+            end
+          end
+        end
+        clean_instances_loc_orig(data)
+      end
+    end
+  end
+
 end

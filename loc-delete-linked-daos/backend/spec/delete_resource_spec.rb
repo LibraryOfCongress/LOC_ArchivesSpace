@@ -53,7 +53,7 @@ describe 'deleting digital objects with resources' do
                    build(:json_instance_digital,
                          digital_object: {ref: digital_object_3.uri})])
 
-    
+
 
     expect(ArchivalObject.first(root_record_id: resource.id)).to_not be_nil
     expect(DigitalObject.first(id: digital_object_1.id)).to_not be_nil

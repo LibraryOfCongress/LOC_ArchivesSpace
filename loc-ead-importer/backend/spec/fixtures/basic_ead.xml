@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" findaidstatus="completed" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid>af022009</eadid>
+    <filedesc>
+      <titlestmt>
+	<titleproper>TITLE</titleproper>
+      </titlestmt>
+    </filedesc>
+    <profiledesc>
+      <creation>
+	This is a fake EAD for testing purposes.
+	<control>
+	  <recordid>af022009</recordid>
+	</control>
+      </creation>
+    </profiledesc>
+  </eadheader>
+  <archdesc level="collection">
+    <did>
+      <unittitle>Legal Collection Test</unittitle>
+      <unitid>abc123</unitid>
+      <unitdate normal="2000/2010" type="inclusive">2000-2010</unitdate>
+      <physdesc><extent>1 linear foot</extent></physdesc>
+      <langmaterial><language langcode="eng">English</language></langmaterial>
+    </did>
+    <dsc>
+    </dsc>
+  </archdesc>
+</ead>

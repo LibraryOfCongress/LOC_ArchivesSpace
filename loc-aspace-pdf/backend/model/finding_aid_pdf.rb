@@ -85,6 +85,8 @@ class FindingAidPDF
   include JsonHelper
   include ActionView::Helpers::AssetTagHelper
   include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::CaptureHelper
+  include ActionView::Context
 
   DEPTH_1_LEVELS = ['collection', 'recordgrp', 'series']
   DEPTH_2_LEVELS = ['subgrp', 'subseries', 'subfonds']

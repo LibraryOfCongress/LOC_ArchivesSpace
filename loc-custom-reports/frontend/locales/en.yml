@@ -15,8 +15,11 @@ en:
     loc_resource_note_report:
       title: Missing Note Type Report
       description: Lists all resource records (by title and EAD ID) in a given repository that lack a specified note type. Defaults to "Other Finding Aids" (otherfindaid).
-    parameters:
-      note_type: Note Type  
+    loc_extent_type_report:
+      title: Extent Type Report
+      description: List extent type usage for a repository
+      parameters:
+      note_type: Note Type
     translation_defaults:
       loc_magmar_id: Magmar ID
       file_uri: File URI
@@ -25,4 +28,3 @@ en:
       pui_url: PUI URL
       title: Title
       ead_id: EAD ID
-    

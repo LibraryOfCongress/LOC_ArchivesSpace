@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ead xmlns="urn:isbn:1-931666-22-9">
+  <eadheader countryencoding="iso3166-1" dateencoding="iso8601" findaidstatus="completed" langencoding="iso639-2b" repositoryencoding="iso15511">
+    <eadid>ms003030</eadid>
+    <filedesc>
+      <titlestmt>
+	<titleproper>Test Fixture</titleproper>
+      </titlestmt>
+    </filedesc>
+    <profiledesc>
+      <creation>
+	This is a fake EAD for testing purposes.
+	<control>
+	  <recordid>ms003030</recordid>
+	</control>
+      </creation>
+    </profiledesc>
+  </eadheader>
+  <relatedmaterial>
+    <head id="related">Related Material</head>
+    <p>Sound recordings of lectures by Corwin have been transferred to the Motion Picture, Broadcasting, and Recorded Sound Division of the Library of Congress where they are identified as part of these papers.</p>
+  </relatedmaterial>
+  <odd>
+    <head>Additional Information</head>
+    <p>This is a test paragraph to demonstrate the bug. <ref target="related">Also see related material.</ref> This text follows the reference.</p>
+  </odd>
+  <archdesc level="collection">
+    <did>
+      <unittitle>Legal Collection Test</unittitle>
+      <unitid>ms003030</unitid>
+      <unitdate normal="2000/2010" type="inclusive">2000-2010</unitdate>
+      <physdesc><extent>1 linear foot</extent></physdesc>
+      <langmaterial><language langcode="eng">English</language></langmaterial>
+    </did>
+    <dsc>
+    </dsc>
+  </archdesc>
+</ead>

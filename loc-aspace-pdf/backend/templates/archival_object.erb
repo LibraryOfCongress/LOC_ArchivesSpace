@@ -1,11 +1,58 @@
-<% (level - 1).times do |previous_level| %>
-    <div class="print-record-border level-<%= previous_level + 1 %>">
-<% end %>
+<tr>
+<td>
+  <% Array(record.instances).each do |instance| %>
+      <% if instance['sub_container'] %>
+    <div class="container-information">
+        <%
+    if instance['sub_container'] &&
+       instance['sub_container']['top_container'] &&
+       instance['sub_container']['top_container']['_resolved'] &&
+       instance['sub_container']['top_container']['_resolved']['display_string']
+
+      tc_display_string = instance['sub_container']['top_container']['_resolved']['display_string'].split(':')[0]
+
+
+      if tc_display_string =~ /:/
+        box_string = tc_display_string.split(':')[0]
+      else
+        box_string = tc_display_string
+      end
+
+    else
+      box_string = ""
+    end
+
+    if instance['sub_container'] &&
+       instance['sub_container']['type_2'] &&
+       instance['sub_container']['indicator_2']
+      folder_string = instance['sub_container']['type_2'] + " " + instance['sub_container']['indicator_2']
+    else
+      folder_string = ""
+    end
+        %>
+
+        <% unless box_string.empty? && folder_string.empty? %>
+    <div class="box-area">
+      <% unless box_string.empty? %>
+        <div class="box-string"><%= box_string %></div>
+      <% end %>
+
+      <% unless folder_string.empty? %>
+        <div class="folder-string"><%= folder_string %></div>
+      <% end %>
+    </div>
+        <% end %>
+    </div>
+      <% end %>
+  <% end %>
+</td>
+<td>
+
 
 <%
 format_container = lambda do |type, indicator|
     if type
-	type = type.capitalize
+  type = type.capitalize
     end
 
     [type, indicator].compact.join(' ')
@@ -18,152 +65,95 @@ end
 <div class="avoid-break">
     <div class="print-record-border print-record level-<%= level %> <%= is_heading ? "first-post" : "" %>">
       <a id="<%= record.ref_id %>"></a>
-      <% if level == 1 %>
-	<div class="ao-summary">
+
+  <% content = capture do %>
+  <p><a class="record-title" id="<%= record.uri %>"><%= process_mixed_content_title(record.display_string).html_safe %></a></p>
+
+   <% record.notes.each do |note_type, note| %>
+     <% if note_type == 'scopecontent' %>
+       <% note.each do |n| %>
+         <% if !n['is_inherited'] %>
+     <h4>
+       <% if n['label'] %>
+           <%= process_mixed_content(n['label']) %>
+       <% else %>
+           <%= I18n.t("enumerations._note_types.scopecontent") %>
+       <% end %>
+     </h4>
+     <p><%= n['note_text'].html_safe %></p>
+         <% end %>
+       <% end %>
+     <% end %>
+   <% end %>
+   <% end %>
+
+   <%= level == 1 ? content_tag(:div, content, class: "ao-summary") : content %>
+
+  <div class="indented">
+      <dl>
+    <% if record.direct_component_id.present? %>
+        <dt><%= I18n.t('resource._public.finding_aid.identifier') %></dt>
+        <dd><%= record.direct_component_id %></dd>
+    <% end %>
+
+    <% record.notes.each do |note_type, note| %>
+        <% if note_type != 'physdesc' && note_type != 'scopecontent' %>
+          <% note.each do |n| %>
+      <% if !n['is_inherited'] %>
+        <dt>
+          <% if n['label'] %>
+        <%= process_mixed_content(n['label']) %>
+          <% else %>
+        <%= I18n.t("enumerations._note_types.#{note_type}", default: note_type) %>
+          <% end %>
+        </dt>
+        <dd><%= n['note_text'].html_safe %></dd>
       <% end %>
-	<p><a class="record-title" id="<%= record.uri %>"><%= process_mixed_content_title(record.display_string).html_safe %></a></p>
-
-	 <% record.notes.each do |note_type, note| %>
-	   <% if note_type == 'scopecontent' %>
-	     <% note.each do |n| %>
-	       <% if !n['is_inherited'] %>
-		 <h4>
-		   <% if n['label'] %>
-		       <%= process_mixed_content(n['label']) %>
-		   <% else %>
-		       <%= I18n.t("enumerations._note_types.scopecontent") %>
-		   <% end %>
-		 </h4>
-		 <p><%= n['note_text'].html_safe %></p>
-	       <% end %>
-	     <% end %>
-	   <% end %>
-	 <% end %>
-
-    <% if level == 1 %>
-      </div>
+          <% end %>
+        <% end %>
     <% end %>
 
-    <% if is_heading %>
-       <table class="collection-inventory-header">
-	  <td class="title">Title/Description</td>
-	  <td class="instance">Instances</td>
-       </table>
+    <% record.extents.each do |extent| %>
+        <% next if extent['_inherited'] %>
+        <dt><%= I18n.t('resource._public.physdesc') %></dt><dd><%= extent['display'] %></dd>
     <% end %>
 
-	<% Array(record.instances).each do |instance| %>
-	    <% if instance['sub_container'] %>
-		<div class="container-information">
-		    <%
-		      if instance['sub_container'] &&
-			 instance['sub_container']['top_container'] &&
-			 instance['sub_container']['top_container']['_resolved'] &&
-			 instance['sub_container']['top_container']['_resolved']['display_string']
+    <% unless record.notes.include?('langmaterial') || record.lang_materials.blank? %>
+      <% record.lang_materials.each do |lang_material| %>
+        <% next if lang_material['_inherited'] %>
+        <dt><%= I18n.t('resource._public.lang') %></dt>
+      <dd><%= t('enumerations.language_iso639_2.' + lang_material['language']) %></dd>
+      <% end %>
+    <% end %>
 
-			tc_display_string = instance['sub_container']['top_container']['_resolved']['display_string'].split(':')[0]
+    <% record.notes.each do |note_type, note| %>
+      <% if note_type == 'physdesc' %>
+        <% note.each do |n| %>
+          <% if !n['is_inherited'] %>
+      <dt><%= I18n.t('resource._public.physdesc') %></dt><dd><%= n['note_text'].html_safe %></dd>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
 
+         <!-- digital_object instances -->
+         <%= yield %>
 
-			if tc_display_string =~ /:/
-			  box_string = tc_display_string.split(':')[0]
-			else
-			  box_string = tc_display_string
-			end
+    <% subjects = Array(record.subjects).reject {|s| s['is_inherited']} %>
+    <% if !subjects.empty? %>
+        <dt><%= I18n.t('pdf_reports.controlled_access_headings') %></dt>
+        <dd>
+      <ul>
+          <% subjects.each do |subject| %>
+        <li><%= subject['title'] %></li>
+          <% end %>
+      </ul>
+        </dd>
+    <% end %>
 
-		      else
-			box_string = ""
-		      end
-
-		      if instance['sub_container'] &&
-			 instance['sub_container']['type_2'] &&
-			 instance['sub_container']['indicator_2']
-			folder_string = instance['sub_container']['type_2'] + " " + instance['sub_container']['indicator_2']
-		      else
-			folder_string = ""
-		      end
-		    %>
-
-		    <% unless box_string.empty? && folder_string.empty? %>
-		      <div class='box-area'>
-			<% unless box_string.empty? %>
-			  <div class='box-string'><%= box_string.downcase %></div>
-			<% end %>
-
-			<% unless folder_string.empty? %>
-			  <div class='folder-string'><%= folder_string.downcase %></div>
-			<% end %>
-		      </div>
-		    <% end %>
-		</div>
-	    <% end %>
-	<% end %>
-
-	<div class="indented">
-	    <dl>
-		<% if record.direct_component_id.present? %>
-		    <dt><%= I18n.t('resource._public.finding_aid.identifier') %></dt>
-		    <dd><%= record.direct_component_id %></dd>
-		<% end %>
-
-		<% record.notes.each do |note_type, note| %>
-		    <% if note_type != 'physdesc' && note_type != 'scopecontent' %>
-		      <% note.each do |n| %>
-			<% if !n['is_inherited'] %>
-			  <dt>
-			    <% if n['label'] %>
-				<%= process_mixed_content(n['label']) %>
-			    <% else %>
-				<%= I18n.t("enumerations._note_types.#{note_type}", default: note_type) %>
-			    <% end %>
-			  </dt>
-			  <dd><%= n['note_text'].html_safe %></dd>
-			<% end %>
-		      <% end %>
-		    <% end %>
-		<% end %>
-
-		<% record.extents.each do |extent| %>
-		    <% next if extent['_inherited'] %>
-		    <dt><%= I18n.t('resource._public.physdesc') %></dt><dd><%= extent['display'] %></dd>
-		<% end %>
-
-		<% unless record.notes.include?('langmaterial') || record.lang_materials.blank? %>
-		  <% record.lang_materials.each do |lang_material| %>
-		    <% next if lang_material['_inherited'] %>
-		    <dt><%= I18n.t('resource._public.lang') %></dt>
-			<dd><%= t('enumerations.language_iso639_2.' + lang_material['language'])%></dd>
-		  <% end %>
-		<% end %>
-
-		<% record.notes.each do |note_type, note| %>
-		  <% if note_type == 'physdesc' %>
-		    <% note.each do |n| %>
-		      <% if !n['is_inherited'] %>
-			<dt><%= I18n.t('resource._public.physdesc') %></dt><dd><%= n['note_text'].html_safe %></dd>
-		      <% end %>
-		    <% end %>
-		  <% end %>
-		<% end %>
-
-	       <!-- digital_object instances -->
-	       <%= yield %>
-
-		<% subjects = Array(record.subjects).reject {|s| s['is_inherited']} %>
-		<% if !subjects.empty? %>
-		    <dt><%= I18n.t('pdf_reports.controlled_access_headings') %></dt>
-		    <dd>
-			<ul>
-			    <% subjects.each do |subject| %>
-				<li><%= subject['title'] %></li>
-			    <% end %>
-			</ul>
-		    </dd>
-		<% end %>
-
-	    </dl>
-	</div>
+      </dl>
+  </div>
     </div>
 </div>
-<% (level - 1).times do |previous_level| %>
-
-    </div>
-<% end %>
+</td>
+</tr>

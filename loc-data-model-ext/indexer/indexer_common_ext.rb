@@ -3,7 +3,6 @@ class IndexerCommon
   alias_method :add_agents_orig, :add_agents
 
   def add_agents(doc, record)
-
     add_agents_orig(doc, record)
 
     # This is a stopgap to prevent many unneccessary
@@ -13,14 +12,18 @@ class IndexerCommon
     doc.reject! { |k,_| k =~ /_relator_sort$/ }
   end
 
-# AS-500: Shared logic to force alphabetic titles to the top of A-Z sorts
+  # AS-500: Shared logic to force alphabetic titles to the top of A-Z sorts in PUI
   def self.generate_alpha_title_sort(doc, record)
     return unless doc['primary_type'] == 'digital_object'
 
-    title = doc['title'] || record['record']['title'] || record['record']['display_string'] || ""
-    # Strip leading punctuation/brackets so titles like "[Untitled]" are evaluated by their first letter
-    clean_title = title.strip.sub(/^["'\[]+/, '')
-    
+    title = (doc['title'] ||
+             record.dig('record', 'title') ||
+             record.dig('record', 'display_string') ||
+             '').to_s
+
+    # Strip leading non-alphanumeric characters (brackets, quotes, spaces, dashes, symbols)
+    clean_title = title.sub(/^[^a-zA-Z0-9]+/, '')
+
     # Prefix non-alphabetic titles with 'zzzz' to push them to the end of ascending sort
     if clean_title.match?(/^[a-zA-Z]/)
       doc['title_sort'] = clean_title.downcase

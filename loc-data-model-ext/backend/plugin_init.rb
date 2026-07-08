@@ -1,3 +1,5 @@
+require_relative 'model/loc_titleless_date_unittitle'
+
 module JSONModel::Validations
   if JSONModel(:digital_object)
     JSONModel(:digital_object).add_validation("check_digital_object_otherdaotype") do |hash|
@@ -119,7 +121,6 @@ class SpreadsheetBuilder
 
         subrecord_datasets = {}
         SUBRECORDS_OF_INTEREST.each do |subrecord|
-          puts "SUBRECORD #{subrecord} = #{selected?(subrecord)}"
           next unless selected?(subrecord.to_s)
 
           subrecord_fields = [:archival_object_id] + FIELDS_OF_INTEREST.fetch(subrecord).map {|field| field.column}
@@ -141,7 +142,7 @@ class SpreadsheetBuilder
             .join(:top_container_link_rlshp, Sequel.qualify(:top_container_link_rlshp, :sub_container_id) => Sequel.qualify(:sub_container, :id))
             .join(:top_container, Sequel.qualify(:top_container, :id) => Sequel.qualify(:top_container_link_rlshp, :top_container_id))
             .filter(Sequel.qualify(:instance, :archival_object_id) => batch)
-            .filter(Sequel.~(Sequel.qualify(:instance, :instance_type_id) => BackendEnumSource.id_for_value('instance_instance_type', 'digital_object')) | Sequel.qualify(:instance, :instance_type_id) => nil)
+            .filter(Sequel.~(Sequel.qualify(:instance, :instance_type_id) => BackendEnumSource.id_for_value('instance_instance_type', 'digital_object'))).or(Sequel.qualify(:instance, :instance_type_id) => nil)
             .select(
               Sequel.as(Sequel.qualify(:instance, :archival_object_id), :archival_object_id),
               Sequel.as(Sequel.qualify(:instance, :instance_type_id), :instance_type_id),
@@ -368,3 +369,6 @@ ArchivesSpaceService.loaded_hook do
   ep_accession = RESTHelpers::Endpoint.find_by_uri("/repositories/:repo_id/accessions/:id", [:delete])
   ep_accession.permissions([:delete_accession_record]) if ep_accession
 end
+
+# AS-546: register the title-less-date <unittitle> step for EAD3 export.
+EAD3Serializer.add_serialize_step(LocTitlelessDateUnittitle)

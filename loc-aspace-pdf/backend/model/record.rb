@@ -38,7 +38,7 @@ module PDF
 
       @resolved_resource = parse_resource
 
-      @level = raw['level']
+      @level = json['level']
       @other_level = json['other_level']
       @display_string = parse_full_title
       @container_display = parse_container_display
@@ -101,6 +101,14 @@ module PDF
         return "#{json['title']}, #{json['display_string']}"
       end
       return process_mixed_content_title(json['display_string'] || json['title'])
+    end
+
+    def method_missing(name)
+      if json.has_key?(name.to_s)
+        return json[name.to_s]
+      else
+        super
+      end
     end
 
     private

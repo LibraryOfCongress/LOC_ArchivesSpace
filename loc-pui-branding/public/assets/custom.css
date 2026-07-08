@@ -37,6 +37,13 @@ body {
   color: var(--primary-text);
 }
 
+h1,
+.h1,
+.site-title {
+  font-family: 'Open Sans Bold', sans-serif !important;
+  font-weight: 400 !important;
+}
+
 #main_content_wrapper {
   flex-grow: 1;
 }
@@ -439,6 +446,10 @@ nav.navbar.navbar-inverse .navbar-brand,
   margin-bottom: 0.25rem;
   margin-left: -8rem !important;
   white-space: nowrap !important;
+}
+
+#welcomePageSearch .plusminus button {
+  margin-left: -8rem !important;
 }
 
 #welcomePageSearch .plusminus-btn {
@@ -912,6 +923,11 @@ nav.navbar.navbar-inverse .navbar-brand,
 
 #main-content .information {
   padding-bottom: 3rem !important;
+}
+
+.information .inline-label {
+  font-family: "Open Sans Bold", sans-serif !important;
+  font-weight: 400 !important;
 }
 
 /* TABS NAVIGATION */
@@ -2806,6 +2822,8 @@ input.btn.btn-primary[type="submit"] {
 .recordrow .record-type-badge.agent,
 #main-content.agents .record-type-badge.agent {
   color: var(--primary-text) !important;
+  font-family: 'Open Sans Bold', sans-serif !important;
+  font-weight: 400 !important;
 }
 
 #main-content.agents .information h1 {

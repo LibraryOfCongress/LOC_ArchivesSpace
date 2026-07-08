@@ -1,5 +1,18 @@
 ArchivesSpacePublic::Application.config.after_initialize do
 
+  # --- AS-566: Decode WAF-bypassed XSS characters in facet values ---
+  ApplicationController.class_eval do
+    before_action :loc_restore_waf_bypassed_params
+
+    def loc_restore_waf_bypassed_params
+      if params[:filter_values].is_a?(Array)
+        params[:filter_values] = params[:filter_values].map do |v|
+          v.is_a?(String) ? v.gsub('__LT__', '<').gsub('__GT__', '>') : v
+        end
+      end
+    end
+  end
+
   class NoteRenderer
     alias_method :build_label_orig, :build_label
 
@@ -61,4 +74,6 @@ ArchivesSpacePublic::Application.config.after_initialize do
     end
   end
 
+  require_relative 'models/loc_citation_ext'
+  require_relative 'controllers/objects_controller'
 end
