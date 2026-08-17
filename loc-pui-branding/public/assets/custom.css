@@ -1959,6 +1959,10 @@ input.btn.btn-primary[type="submit"] {
   font-size: 0.875rem !important;
 }
 
+.collection-header .record-type-badge.archival_object {
+  font-family: 'Open Sans Bold', sans-serif !important;
+}
+
 #main-content .information h1 a.record-title {
   color: var(--primary-text) !important;
   font-size: 1.25rem !important;

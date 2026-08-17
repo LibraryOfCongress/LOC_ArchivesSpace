@@ -207,7 +207,7 @@ module PDF
       dig_f = {}
       unless json['file_versions'].blank?
         json['file_versions'].each do |version|
-          if version.dig('publish') != false #&& version['file_uri'].start_with?('http')
+          if version.dig('publish') != false || self.include_unpublished?
             unless !json.dig('html', 'note', 'note_text')
               dig_f['caption'] = json['html']['note']['note_text']
             end
@@ -234,11 +234,11 @@ module PDF
           v = json[k]
           if v.is_a? Array
             v.each do |rev|
-              revision.push({'date' => rev['date'] || '', 'desc' => rev['description'] || ''}) if rev['publish']
+              revision.push({'date' => rev['date'] || '', 'desc' => rev['description'] || ''}) if (rev['publish'] || self.include_unpublished?)
             end
           else
             if v.is_a? Hash
-              revision.push({'date' => v['date'] || '', 'desc' => v['description'] || ''}) if rev['publish']
+              revision.push({'date' => v['date'] || '', 'desc' => v['description'] || ''}) if (rev['publish'] || self.include_unpublished?)
             end
           end
           fa['revision'] = revision
@@ -253,7 +253,7 @@ module PDF
           raw['_resolved_related_accession_uris'][uri].first
         end
       }.compact.select {|accession|
-        accession['publish']
+        accession['publish'] || self.include_unpublished?
       }.map {|accession|
         record_from_resolved_json(ASUtils.json_parse(accession['json']))
       }

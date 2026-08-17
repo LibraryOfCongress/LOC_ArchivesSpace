@@ -50,7 +50,8 @@ module ManipulateNode
     @frag.traverse { |el|
       # we don't do anything at the top level of the fragment or if it's text
       node_check(el) if el.parent && !el.text?
-      el.content = el.text.gsub("\"", "&quot;") if el.text?
+      # el.content = el.text.gsub("\"", "&quot;") if el.text?
+      el.content = el.text if el.text?
     }
     # replace the inline quotes with &quot;
     @frag.to_xml(encoding: 'utf-8').to_s.gsub("&amp;quot;", "&quot;")
@@ -114,6 +115,8 @@ module ManipulateNode
       newnode.name = 'tbody'
     elsif newnode.name == 'row'
       newnode.name = 'tr'
+    elsif newnode.name == 'a'
+      newnode.name = 'a'
     elsif newnode.name == 'entry'
       if el.ancestors('thead').length > 0
         newnode.name = 'th'

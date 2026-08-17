@@ -1,5 +1,5 @@
 <div class="title-page">
-    <div class="logo"><%= image_tag( @resource.resolved_repository['image_url'] || asset_path("ArchivesSpaceLogo_for_pdf.png") ) %></div>
+    <div class="logo"><img src="<%= AppConfig[:public_url] %>/assets/images/LOC-Logo.png" /></div>
     <div class="title-block">
 
     <% if @resource.finding_aid['title'] %>

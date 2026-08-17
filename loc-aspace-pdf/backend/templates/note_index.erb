@@ -3,10 +3,14 @@
   <br/>
 <% end %>
 
-<dl>
+<ul class="index">
   <% Array(note['items']).each do |index_item| %>
-    <dt><%= process_mixed_content( index_item['value'] ) %></dt>
-    <dd><%= index_item['reference'] %></dd>
-    <dd><%= index_item['reference_text'] %></dd>
+    <li>
+    <% if index_item['reference'] %>
+      <a href="#<%= index_item['reference'] %>"><%= process_mixed_content( index_item['value'] ) %></a>
+    <% else %>
+      <%= process_mixed_content( index_item['value'] ) %>
+    <% end %>
+    </li>
   <% end %>
-</dl>
+</ul>

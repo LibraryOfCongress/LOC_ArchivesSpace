@@ -5,10 +5,10 @@ module JsonHelper
   def process_json_notes(notes, req = nil)
     notes_hash = {}
     ASUtils.wrap(notes).each do |note|
-      type = note['type'] || note['jsonmodel_type']
+      type = note['type'] || note['jsonmodel_type'].sub('note_index', 'index')
 
       next unless !req || req.include?(type)
-      next unless note['publish']
+      next unless self.include_unpublished? || note['publish']
 
       note_struct = handle_note_structure(note, type)
       notes_hash[type] ||= []
@@ -44,9 +44,10 @@ module JsonHelper
   private
 
   def handle_note_structure(note, type)
-    return nil unless note['publish']
+    return nil unless self.include_unpublished? || note['publish']
 
     renderer = NoteRenderer.for(note['jsonmodel_type'])
+    renderer.include_unpublished! if self.include_unpublished?
 
     note_struct = {}
     note_struct['is_inherited'] = note['_inherited']

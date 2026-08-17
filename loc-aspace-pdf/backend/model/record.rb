@@ -2,6 +2,7 @@ require_relative '../lib/manipulate_node'
 require_relative '../helpers/json_helper'
 require_relative '../helpers/record_helper'
 require_relative '../helpers/prefix_helper'
+require_relative '../lib/include_unpublished'
 
 module PDF
   class Record
@@ -10,19 +11,21 @@ module PDF
     include JsonHelper
     include RecordHelper
     include PrefixHelper
+    include IncludeUnpublished
 
     attr_reader :raw, :full, :json, :display_string, :container_display, :container_summary_for_badge,
                 :notes, :dates, :lang_materials, :external_documents, :resolved_repository,
                 :resolved_resource, :resolved_top_container, :primary_type, :uri,
                 :subjects, :agents, :extents, :repository_information,
-                :identifier, :classifications, :level, :other_level, :linked_digital_objects,
+                :identifier, :classifications, :level, :other_level,
                 :container_titles_and_uris
 
     attr_accessor :criteria, :highlights
 
     ABSTRACT = %w(abstract scopecontent)
 
-    def initialize(solr_result, full = false)
+    def initialize(solr_result, opts={})
+      @include_unpublished = opts[:include_unpublished] || false
       @raw = solr_result
       if solr_result['json'].is_a? Hash
         @json = solr_result['json']
@@ -44,7 +47,6 @@ module PDF
       @container_display = parse_container_display
       @container_summary_for_badge = parse_container_summary_for_badge
       @container_titles_and_uris = parse_container_display(:include_uri => true)
-      @linked_digital_objects = parse_digital_object_instances
       @notes = parse_notes
       @dates = parse_dates
       @lang_materials = parse_lang_materials
@@ -233,7 +235,7 @@ module PDF
       external_documents = []
 
       json['external_documents'].each do |doc|
-        if doc['publish']
+        if doc['publish'] || self.include_unpublished?
           extd = {}
           extd['title'] = doc['title']
           extd['uri'] = doc['location'].start_with?('http') ? doc['location'] : ''
@@ -312,7 +314,7 @@ module PDF
       ASUtils.wrap(json['linked_agents']).each do |relationship|
         unless relationship['role'].blank? || relationship['_resolved'].blank?
           agent = relationship.fetch('_resolved')
-          next unless agent['publish']
+          next unless agent['publish'] || self.include_unpublished?
 
           role = relationship['role']
 
@@ -439,31 +441,6 @@ module PDF
       end
 
       (summary || citation) ? parts.join(", ") : (parts.join(", ") + (instance_type ?  " (#{instance_type})" : ""))
-    end
-
-    def parse_digital_object_instances
-      results = {}
-
-      ASUtils.wrap(json['instances']).each do |instance|
-        if instance['digital_object'] && instance['digital_object']['ref']
-          digital_object = digital_object_for_uri(instance['digital_object']['ref'])
-          next if digital_object.nil? || digital_object['publish'] == false
-
-          results[instance['digital_object']['ref']] = record_from_resolved_json(digital_object)
-        end
-      end
-
-      results
-    end
-
-    def digital_object_for_uri(uri)
-      if raw['_resolved_digital_object_uris']
-        resolved = raw['_resolved_digital_object_uris'].fetch(uri, nil)
-
-        if resolved
-          resolved.first
-        end
-      end
     end
 
     def build_request_item

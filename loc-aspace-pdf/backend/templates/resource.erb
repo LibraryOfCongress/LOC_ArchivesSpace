@@ -127,6 +127,23 @@
   <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
 <% end %>
 
+<a id="note-index"></a>
+
+<% unless @resource.notes['index'].nil? %>
+  <% @resource.notes['index'].each do |n| %>
+    <h3>
+      <% if n['label'] %>
+    <%= process_mixed_content(n['label']) %>
+      <% else %>
+    <%= I18n.t("enumerations._note_types.index") %>
+      <% end %>
+    </h3>
+    <p><%= n['note_text'] %></p>
+  <% end %>
+
+  <a href="#toc"><%= I18n.t('pdf_reports.return_to_table_of_contents') %></a>
+<% end %>
+
 
 <a id="administrative-information"></a>
 <h3><%= I18n.t('pdf_reports.administrative_information') %></h3>
@@ -208,11 +225,8 @@
   <% @resource.notes[note_type].each do |n| %>
   <% label = n['label'] || I18n.t("enumerations._note_types.#{note_type}", default: note_type) %>
     <% next unless n['subnotes'] %>
-    <% n['subnotes'].each do |sn| %>
-      <% next unless sn['content'] %>
-      <h4><%= label %></h4>
-      <p><%= simple_format(sn['content']) %></p>
-    <% end %>
+    <h4><%= label %></h4>
+    <p><%= n['note_text'].html_safe %></p>
   <% end %>
 <% end %>
 

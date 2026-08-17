@@ -1,17 +1,5 @@
 require_relative 'mixins/resource_publish_permission.rb'
 
-module RESTHelpers
-  class Endpoint
-    def self.find_by_uri(uri, methods=[:get])
-      @@endpoints.find { |e|
-        e.instance_eval do
-          @methods == methods && @uri == uri
-        end
-      }
-    end
-  end
-end
-
 [
   "/repositories/:repo_id/resources/:id/publish",
   "/repositories/:repo_id/resources/:id/unpublish",

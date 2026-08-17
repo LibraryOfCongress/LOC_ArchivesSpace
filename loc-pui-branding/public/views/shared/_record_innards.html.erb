@@ -1,5 +1,5 @@
-<% non_folder = %w(summary langmaterial accessrestrict userestrict bioghist) %>
-<% folder = %w(scopecontent arrangement phystech physloc otherfindaid custodhist acqinfo appraisal accruals originalsloc altformavail extent relatedmaterial separatedmaterial note_bibliography materialspec physdesc inscription physfacet dimensions edition fileplan legalstatus odd note processinfo note_index) %>
+<% non_folder = %w(summary langmaterial accessrestrict userestrict otherfindaid) %>
+<% folder = %w(scopecontent bioghist arrangement phystech physloc custodhist acqinfo appraisal accruals originalsloc altformavail extent relatedmaterial separatedmaterial note_bibliography materialspec physdesc inscription physfacet dimensions edition fileplan legalstatus odd note processinfo note_index) %>
 <% calling_partial ||= 'unknown' %>
 
 <% unless @result.kind_of?(DigitalObject) %>
@@ -33,15 +33,30 @@
     <% end %>
 
     <% unless @result.extents.blank? %>
-      <h2>
-        <%= t('resource._public.extent') %>
-      </h2>
-      <p class="extent">
-        <% @result.extents.each do |ext| %>
-          <%= inheritance(ext['_inherited']).html_safe %>
-          <%= ext['display'] %><br />
-        <% end %>
-      </p>
+      <% whole_extents = @result.extents.select {|ext| ext['portion'].to_s.downcase.blank? || ext['portion'].to_s.downcase == 'whole'} %>
+      <% partial_extents = @result.extents.select {|ext| ext['portion'].to_s.downcase.present? && ext['portion'].to_s.downcase != 'whole'} %>
+
+      <% unless whole_extents.blank? %>
+        <h2 id="full_extent"><%= t('resource._public.full_extent', default: 'Full Extent') %></h2>
+        <ul class="extent mb-2" aria-labelledby="full_extent">
+          <% whole_extents.each do |ext| %>
+            <li>
+              <%= inheritance(ext['_inherited']).html_safe %><%= ext['display'] %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <% unless partial_extents.blank? %>
+        <h2 id="partial_extent"><%= t('resource._public.partial_extent', default: 'Partial Extent') %></h2>
+        <ul class="extent mb-2" aria-labelledby="partial_extent">
+          <% partial_extents.each do |ext| %>
+            <li>
+              <%= inheritance(ext['_inherited']).html_safe %><%= ext['display'] %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     <% end %>
 
     <% unless @result.notes.include?('langmaterial') || @result.lang_materials.blank? %>

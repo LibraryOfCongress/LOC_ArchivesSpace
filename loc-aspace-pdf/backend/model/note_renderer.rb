@@ -1,6 +1,8 @@
+require_relative '../lib/include_unpublished'
 # Base class for all renderers
 class NoteRenderer
   include ManipulateNode
+  include IncludeUnpublished
 
   def self.inherited(subclass)
     @renderers ||= []
@@ -59,7 +61,7 @@ class MultipartNoteRenderer < NoteRenderer
 
     notes = []
     ASUtils.wrap(note['subnotes']).each do |sub|
-      unless sub['publish'] == false
+      if self.include_unpublished? || sub['publish']
         rendered_subnote = {}
         NoteRenderer.for(sub['jsonmodel_type']).render(sub['jsonmodel_type'], sub, rendered_subnote)
 
@@ -90,7 +92,7 @@ class SinglepartNoteRenderer < NoteRenderer
   def render(type, note, result)
     result['label'] = build_label(type, note)
     #result['note_text'] = ASUtils.wrap(note['content']).map { |s| "<p>#{process_mixed_content(s)}</p>" }.join.html_safe
-    result['note_text'] = ASUtils.wrap(note['content']).map { |s| "#{process_mixed_content(s)}<br />" }.join.html_safe
+    result['note_text'] = ASUtils.wrap(note['content']).map { |s| "#{process_mixed_content(s)}" }.join("<br/>").html_safe
     result
   end
 end
@@ -128,7 +130,7 @@ class ERBNoteRenderer < NoteRenderer
 
   def get_template(template, fixed_locals = "(note:)")
     Tilt::ErubiTemplate.new(template_path(template), fixed_locals: fixed_locals)
-  end  
+  end
 end
 
 class UnhandledNoteRenderer < NoteRenderer

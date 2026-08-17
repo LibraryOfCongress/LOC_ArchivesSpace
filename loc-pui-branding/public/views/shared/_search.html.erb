@@ -21,39 +21,46 @@
           <%= select_tag('op[]', options_for_select(Search.get_boolean_opts, @search[:op][i]),
                            disabled: (i == 0),
                            :id => "op#{i}",
-                           :class => operator_classes) %>
+                           :class => operator_classes,
+                           :autocomplete => 'off') %>
           <%= hidden_field_tag('op[]','', :id => "op_") if i == 0 %>
         </div>
 
         <div class="col-xl-5 col-lg-<%= i == 0 ? '5' : '5' %> col-md-<%= i == 0 ? '6' : '10' %> col-sm-12 form-group">
           <%= label_tag(:"q#{i}", t('navbar.search_placeholder'), class: 'repeats font-weight-bold') %>
           <%= text_field_tag('q[]', @search[:q][i], :placeholder =>  t('custom_search_placeholders.main_query'), :id => "q#{i}",
-                                     :class=> 'form-control repeats fill-column js-search-box') %>
+                                     :class=> 'form-control repeats fill-column js-search-box',
+                                     :autocomplete => 'on',
+                                     :"aria-label" => "#{t('navbar.search_placeholder')} (#{t('actions.refine_search')})") %>
         </div>
 
         <% if i == 0 %>
           <div class="col-xl-3 col-lg-4 col-md-5 col-sm-12 form-group norepeat">
-            <%= label_tag(:limit, t('advanced_search.limit_label'), class: 'font-weight-bold') %>
-            <%= select_tag(:limit, options_for_select(limit_options, @search[:limit]), :id => 'limit', :class=> 'form-control fill-column') %>
+            <%= label_tag(:advanced_search_limit, t('advanced_search.limit_label'), class: 'font-weight-bold') %>
+            <%= select_tag(:limit, options_for_select(limit_options, @search[:limit]), :id => 'advanced_search_limit', :class=> 'form-control fill-column', :autocomplete => 'off') %>
           </div>
         <% end %>
 
         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 form-group">
           <%= label_tag(:"field#{i}", t('search-field'), class: 'repeats font-weight-bold') %>
-          <%= select_tag('field[]', options_for_select(field_options, @search[:field][i]), :id=> "field#{i}", :class=> 'form-control repeats') %>
+          <%= select_tag('field[]', options_for_select(field_options, @search[:field][i]), :id=> "field#{i}", :class=> 'form-control repeats', :autocomplete => 'off') %>
         </div>
 
         <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 form-group px-0">
           <div class="row mx-0">
-            <div class="col-6">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
               <%= label_tag(:"from_year#{i}", "#{t('search_results.filter.from_year')}", class: 'repeats font-weight-bold') %>
               <%= text_field_tag('from_year[]', @search[:from_year][i], :size => 4,:maxlength => 4, :id=>"from_year#{i}",
-                                         :placeholder => t('search_results.filter.from'),:class=>'form-control repeats form-control-small-year') %>
+                                         :placeholder => t('search_results.filter.from'),:class=>'form-control repeats form-control-small-year',
+                                         :autocomplete => 'off',
+                                         :"aria-label" => "#{t('search_results.filter.from_year')} (#{t('actions.refine_search')})") %>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6">
               <%= label_tag(:"to_year#{i}", "#{t('search_results.filter.to_year')}", class: 'repeats font-weight-bold') %>
               <%= text_field_tag('to_year[]', @search[:to_year][i], :size => 4, :maxlength => 4, :id => "to_year#{i}",
-                                         :class=> 'form-control repeats form-control-small-year', :placeholder => t('search_results.filter.to')) %>
+                                         :class=> 'form-control repeats form-control-small-year', :placeholder => t('search_results.filter.to'),
+                                         :autocomplete => 'off',
+                                         :"aria-label" => "#{t('search_results.filter.to_year')} (#{t('actions.refine_search')})") %>
             </div>
           </div>
         </div>
@@ -74,7 +81,7 @@
 
     <div class="row" id="submit_div">
       <div class="col-sm-3">
-        <%= submit_tag(t('search-button.label'), :class=>'btn btn-primary', :id => 'submit_search') %>
+        <%= submit_tag(t('search-button.label'), :class=>'btn btn-primary', :id => 'submit_search', :"aria-label" => "#{t('search-button.label')} (#{t('actions.refine_search')})") %>
       </div>
     </div>
   <% end %>

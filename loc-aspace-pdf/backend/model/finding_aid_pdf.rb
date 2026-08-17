@@ -4,6 +4,7 @@ require 'tilt'
 require 'tilt/erubi'
 require_relative '../lib/xml_cleaner'
 require_relative '../lib/manipulate_node'
+require_relative '../lib/include_unpublished'
 require_relative '../helpers/json_helper'
 require_relative 'resource'
 require_relative 'resource_ordered_records'
@@ -26,7 +27,7 @@ class FindingAidRenderer
   def render(ticker)
     layout = get_template('layout.erb')
     archival_object = get_template('archival_object.erb', "(record:, level:, is_parent:)")
-    dolinks = get_template('digital_object_links.erb', "(instances:)")
+    dolinks = get_template('digital_object_links.erb', "(instances:, include_unpublished:)")
     result = layout.render(@scope) do
       inner_result = ""
       header = get_template('header.erb')
@@ -45,7 +46,7 @@ class FindingAidRenderer
         ticker.log("rendering resource")
         body_str += resource.render(@scope) do
           ticker.log("rendering do links for resource")
-          do_str = dolinks.render(@scope, instances: @scope.instances)
+          do_str = dolinks.render(@scope, instances: @scope.instances, include_unpublished: @scope.include_unpublished?)
           do_str
         end
         collection_inventory = get_template('collection_inventory.erb')
@@ -53,9 +54,8 @@ class FindingAidRenderer
         body_str += collection_inventory.render(@scope) do
           ao_list = ""
           @scope.each_ao do |record, entry, is_parent|
-            # ticker.log("rendering #{record.uri}")
             ao_list += archival_object.render(@scope, record: record, level: entry.depth, is_parent: is_parent) do
-              do_str = dolinks.render(@scope, instances: record.instances)
+              do_str = dolinks.render(@scope, instances: record.instances, include_unpublished: @scope.include_unpublished?)
               do_str
             end
           end
@@ -87,17 +87,18 @@ class FindingAidPDF
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::CaptureHelper
   include ActionView::Context
+  include IncludeUnpublished
 
   DEPTH_1_LEVELS = ['collection', 'recordgrp', 'series']
   DEPTH_2_LEVELS = ['subgrp', 'subseries', 'subfonds']
 
   attr_reader :repo_id, :resource_id, :archivesspace, :base_url, :repo_code
 
-  def initialize(repo_id, resource_id, base_url=AppConfig[:public_proxy_url])
+  def initialize(repo_id, resource_id, opts={})
     @repo_id = repo_id
     @resource_id = resource_id
-
-    @base_url = base_url
+    @include_unpublished = opts[:include_unpublished] || false
+    @base_url = AppConfig[:public_proxy_url]
 
     resource = Resource.get_or_die(resource_id)
     # adapted from the PUI Resource model
@@ -105,7 +106,12 @@ class FindingAidPDF
     @resource = PDF::Resource.new({ "json" => URIResolver.resolve_references(
                                Resource.to_jsonmodel(resource),
                                ['repository', 'repository::agent_representation', 'subjects', 'top_container', 'linked_agents', 'digital_object'])
-                                  })
+                                  },
+                                  include_unpublished: @include_unpublished
+                                 )
+    if @include_unpublished
+      resource.include_unpublished!
+    end
     @ordered_records = PDF::ResourceOrderedRecords.new({ "json" => { 'uris' => resource.ordered_records }})
     # make sure finding aid title isn't only like /^\n$/
     if @resource.finding_aid['title'] and @resource.finding_aid['title'] =~ /\w/

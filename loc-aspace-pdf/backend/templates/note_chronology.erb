@@ -1,4 +1,7 @@
-<table>
+<% if note['title'] %>
+  <h4><%= note['title'] %></h4>
+<% end %>
+<table class="chronlist">
   <% Array(note['items']).each do |item| %>
   <tr>
     <th>
@@ -7,8 +10,9 @@
       <% elsif item['date_from'] || item['date_to'] %>
       <%= item['date_from'] %> - <%= item['date_to'] %>
       <% end %>
-      <% if item['place'] %><br /><% end %>
-      <%= item['place'] %>
+      <% if item['place'] %><br />
+	<%= process_mixed_content(item['place']).gsub(/\n/, "<br />") %>
+      <% end %>
     </th>
     <td>
       <% item['events'].each do | event | %>

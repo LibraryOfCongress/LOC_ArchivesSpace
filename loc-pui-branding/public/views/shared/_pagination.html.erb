@@ -1,6 +1,7 @@
 <% pager_id ||= 'paging' %>
 <% if pager && (pager.last_page > 1 || (local_assigns.has_key?(:force_show) && force_show)) %>
-<nav id="<%= pager_id %>" class="d-flex custom-pagination">
+<% pager_aria_label = (pager_id == 'paging_bottom' ? 'Bottom pagination controls' : 'Top pagination controls') %>
+<nav id="<%= pager_id %>" class="d-flex custom-pagination" aria-label="<%= pager_aria_label %>">
   <ul class="pagination flex-wrap mb-0">
 
     <% if pager.page > 1 %>

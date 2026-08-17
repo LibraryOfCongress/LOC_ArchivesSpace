@@ -65,6 +65,10 @@
   document.querySelectorAll("[data-js='readmore']").forEach((el) => {
     new ReadMoreNotes(el);
   });
+
+  document.querySelectorAll(".readmore__content[role='region']").forEach((el) => {
+    el.removeAttribute('role');
+  });
 </script>
 
 <%= render partial: 'shared/modal_actions' %>

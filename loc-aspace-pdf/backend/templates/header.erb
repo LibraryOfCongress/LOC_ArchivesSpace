@@ -157,7 +157,6 @@
   padding: 4px 0;
   border-top: 2px #000 solid;
   border-bottom: 1px #000 dotted;
-  margin-left: -10px;
     }
 
     h3 + p {
@@ -186,6 +185,16 @@
        text-align: left;
     }
 
+    table.chronlist {
+      width: 100%;
+      table-layout: fixed;
+      th {
+	width: 20%;
+      }
+      td {
+	width: 80%;
+      }
+    }
     dl {
        overflow: hidden;
        margin: 0.23 em 0;
@@ -204,7 +213,7 @@
     .bioghist dd { width: 380px; margin-left: 120px; }
 
     .bioghist table th {
-  white-space: nowrap;
+      text-align: left;
     }
 
     div.title-text-block p {

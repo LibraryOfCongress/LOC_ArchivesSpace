@@ -63,7 +63,9 @@
           <div class="form-group row">
             <%= hidden_field_tag('sort', "", id: nil) %>
             <%= label_tag('filter_q', t('actions.search_within'), class: 'sr-only') %>
-            <%= text_field_tag('filter_q[]', nil, id: 'filter_q', placeholder: t('actions.search_within'), class: "form-control") %>
+            <%= text_field_tag('filter_q[]', nil, id: 'filter_q', placeholder: t('actions.search_within'), class: "form-control",
+                                        :autocomplete => 'on',
+                                        :"aria-label" => "#{t('actions.search_within')} (#{t('search_results.filter.head')})") %>
           </div>
         <% end %>
         <% unless params[:limit] == 'subject' || !@search.filters_blank? %>
@@ -77,17 +79,22 @@
             <div class="form-group row">
               <div class="col-md-6 year_from p-0 pr-md-1">
                 <%= label_tag('filter_from_year', t('search_results.filter.from_year'), class: 'sr-only') %>
-                <%= text_field_tag(:filter_from_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.from_year'), id: 'filter_from_year') %>
+                <%= text_field_tag(:filter_from_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.from_year'), id: 'filter_from_year',
+                                   :autocomplete => 'off',
+                                   :"aria-label" => "#{t('search_results.filter.from_year')} (#{t('search_results.filter.head')})") %>
               </div>
               <div class="col-md-6 year_to p-0 pl-md-1">
                 <%= label_tag('filter_to_year', t('search_results.filter.to_year'), class: 'sr-only') %>
-                <%= text_field_tag(:filter_to_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.to_year'), id: 'filter_to_year') %>
+                <%= text_field_tag(:filter_to_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.to_year'), id: 'filter_to_year',
+                                   :autocomplete => 'off',
+                                   :"aria-label" => "#{t('search_results.filter.to_year')} (#{t('search_results.filter.head')})") %>
               </div>
             </div>
           </div>
         <% end %>
         <div class='row align-items-center'>
-          <%= submit_tag(t('search-button.label'), class: 'btn btn-primary', id: nil) %>
+          <%= submit_tag(t('search-button.label'), class: 'btn btn-primary', id: nil,
+                         :"aria-label" => "#{t('search-button.label')} (#{t('search_results.filter.head')})") %>
         </div>
       <% end %>
     <% else %>
@@ -98,7 +105,9 @@
           <div class="form-group row">
             <%= hidden_field_tag('sort', "", id: nil) %>
             <%= label_tag('filter_q', t('actions.search_within'), class: 'sr-only') %>
-            <%= text_field_tag('filter_q[]', nil, id: 'filter_q', placeholder: t('actions.search_within'), class: "form-control") %>
+            <%= text_field_tag('filter_q[]', nil, id: 'filter_q', placeholder: t('actions.search_within'), class: "form-control",
+                                        :autocomplete => 'on',
+                                        :"aria-label" => "#{t('actions.search_within')} (#{t('search_results.filter.head')})") %>
           </div>
         <% end %>
         <% unless params[:limit] == 'subject' || !@search.filters_blank? %>
@@ -112,17 +121,22 @@
             <div class="form-group row">
               <div class="col-md-6 year_from p-0 pr-md-1">
                 <%= label_tag('filter_from_year', t('search_results.filter.from_year'), class: 'sr-only') %>
-                <%= text_field_tag(:filter_from_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.from_year'), id: 'filter_from_year') %>
+                <%= text_field_tag(:filter_from_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.from_year'), id: 'filter_from_year',
+                                   :autocomplete => 'off',
+                                   :"aria-label" => "#{t('search_results.filter.from_year')} (#{t('search_results.filter.head')})") %>
               </div>
               <div class="col-md-6 year_to p-0 pl-md-1">
                 <%= label_tag('filter_to_year', t('search_results.filter.to_year'), class: 'sr-only') %>
-                <%= text_field_tag(:filter_to_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.to_year'), id: 'filter_to_year') %>
+                <%= text_field_tag(:filter_to_year, nil, size: 4, maxlength: 4, class: "form-control", placeholder: t('search_results.filter.to_year'), id: 'filter_to_year',
+                                   :autocomplete => 'off',
+                                   :"aria-label" => "#{t('search_results.filter.to_year')} (#{t('search_results.filter.head')})") %>
               </div>
             </div>
           </div>
         <% end %>
         <div class='row align-items-center'>
-          <%= submit_tag(t('search-button.label'), class: 'btn btn-primary', id: nil) %>
+          <%= submit_tag(t('search-button.label'), class: 'btn btn-primary', id: nil,
+                         :"aria-label" => "#{t('search-button.label')} (#{t('search_results.filter.head')})") %>
         </div>
       <% end %>
     <% end %>
