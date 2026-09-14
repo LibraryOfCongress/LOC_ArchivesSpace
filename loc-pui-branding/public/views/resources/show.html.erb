@@ -84,8 +84,9 @@
       if (dateContainer) {
         const toggleButtonHTML = `
           <div class="custom-date-toggle">
-            <button type="button" id="toggle-date-range" class="date-range-button">
-              <i id="date-range-icon" class="fas fa-plus"></i>
+            <button type="button" id="toggle-date-range" class="date-range-button" title="<%= t('search_results.filter.date_range') %>" aria-label="<%= t('search_results.filter.date_range') %>" aria-labelledby="date-range-text" aria-controls="date-range-fields" aria-expanded="false">
+              <i id="date-range-icon" class="fas fa-plus" aria-hidden="true"></i>
+              <span class="sr-only"><%= t('search_results.filter.date_range') %></span>
             </button>
             <span id="date-range-text" class="date-range-label"><%= t('search_results.filter.date_range') %></span>
           </div>

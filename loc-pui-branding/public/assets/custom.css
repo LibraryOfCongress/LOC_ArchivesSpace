@@ -689,6 +689,24 @@ nav.navbar.navbar-inverse .navbar-brand,
   margin-right: 0;
 }
 
+.delete_filter {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin-left: 0.25rem;
+  color: #337ab7;
+  font: inherit;
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.delete_filter:hover,
+.delete_filter:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+
 .panel-footer.bg-lightgray {
   padding-top: 0.5rem !important;
   padding-bottom: 1rem !important;
@@ -1049,7 +1067,7 @@ nav.navbar.navbar-inverse .navbar-brand,
 }
 
 #sidebar .infinite-tree-view.largetree-container .table .table-row {
-  background-color: #f1f1f1 !important;
+  background-color: #f4f4f4 !important;
 }
 
 #tree-container .largetree-node .title a.record-title,
@@ -2004,6 +2022,10 @@ input.btn.btn-primary[type="submit"] {
   color: var(--primary-blue);
   text-decoration: underline !important;
   text-underline-offset: 3px;
+}
+
+.information + .page_actions .btn.page_action.request .action-text {
+  text-decoration: none !important;
 }
 
 .information + .page_actions {

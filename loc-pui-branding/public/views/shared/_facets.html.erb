@@ -12,10 +12,18 @@
               <%# Generate the correct "remove filter" link for both index and show pages. %>
               <% if defined?(@result) && @result %>
                 <%# On a SHOW page, link back to the specific record's URI. %>
-                <a href="<%= app_prefix(@result.uri) %>" title="<%= t('search_results.remove_filter')%>" class="delete_filter">X</a>
+                <button type="button"
+                        title="<%= t('search_results.remove_filter') %>"
+                        aria-label="<%= "#{t('search_results.remove_filter')}: #{f_q['v']}" %>"
+                        class="delete_filter"
+                        onclick="window.location.href='<%= app_prefix(@result.uri) %>'">X</button>
               <% else %>
                 <%# On an INDEX page, use the default remove-filter URI. %>
-                <a href="<%= app_prefix(f_q['uri']) %>" title="<%= t('search_results.remove_filter')%>" class="delete_filter">X</a>
+                <button type="button"
+                        title="<%= t('search_results.remove_filter') %>"
+                        aria-label="<%= "#{t('search_results.remove_filter')}: #{f_q['v']}" %>"
+                        class="delete_filter"
+                        onclick="window.location.href='<%= app_prefix(f_q['uri']) %>'">X</button>
               <% end %>
 
             </span>
@@ -30,8 +38,11 @@
         <li class="list-group-item">
           <span class="filter">
             <%= t('search_results.filter.from_to', begin: from_year, end: to_year) %>
-            <a href="<%= app_prefix(@page_search.sub("&filter_from_year=#{(from_year=='' ? '*' : from_year)}&filter_to_year=#{(to_year==t('search_results.filter.year_now') ? '*' : to_year)}","")) %>"
-               title="<%= t('search_results.remove_filter') %> " class="delete_filter">X</a>
+            <button type="button"
+                    title="<%= t('search_results.remove_filter') %>"
+                    aria-label="<%= "#{t('search_results.remove_filter')}: #{t('search_results.filter.from_to', begin: from_year, end: to_year)}" %>"
+                    class="delete_filter"
+                    onclick="window.location.href='<%= app_prefix(@page_search.sub("&filter_from_year=#{(from_year=='' ? '*' : from_year)}&filter_to_year=#{(to_year==t('search_results.filter.year_now') ? '*' : to_year)}","")) %>'">X</button>
           </span>
         </li>
       <% end %>
@@ -40,8 +51,11 @@
           <li class="list-group-item">
             <span class="filter">
               <%= h['pt'] %>: <%= h['pv'] %>
-              <a href="<%= app_prefix(h['uri']) %>"
-                 title="<%= t('search_results.remove_filter') %> " class="delete_filter">X</a>
+              <button type="button"
+                      title="<%= t('search_results.remove_filter') %>"
+                      aria-label="<%= "#{t('search_results.remove_filter')}: #{h['pt']}: #{h['pv']}" %>"
+                      class="delete_filter"
+                      onclick="window.location.href='<%= app_prefix(h['uri']) %>'">X</button>
             </span>
           </li>
         <% end %>
@@ -52,7 +66,7 @@
 
 <%# "Search within results" form and associated date filters. %>
 <% if @search[:dates_within] || @search[:text_within] %>
-  <h3 class="search-results-heading"><%= t('search_results.search_results') %></h3>
+  <h2 class="search-results-heading"><%= t('search_results.search_results') %></h2>
   <div class="filter_more">
 
     <%# Render the correct search form based on whether this is a show or index page. %>

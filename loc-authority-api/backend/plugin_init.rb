@@ -1,0 +1,1 @@
+require_relative 'controllers/loc_managed_authorities_controller'

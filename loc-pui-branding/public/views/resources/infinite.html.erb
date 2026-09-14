@@ -144,10 +144,11 @@ function treeClickDelegator(event, tree, records) {
     if (dateContainer) {
       const toggleButtonHTML = `
         <div class="custom-date-toggle">
-          <button type="button" class="date-range-button" aria-expanded="false">
-            <i class="fas fa-plus"></i>
+          <button type="button" class="date-range-button" title="<%= t('search_results.filter.date_range') %>" aria-label="<%= t('search_results.filter.date_range') %>" aria-labelledby="date-range-text" aria-controls="date-range-fields" aria-expanded="false">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            <span class="sr-only"><%= t('search_results.filter.date_range') %></span>
           </button>
-          <span class="date-range-label"><%= t('search_results.filter.date_range') %></span>
+          <span id="date-range-text" class="date-range-label"><%= t('search_results.filter.date_range') %></span>
         </div>
       `;
       

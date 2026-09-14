@@ -12,6 +12,13 @@ en:
     lccn: LCCN
     date_received_by_library: "Date Received by Library"
     division_acquisition_date: "Date Received by Division"
+    is_new: New?
+    user_defined:
+      string_1: Alternate Accession ID
+      string_2: Curatorial Responsibility
+      string_3: "P&P - Arrearage Code"
+      string_4: Mus - Purchase Fund
+      text_1: Location Information
   revision_statement:
     agent: Agent
     agent_type: Agent Type
@@ -38,6 +45,7 @@ en:
 # load_paths for some reason, this will work.
     _note_types:
       odd: Other Descriptive Data
+      didnote: Descriptive Identification Note
     ead_dao_type:
       derived: Derived
       borndigital: Born Digital
@@ -67,4 +75,3 @@ en:
       delete_resource_record: "delete resources (in this repository)"
       delete_accession_record: "delete accessions (in this repository)"
       delete_archival_record: "delete archival objects and digital objects (in this repository)"
-        

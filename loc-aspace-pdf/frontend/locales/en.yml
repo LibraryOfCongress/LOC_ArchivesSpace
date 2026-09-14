@@ -26,6 +26,7 @@ en:
   resource:
     _public:
       lang: Language of Materials
+      lang_pdf: Language of the Material
       physdesc: Physical Description
       storage: Container Information
       identifier_pdf: ID

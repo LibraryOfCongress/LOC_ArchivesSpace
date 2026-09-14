@@ -8,19 +8,25 @@
   line-height: 1.2;
     }
 
-   .title-page {
-  page-break-after: always;
-  position: relative;
-  height: 58em;
+    .title-page {
+      page-break-after: always;
+      position: relative;
+      height: 58em;
     }
 
-    .toc-page {
-  page-break-after: always;
+   .toc-page {
+     page-break-after: always;
     }
 
-   span.title {
-     font-style: italic;
-   }
+    span.title,
+    span.render-italic
+    {
+      font-style: italic;
+    }
+
+    span.render-bold {
+      font-weight: bold;
+    }
 
    .title {
      line-height: 140%;

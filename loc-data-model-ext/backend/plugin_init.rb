@@ -110,6 +110,9 @@ end
 class SpreadsheetBuilder
   alias_method :dataset_iterator_orig, :dataset_iterator
 
+  MULTIPART_NOTES_OF_INTEREST += [:otherfindaid]
+  SINGLEPART_NOTES_OF_INTEREST += [:didnote]
+
   def dataset_iterator(&block)
     DB.open do |db|
       @ao_ids.each_slice(BATCH_SIZE) do |batch|

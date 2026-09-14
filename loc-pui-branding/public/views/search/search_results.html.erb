@@ -1,4 +1,5 @@
 <% results_type = (defined?(@results_type) ? @results_type : t('search_results.results')) %>
+<% @page_title = 'Digital Materials' if params[:limit] == 'digital_object' %>
 <div class="row">
   <div class="col-sm-12">
     <%= render partial: 'shared/breadcrumbs' %>

@@ -13,6 +13,18 @@ ArchivesSpacePublic::Application.config.after_initialize do
     end
   end
 
+  # outage 2026-09-14
+  class ApplicationController
+    before_action :outage_warning
+
+    def outage_warning
+      now = Time.now
+      if now.year == 2026 && now.month == 9 && now.day < 15
+        flash[:notice] = "Finding Aids to Archival Collections (findingaids.loc.gov) will be undergoing routine maintenance on Monday September 14, 2026 from 4pm-11pm EST. During this time, the site will be offline and unavailable."
+      end
+    end
+  end
+
   class NoteRenderer
     alias_method :build_label_orig, :build_label
 

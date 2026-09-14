@@ -111,6 +111,7 @@ class FindingAidPDF
                                  )
     if @include_unpublished
       resource.include_unpublished!
+      resource.publish = 1
     end
     @ordered_records = PDF::ResourceOrderedRecords.new({ "json" => { 'uris' => resource.ordered_records }})
     # make sure finding aid title isn't only like /^\n$/
@@ -341,5 +342,9 @@ class FindingAidPDF
         yield record, tuple[1], has_children
       end
     end
+  end
+
+  def file_version_is_clickable?(file_version)
+    file_version['file_uri'].start_with?(/https?:\/\//)
   end
 end

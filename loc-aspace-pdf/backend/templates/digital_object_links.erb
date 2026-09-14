@@ -3,10 +3,22 @@
   <% if instance['instance_type'] == 'digital_object' && instance['digital_object'] %>
     <% file_versions = instance['digital_object']['_resolved']['file_versions'] %>
       <% Array(file_versions).each do |file| %>
-  <% if (include_unpublished || file['publish']) && file['file_uri'] && file['xlink_show_attribute'] != 'embed' %>
-      <dt><%= I18n.t('resource._public.digital_object', default: "Digital Object") %></dt>
-      <dd><a href="<%= file['file_uri'] %>"><%= file['file_uri'] %></a></dd>
-  <% end %>
-    <% end %>
+        <% clickable = file_version_is_clickable?(file) %>
+	<% if (include_unpublished || file['publish']) && file['file_uri'] && file['xlink_show_attribute'] != 'embed' && clickable %>
+	  <dt><%= I18n.t('resource._public.digital_object', default: "Digital Object") %></dt>
+	  <dd><a href="<%= file['file_uri'] %>"><%= file['file_uri'] %></a></dd>
+	<% elsif !clickable %>
+	  <dt><%= I18n.t('resource._public.digital_object', default: "Digital Object") %></dt>
+	  <dd>
+	    <%= instance['digital_object']['_resolved']['digital_object_id'] %>
+	  </dd>
+	<% end %>>
+      <% end %>
+      <% if Array(file_versions).empty? %>
+	<dt><%= I18n.t('resource._public.digital_object', default: "Digital Object") %></dt>
+	<dd>
+	  <%= instance['digital_object']['_resolved']['digital_object_id'] %>
+	</dd>
+     <% end %>
   <% end %>
 <% end %>

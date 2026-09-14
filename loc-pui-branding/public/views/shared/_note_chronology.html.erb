@@ -1,0 +1,16 @@
+<dl>
+  <% Array(note['items']).each do |item| %>
+    <% if item['date_singular'] %>
+      <dt><%= item['date_singular'] %></dt>
+    <% end %>
+    <% if item['date_from'] || item['date_to'] %>
+      <dt><%= item['date_from'] %>-<%= item['date_to'] %></dt>
+    <% end %>
+    <% if item['place'] %>
+      <dt><%= process_mixed_content(item['place']).html_safe %></dt>
+    <% end %>
+    <% item['events'].each do | event | %>
+      <dd><%=  process_mixed_content(event).html_safe %></dd>
+    <% end %>
+  <% end %>
+</dl>
